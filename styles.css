@@ -1,3 +1,44 @@
 body {
-    background-color: Lavender;
+    margin: 0;
+    font-family: Helvetica;
+}
+
+ul.navbar  {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333; /* a dark gray */
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+ul.navbar .nav_header {
+    float: left;
+}
+
+ul.navbar li {
+    float: right;
+}
+
+ul.navbar li a {
+    display: block;
+    color: White;
+    text-align: center;
+    text-decoration: none;
+}
+
+ul.navbar li a.nav_element{
+    padding: 23.5px 16px;
+}
+
+ul.navbar li a.nav_header {
+    padding: 14px 16px;
+    font-size: 32px;
+    background-color: DarkSlateGray;
+}
+
+ul.navbar li a:hover {
+    background-color: SlateGray;
 }
