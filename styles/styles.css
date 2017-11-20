@@ -1,5 +1,10 @@
-body {
+html, body {
+    height: 100%;
+    width: 100%;
     margin: 0;
+}
+
+body {
     font-family: Helvetica;
 }
 
@@ -43,22 +48,23 @@ ul.navbar li a:hover {
     background-color: SlateGray;
 }
 
-#music_vs_cs_images {
-    text-align: center;
-    width: 100%;
-    height: 100%-130px; /* subtract height of nav bar */
-    /*    background-color: red; */
-
-    position: absolute;
-    top:65px; /* start immediately after nav bar */
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
+#top_spacer {
+    /*background-color: red;*/
+    height: 40%;
 }
 
-#music_vs_cs_images img {
+#music_vs_cs {
+    /*background-color: green;*/
+    height: 20%;
+    text-align: center;
+}
+
+#bottom_spacer {
+    /*background-color: blue;*/
+    height: 40%;
+}
+
+#music_vs_cs img {
     max-width: 30%;
     padding: 0% 5%;
 }
