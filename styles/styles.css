@@ -69,3 +69,7 @@ ul.navbar li a:hover {
     padding: 0% 5%;
 }
 
+#music_vs_cs a:hover {
+    opacity: .2;
+}
+
