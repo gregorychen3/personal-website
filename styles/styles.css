@@ -9,10 +9,6 @@ body {
     color: Black;
 }
 
-#top_third {
-    height: 33%;
-}
-
 #title_bar {
     position: relative;
     padding: 8px 0 0 0;
@@ -32,18 +28,13 @@ body {
     right: 0;
 }
 
-#middle_third {
-    height: 33%;
+#home_content {
     text-align: center;
+    padding: 20px 0 0 0;
 }
 
-#bottom_spacer {
-    height: 33%;
-}
-
-#middle_third img {
-    max-width: 30%;
-    padding: 0% 6.5%;
+#home_content img {
+    max-width: 92%;
 }
 
 a {
