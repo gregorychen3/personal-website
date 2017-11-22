@@ -6,70 +6,56 @@ html, body {
 
 body {
     font-family: Helvetica;
+    color: Black;
 }
 
-ul.navbar  {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333; /* a dark gray */
-    position: fixed;
-    top: 0;
-    width: 100%;
+#top_third {
+    height: 33%;
 }
 
-ul.navbar .nav_header {
-    float: left;
+#title_bar {
+    position: relative;
+    padding: 8px 0 0 0;
+
 }
 
-ul.navbar li {
-    float: right;
-}
-
-ul.navbar li a {
-    display: block;
-    color: White;
-    text-align: center;
-    text-decoration: none;
-}
-
-ul.navbar li a.nav_element{
-    padding: 23.5px 16px;
-}
-
-ul.navbar li a.nav_header {
-    padding: 14px 16px;
+#title_bar #title {
+    margin: 0px auto 0px auto;
+    width: 263px;
     font-size: 32px;
-    background-color: DarkSlateGray;
 }
 
-ul.navbar li a:hover {
-    background-color: SlateGray;
+#title_bar #contact {
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
-#top_spacer {
-    /*background-color: red;*/
-    height: 40%;
-}
-
-#music_vs_cs {
-    /*background-color: green;*/
-    height: 20%;
+#middle_third {
+    height: 33%;
     text-align: center;
 }
 
 #bottom_spacer {
-    /*background-color: blue;*/
-    height: 40%;
+    height: 33%;
 }
 
-#music_vs_cs img {
+#middle_third img {
     max-width: 30%;
-    padding: 0% 5%;
+    padding: 0% 6.5%;
 }
 
-#music_vs_cs a:hover {
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#contact a {
+    padding: 0 12px 0 0;
+}
+a:hover {
     opacity: .2;
+
 }
 
