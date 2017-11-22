@@ -54,8 +54,13 @@ a {
 #contact a {
     padding: 0 12px 0 0;
 }
+
 a:hover {
     opacity: .2;
 
+}
+
+#title a:hover {
+    opacity: 1;
 }
 
