@@ -60,7 +60,10 @@ a:hover {
 
 }
 
+a:active{
+    opacity: .1;
+}
+
 #title a:hover {
     opacity: 1;
 }
-
