@@ -1,31 +1,24 @@
 html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
 }
 
 body {
     font-family: Helvetica;
-    color: Black;
 }
 
-#title_bar {
+.nav {
     position: relative;
-    padding: 8px 0 0 0;
-
 }
 
-#title_bar #title {
-    margin: 0px auto 0px auto;
-    width: 263px;
+.nav .nav_title {
+    display: inline-block;
     font-size: 32px;
 }
 
-#title_bar #contact {
-    float: right;
+.nav .nav_elements {
+    display: inline-block;
     position: absolute;
-    bottom: 0;
     right: 0;
+    bottom: 0;
 }
 
 #home_content {
