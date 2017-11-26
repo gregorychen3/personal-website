@@ -57,12 +57,12 @@ a:active{
 }
 
 #credits {
-    padding-top: 8px;
+    padding-top: 6px;
     float: right;
     font-size: 12px;
-    font-style: italic;
 }
 
 #credits a {
     color: Black;
 }
+
