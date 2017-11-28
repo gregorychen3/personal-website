@@ -18,21 +18,17 @@ body {
 }
 
 .nav .nav_elements {
-    padding-top: 14px;
     display: inline-block;
-    position: absolute;
-    right: 0;
-    bottom: 5px;
+    float: right;
+    padding: 15px 24px 3px 24px;
 }
 
-.nav .nav_elements span {
-    padding-left: 24px;
-    padding-right: 24px;
+.nav #contact {
+    padding: 15px 4px 3px 24px;
 }
 
-.nav .nav_elements span#contact {
-    padding-left: 24px;
-    padding-right: 0px;
+.nav .nav_elements:hover {
+    background-color: LightGray;
 }
 
 #home_content {
@@ -49,27 +45,9 @@ a {
     color: black;
 }
 
-
-a:hover {
-    opacity: .2;
-
-}
-
-a:active{
-    opacity: .1;
-}
-
-.nav_title a:hover {
-    opacity: 1;
-}
-
 #credits {
     padding-top: 6px;
     float: right;
     font-size: 10px;
-}
-
-#credits a {
-    color: Black;
 }
 
