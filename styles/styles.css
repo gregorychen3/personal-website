@@ -45,7 +45,7 @@ body {
 }
 
 .menu-content {
-    /*display: none;*/
+    display: none;
     position: absolute;
     background-color: LightGray;
     z-index: 1;
@@ -90,5 +90,13 @@ a {
     padding-top: 6px;
     float: right;
     font-size: 10px;
+}
+
+#music-calendar {
+    text-align: center;
+}
+
+#music-calendar iframe {
+    width: 100%;
 }
 
