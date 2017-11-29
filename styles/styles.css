@@ -45,7 +45,7 @@ body {
 }
 
 .menu-content {
-    display: none;
+    /*display: none;*/
     position: absolute;
     background-color: LightGray;
     z-index: 1;
