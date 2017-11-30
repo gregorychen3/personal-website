@@ -104,3 +104,22 @@ a {
     width: 100%;
 }
 
+#listen_content {
+    position: relative;
+    border: solid;
+    border-color: White;
+    border-width: .5px;
+    /*text-align:center;
+    width: 40%;
+    height: 400px;*/
+}
+
+#listen_content_row {
+    width: 100%
+}
+
+#listen_content_row iframe {
+    width: 49%;
+    height: 315px;
+}
+
