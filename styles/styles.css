@@ -93,7 +93,7 @@ a {
 #credits {
     padding-top: 6px;
     float: right;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 #music-calendar {
@@ -132,5 +132,11 @@ a {
 #listen_content_row iframe {
     width: 49%;
     height: 315px;
+}
+
+#credits-content {
+    padding-top: 150px;
+    font-size: 12px;
+    text-align: center;
 }
 
