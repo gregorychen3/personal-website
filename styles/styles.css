@@ -23,11 +23,15 @@ body {
 }
 
 .nav #contact {
-    padding: 15px 24px 3px 24px;
+    padding: 15px 24px 4px 24px;
 }
 
 .nav .nav_elements:hover {
     background-color: LightGray;
+}
+
+.nav_elements:hover .menu-content {
+    display: block;
 }
 
 .nav_elements .dropbtn {
@@ -45,7 +49,7 @@ body {
 }
 
 .menu-content {
-    /*display: none;*/
+    display: none;
     position: absolute;
     background-color: LightGray;
     z-index: 1;
