@@ -6,6 +6,7 @@ html, body {
 
 body {
     font-family: Helvetica;
+    min-width: 780px;
 }
 
 .nav {
@@ -56,11 +57,11 @@ body {
 }
 
 #cs-menu-content {
-    min-width: 232px;
+    min-width: 240px;
 }
 
 #music-menu-content {
-    min-width: 142px;
+    min-width: 144px;
 }
 
 .menu-content a {
