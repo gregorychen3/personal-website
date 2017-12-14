@@ -49,6 +49,14 @@ body {
     background-color: LightGray;
 }
 
+#music_dropbtn {
+    width: 144px;
+}
+
+#cs_dropbtn {
+    width: 240px;
+}
+
 .menu-content {
     display: none;
     position: absolute;
