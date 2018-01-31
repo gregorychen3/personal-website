@@ -1,11 +1,10 @@
 #!/bin/bash
-set -x
 
 SRC_SHEETMUSIC="/Users/gregorychen3/Documents/music_docs/sheetmusic"
 DEST_SHEETMUSIC="/Users/gregorychen3/Documents/music_docs/website_sheetmusic"
 
 # Start with clean slate
-rm -rf ../sheetmusic/*
+rm -rf $DEST_SHEETMUSIC/*
 
 # Copy over all sheetmusic dirs that have a score in them
 for path in $SRC_SHEETMUSIC/*; do
