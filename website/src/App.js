@@ -3,9 +3,9 @@ import { Route, Redirect } from "react-router-dom";
 import Header from './components/Header';
 import Welcome from './components/Welcome';
 import MusicListen from './components/MusicListen';
+import MusicSchedule from './components/MusicSchedule'
 import MusicSongbookTunes from './components/MusicSongbookTunes';
 import ProgrammingResume from './components/ProgrammingResume';
-import Contact from './components/Contact';
 import './App.css';
 
 class App extends Component {
@@ -23,6 +23,7 @@ class App extends Component {
         <Route exact path="/" render={() => <Redirect to="/index" />} />
         <Route exact path="/index" component={Welcome} />
         <Route path="/music-listen" component={MusicListen} />
+        <Route path="/music-schedule" component={MusicSchedule} />
         <Route path="/music-songbook-tunes" component={MusicSongbookTunes} />
         <Route path="/programming-resume" component={ProgrammingResume} />
         <Route path="/programming-linkedin"
@@ -41,7 +42,6 @@ class App extends Component {
             }
           }
         />
-        <Route path="/contact" component={Contact} />
       </div>
     );
   }

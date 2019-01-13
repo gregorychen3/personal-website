@@ -14,7 +14,7 @@ class Header extends Component {
         <div class="nav_elements">
           <button class="dropbtn" id="cs_dropbtn">Computer Science</button>
           <div class="menu-content" id="cs-menu-content">
-            <a href="documents/cs_resume.pdf">Resume</a>
+            <a href="cs_resume.pdf">Resume</a>
             <a href="http://www.linkedin.com/in/gregorychen3">LinkedIn</a>
             <a href="http://34.229.58.254:3000">Cookbook App</a>
           </div>
@@ -22,10 +22,10 @@ class Header extends Component {
         <div class="nav_elements">
           <button class="dropbtn" id="music_dropbtn">Music</button>
           <div class="menu-content" id="music-menu-content">
-            <a href="music-listen.html">Listen</a>
-            <a href="music-schedule.html">Schedule</a>
-            <a href="music-songbook-tunes.html">Songbook Tunes</a>
-            <a href="documents/music_resume.pdf">Resume</a>
+            <Link to={{ pathname: '/music-listen' }}>Listen</Link>
+            <Link to={{ pathname: '/music-schedule' }}>Schedule</Link>
+            <Link to={{ pathname: '/music-songbook-tunes' }}>Songbook Tunes</Link>
+            <a href="music_resume.pdf">Resume</a>
           </div>
         </div>
       </div>
