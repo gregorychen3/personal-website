@@ -6,7 +6,7 @@ class Header extends Component {
     return (
       <div class="nav">
         <div class="nav_title">
-          <a href="home.html">GREGORY CHEN</a>
+          <Link to={{ pathname: '/index' }}>GREGORY CHEN</Link>
         </div>
         <div class="nav_elements" id="contact">
           <a href="mailto:gregorychen3@gmail.com" target="_blank">Contact</a>
