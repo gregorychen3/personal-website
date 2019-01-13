@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class TopBar extends Component {
+class Header extends Component {
   render() {
     return (
       <div class="nav">
@@ -32,4 +32,4 @@ class TopBar extends Component {
     )
   }
 }
-export default TopBar;
+export default Header;
