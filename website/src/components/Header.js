@@ -1,0 +1,35 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+class TopBar extends Component {
+  render() {
+    return (
+      <div class="nav">
+        <div class="nav_title">
+          <a href="home.html">GREGORY CHEN</a>
+        </div>
+        <div class="nav_elements" id="contact">
+          <a href="mailto:gregorychen3@gmail.com" target="_blank">Contact</a>
+        </div>
+        <div class="nav_elements">
+          <button class="dropbtn" id="cs_dropbtn">Computer Science</button>
+          <div class="menu-content" id="cs-menu-content">
+            <a href="documents/cs_resume.pdf">Resume</a>
+            <a href="http://www.linkedin.com/in/gregorychen3">LinkedIn</a>
+            <a href="http://34.229.58.254:3000">Cookbook App</a>
+          </div>
+        </div>
+        <div class="nav_elements">
+          <button class="dropbtn" id="music_dropbtn">Music</button>
+          <div class="menu-content" id="music-menu-content">
+            <a href="music-listen.html">Listen</a>
+            <a href="music-schedule.html">Schedule</a>
+            <a href="music-songbook-tunes.html">Songbook Tunes</a>
+            <a href="documents/music_resume.pdf">Resume</a>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+export default TopBar;
