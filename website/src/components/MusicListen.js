@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class MusicListen extends Component {
   render() {
@@ -48,8 +48,7 @@ class MusicListen extends Component {
           />
         </div>
       </div>
-
-    )
+    );
   }
 }
 

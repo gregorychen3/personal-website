@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
-import Header from './components/Header';
-import Welcome from './components/Welcome';
-import MusicListen from './components/MusicListen';
-import MusicSchedule from './components/MusicSchedule'
-import MusicSongbookTunes from './components/MusicSongbookTunes';
-import ProgrammingResume from './components/ProgrammingResume';
-import './App.css';
+import Header from "./components/Header";
+import Welcome from "./components/Welcome";
+import MusicListen from "./components/MusicListen";
+import MusicSchedule from "./components/MusicSchedule";
+import MusicSongbookTunes from "./components/MusicSongbookTunes";
+import ProgrammingResume from "./components/ProgrammingResume";
+import "./App.css";
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
       visible: false
-    }
+    };
   }
 
   get pageContent() {
@@ -26,21 +25,19 @@ class App extends Component {
         <Route path="/music-schedule" component={MusicSchedule} />
         <Route path="/music-songbook-tunes" component={MusicSongbookTunes} />
         <Route path="/programming-resume" component={ProgrammingResume} />
-        <Route path="/programming-linkedin"
-          component={
-            () => {
-              window.location = 'https://www.linkedin.com/in/gregorychen3';
-              return null;
-            }
-          }
+        <Route
+          path="/programming-linkedin"
+          component={() => {
+            window.location = "https://www.linkedin.com/in/gregorychen3";
+            return null;
+          }}
         />
-        <Route path="/programming-recipe-app"
-          component={
-            () => {
-              window.location = 'http://34.229.58.254:3000/recipes';
-              return null;
-            }
-          }
+        <Route
+          path="/programming-recipe-app"
+          component={() => {
+            window.location = "http://34.229.58.254:3000/recipes";
+            return null;
+          }}
         />
       </div>
     );
@@ -52,7 +49,7 @@ class App extends Component {
         <Header />
         {this.pageContent}
       </div>
-    )
+    );
   }
 }
 
