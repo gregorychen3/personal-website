@@ -3,7 +3,7 @@ html {
 }
 
 html, body {
-    max-width: 1500px;
+    max-width: 1400px;
     min-width: 780px;
     margin: auto;
 }
@@ -11,8 +11,8 @@ html, body {
 body {
     font-family: Helvetica;
     margin-top: 12px;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .nav {
