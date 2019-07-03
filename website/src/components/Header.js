@@ -15,12 +15,14 @@ class Header extends Component {
         </div>
         <div class="nav_elements">
           <button class="dropbtn" id="cs_dropbtn">
-            Computer Science
+            Software
           </button>
           <div class="menu-content" id="cs-menu-content">
             <a href="cs_resume.pdf">Resume</a>
             <a href="http://www.linkedin.com/in/gregorychen3">LinkedIn</a>
-            <a href="http://34.229.58.254:3000">Cookbook App</a>
+            <a href="https://greg-ally-recipe-book.herokuapp.com">
+              Recipe Book App
+            </a>
           </div>
         </div>
         <div class="nav_elements">
