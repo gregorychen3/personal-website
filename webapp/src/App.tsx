@@ -1,9 +1,14 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
-import HomePage from "./pages/HomePage";
+import Routes from "./routes";
 
 const App = () => {
-  return <HomePage />;
+  return (
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  );
 };
 
 export default App;
