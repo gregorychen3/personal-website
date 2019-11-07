@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePage = () => (
+export default () => (
   <section className="section">
     <div className="container">
       <h1 className="title">Home Page</h1>
@@ -10,5 +10,3 @@ const HomePage = () => (
     </div>
   </section>
 );
-
-export default HomePage;
