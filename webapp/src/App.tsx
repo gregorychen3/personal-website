@@ -2,8 +2,8 @@ import React from "react";
 import "./App.scss";
 import HomePage from "./pages/HomePage";
 
-function App() {
+const App = () => {
   return <HomePage />;
-}
+};
 
 export default App;
