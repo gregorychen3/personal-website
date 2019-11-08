@@ -2,7 +2,7 @@ import createError, { HttpError } from "http-errors";
 import express, { NextFunction, Request, Response } from "express";
 import path from "path";
 import logger from "morgan";
-import indexRouter from "./routes/testController";
+import indexRouter from "./controller/testController";
 
 var app = express();
 
