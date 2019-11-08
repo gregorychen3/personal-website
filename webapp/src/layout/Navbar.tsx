@@ -37,9 +37,14 @@ export default () => (
           <Link to="/music/songbook" className="navbar-item">
             Songbook
           </Link>
-          <Link to="/music/resume" className="navbar-item">
+          <a
+            href="music_resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-item"
+          >
             Resume
-          </Link>
+          </a>
         </div>
       </div>
       <div className="navbar-item has-dropdown is-hoverable">
