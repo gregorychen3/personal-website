@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/node": "^12.12.6",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
     "@types/react-router": "^5.1.2",
     "@types/react-router-dom": "^5.1.2",
     "bulma": "^0.8.0",
+    "iframe-resizer-react": "^1.0.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
