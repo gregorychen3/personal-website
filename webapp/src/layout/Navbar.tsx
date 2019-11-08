@@ -84,7 +84,14 @@ export default () => (
           </a>
         </div>
       </div>
-      <a className="navbar-item">Contact</a>
+      <a
+        href="mailto:gregorychen3@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="navbar-item"
+      >
+        Contact
+      </a>
     </div>
   </nav>
 );
