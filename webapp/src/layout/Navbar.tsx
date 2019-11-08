@@ -38,7 +38,7 @@ export default () => (
             Songbook
           </Link>
           <a
-            href="music_resume.pdf"
+            href={process.env.PUBLIC_URL + "/music_resume.pdf"}
             target="_blank"
             rel="noopener noreferrer"
             className="navbar-item"
@@ -51,7 +51,7 @@ export default () => (
         <a className="navbar-link is-arrowless">Software</a>
         <div className="navbar-dropdown is-right">
           <a
-            href="cs_resume.pdf"
+            href={process.env.PUBLIC_URL + "/cs_resume.pdf"}
             target="_blank"
             rel="noopener noreferrer"
             className="navbar-item"
