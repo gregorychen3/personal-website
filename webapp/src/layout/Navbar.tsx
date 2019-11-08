@@ -17,6 +17,7 @@ export default () => (
         aria-label="menu"
         aria-expanded="false"
         data-target="navbarBasicExample"
+        href="#/"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -26,7 +27,9 @@ export default () => (
 
     <div className="navbar-end">
       <div className="navbar-item has-dropdown is-hoverable">
-        <a className="navbar-link is-arrowless">Music</a>
+        <a className="navbar-link is-arrowless" href="#/">
+          Music
+        </a>
         <div className="navbar-dropdown is-right">
           <Link to="/music/listen" className="navbar-item">
             Listen
@@ -48,7 +51,9 @@ export default () => (
         </div>
       </div>
       <div className="navbar-item has-dropdown is-hoverable">
-        <a className="navbar-link is-arrowless">Software</a>
+        <a className="navbar-link is-arrowless" href="#/">
+          Software
+        </a>
         <div className="navbar-dropdown is-right">
           <a
             href={process.env.PUBLIC_URL + "/cs_resume.pdf"}

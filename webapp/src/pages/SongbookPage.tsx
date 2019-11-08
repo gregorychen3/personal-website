@@ -7,6 +7,7 @@ export default () => {
     <section className="section">
       <div className="container">
         <iframe
+          title="Songbook"
           id="idIframe"
           src={`https://drive.google.com/embeddedfolderview?id=${folderId}#list`}
           style={{ width: "100%", minHeight: "650px" }}
