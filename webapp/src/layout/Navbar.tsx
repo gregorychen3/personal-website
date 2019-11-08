@@ -45,12 +45,38 @@ export default () => (
       <div className="navbar-item has-dropdown is-hoverable">
         <a className="navbar-link is-arrowless">Software</a>
         <div className="navbar-dropdown is-right">
-          <Link to="/software/resume" className="navbar-item">
+          <a
+            href="cs_resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-item"
+          >
             Resume
-          </Link>
-          <a className="navbar-item">LinkedIn</a>
-          <a className="navbar-item">Recipe Book Web App</a>
-          <a className="navbar-item">LiquorBuddy Mobile App</a>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/gregorychen3"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-item"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://greg-ally-recipe-book.herokuapp.com/recipes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-item"
+          >
+            Recipe Book Web App
+          </a>
+          <a
+            href="https://gregorychen3.github.io/liquor-buddy-website/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar-item"
+          >
+            LiquorBuddy Mobile App
+          </a>
         </div>
       </div>
       <a className="navbar-item">Contact</a>
