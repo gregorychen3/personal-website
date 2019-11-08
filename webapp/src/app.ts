@@ -4,14 +4,25 @@ import path from "path";
 import logger from "morgan";
 import indexRouter from "./controller/testController";
 
-var app = express();
+const app = express();
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "/../ui/build")));
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/api/", indexRouter);
+
+// the "catchall" handler: for any request that doesn't match one above, send
+// back React's index.html file.
+app.get("*", (req, res) => {
+  const file = path.join(__dirname + "/../ui/build/index.html");
+  console.log(__dirname);
+  res.sendFile(file);
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
