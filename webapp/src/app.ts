@@ -2,7 +2,8 @@ import createError, { HttpError } from "http-errors";
 import express, { NextFunction, Request, Response } from "express";
 import path from "path";
 import logger from "morgan";
-import indexRouter from "./controller/testController";
+import testController from "./controller/testController";
+import eventsController from "./controller/eventsController";
 
 const app = express();
 
@@ -14,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api/", indexRouter);
+app.use("/api/", testController);
+app.use("/api/events", eventsController);
 
 // the "catchall" handler: for any request that doesn't match one above, send
 // back React's index.html file.
