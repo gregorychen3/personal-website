@@ -12,13 +12,18 @@ const drive = google.drive({
 const songsController = express.Router();
 
 songsController.get("/", async (req, res, next) => {
-  const songs = await drive.files.list({
-    pageSize: 1000,
-    fields: "nextPageToken, files(id, name)",
-    q: `"${websiteSheetmusicFolderId}" in parents and trashed=false`,
-    orderBy: "name"
-  });
-  return res.send(songs.data.files);
+  try {
+    const songs = await drive.files.list({
+      pageSize: 1000,
+      fields: "nextPageToken, files(id, name)",
+      q: `"${websiteSheetmusicFolderId}" in parents and trashed=false`,
+      orderBy: "name"
+    });
+    return res.send(songs.data.files);
+  } catch (e) {
+    console.error(e);
+    return res.status(e.code).send(e.errors ? { errors: e.errors } : e);
+  }
 });
 
 export default songsController;
