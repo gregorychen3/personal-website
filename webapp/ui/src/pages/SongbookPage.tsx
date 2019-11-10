@@ -1,11 +1,9 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import apiClient from "../apiClient";
 import { ISongModel } from "../types";
-import moment from "moment";
 
 export default () => {
-  const folderId = "1XDfbY6K4GzA3Etm-dlwN0-HGhrIICkgw";
-
   const [songs, setSongs] = useState<ISongModel[]>([]);
 
   useEffect(() => {
@@ -24,7 +22,7 @@ export default () => {
   return (
     <section className="section">
       <div className="container">
-        <table className="table is-fullwidth">
+        <table className="table is-fullwidth is-striped is-hoverable">
           <thead>
             <tr>
               <th />
@@ -40,19 +38,20 @@ export default () => {
                     <i className="fas fa-folder" />
                   </span>
                 </td>
-                <td>{s.name}</td>
+                <td>
+                  <a
+                    href={`https://drive.google.com/open?id=${s.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {s.name}
+                  </a>
+                </td>
                 <td>{s.modifiedTime}</td>
               </tr>
             ))}
           </tbody>
         </table>
-
-        <iframe
-          title="Songbook"
-          id="idIframe"
-          src={`https://drive.google.com/embeddedfolderview?id=${folderId}#list`}
-          style={{ width: "100%", minHeight: "650px" }}
-        />
       </div>
     </section>
   );
