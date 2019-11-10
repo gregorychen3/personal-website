@@ -1,20 +1,22 @@
-import moment from "moment";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import apiClient from "../apiClient";
+import { getDateDisplay } from "../helpers";
 import { ISongModel } from "../types";
 
+interface SortConfig {
+  name?: "asc" | "desc";
+  modifiedTime?: "asc" | "desc";
+}
+
 export default () => {
+  const [sortConfig, setSortConfig] = useState<SortConfig>({ name: "asc" });
   const [songs, setSongs] = useState<ISongModel[]>([]);
 
   useEffect(() => {
     const getSongs = async () => {
       const songs = await apiClient.fetchSongs();
-      setSongs(
-        songs.data.map(s => ({
-          ...s,
-          modifiedTime: moment(s.modifiedTime).format("M/D/YYYY")
-        }))
-      );
+      setSongs(songs.data);
     };
     getSongs();
   }, []);
@@ -26,8 +28,32 @@ export default () => {
           <thead>
             <tr>
               <th />
-              <th>Name</th>
-              <th>Last Modified</th>
+              <th
+                onClick={() => {
+                  if (sortConfig.name === "asc") {
+                    setSongs(_.sortBy(songs, "name").reverse());
+                    setSortConfig({ name: "desc" });
+                  } else {
+                    setSongs(_.sortBy(songs, "name"));
+                    setSortConfig({ name: "asc" });
+                  }
+                }}
+              >
+                Name
+              </th>
+              <th
+                onClick={() => {
+                  if (sortConfig.modifiedTime === "asc") {
+                    setSongs(_.sortBy(songs, "modifiedTime").reverse());
+                    setSortConfig({ modifiedTime: "desc" });
+                  } else {
+                    setSongs(_.sortBy(songs, "modifiedTime"));
+                    setSortConfig({ modifiedTime: "asc" });
+                  }
+                }}
+              >
+                Last Modified
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +73,7 @@ export default () => {
                     {s.name}
                   </a>
                 </td>
-                <td>{s.modifiedTime}</td>
+                <td>{getDateDisplay(s.modifiedTime)}</td>
               </tr>
             ))}
           </tbody>
