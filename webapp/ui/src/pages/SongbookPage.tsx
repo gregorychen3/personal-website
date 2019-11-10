@@ -24,7 +24,7 @@ export default () => {
   return (
     <section className="section">
       <div className="container">
-        <table className="table is-fullwidth is-striped is-hoverable">
+        <table className="table is-fullwidth is-striped is-narrow is-hoverable">
           <thead>
             <tr>
               <th />
