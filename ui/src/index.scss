@@ -2,4 +2,6 @@
 // @import "bulma/sass/utilities/initial-variables.sass";
 // your customization as described in the Bulma docs
 
+@import "node_modules/bulmaswatch/materia/_variables.scss";
 @import "bulma/bulma.sass";
+@import "node_modules/bulmaswatch/materia/_overrides.scss";
