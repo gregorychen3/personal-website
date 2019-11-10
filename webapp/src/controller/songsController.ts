@@ -15,7 +15,7 @@ songsController.get("/", async (req, res, next) => {
   try {
     const songs = await drive.files.list({
       pageSize: 1000,
-      fields: "nextPageToken, files(id, name)",
+      fields: "nextPageToken, files(id, name, modifiedTime)",
       q: `"${websiteSheetmusicFolderId}" in parents and trashed=false`,
       orderBy: "name"
     });
