@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import ListenPage from "./pages/ListenPage";
 import SchedulePage from "./pages/SchedulePage";
 import SongbookPage from "./pages/SongbookPage";
+import SiteCreditsPage from "./pages/SiteCreditsPage";
 
 export default () => (
   <Switch>
@@ -13,5 +14,6 @@ export default () => (
     <Route path="/music/songbook" exact component={SongbookPage} />
     <Route path="/music/resume" exact component={HomePage} />
     <Route path="/software/resume" exact component={HomePage} />
+    <Route path="/credits" exact component={SiteCreditsPage} />
   </Switch>
 );
