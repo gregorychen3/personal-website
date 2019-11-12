@@ -86,7 +86,7 @@ export default () => {
               onClick={() => setShowBurgerMenu(false)}
             >
               <a
-                href="https://docs.google.com/document/d/1hsN8sayM2bO1XkU5hhkP2yXk17w1z45O2fc4wYW7f88/edit?usp=sharing"
+                href={`${process.env.PUBLIC_URL}/software_resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowBurgerMenu(false)}
@@ -95,7 +95,7 @@ export default () => {
                 Resume
               </a>
               <a
-                href={`${process.env.PUBLIC_URL}/software_resume.pdf`}
+                href="https://www.linkedin.com/in/gregorychen3"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowBurgerMenu(false)}
