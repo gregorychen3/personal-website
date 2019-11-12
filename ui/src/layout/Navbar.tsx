@@ -61,7 +61,7 @@ export default () => {
                 Songbook
               </Link>
               <a
-                href={process.env.PUBLIC_URL + "/music_resume.pdf"}
+                href={`${process.env.PUBLIC_URL}/music_resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowBurgerMenu(false)}
@@ -93,7 +93,7 @@ export default () => {
                 Resume
               </a>
               <a
-                href="https://www.linkedin.com/in/gregorychen3"
+                href={`${process.env.PUBLIC_URL}/software_resume.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowBurgerMenu(false)}
