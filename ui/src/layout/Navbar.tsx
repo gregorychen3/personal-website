@@ -15,19 +15,18 @@ export default () => {
           </Link>
         </a>
 
-        <a
+        <div
           onClick={() => setShowBurgerMenu(!showBurgerMenu)}
           role="button"
           className="navbar-burger burger"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
-          href="#/"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </div>
       </div>
       <div
         id="navbarBasicExample"
@@ -35,9 +34,13 @@ export default () => {
       >
         <div className="navbar-end">
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link is-arrowless" href="#/">
+            <Link
+              to="/music/listen"
+              onClick={() => setShowBurgerMenu(false)}
+              className="navbar-link is-arrowless"
+            >
               Music
-            </a>
+            </Link>
             <div className="navbar-dropdown is-right">
               <Link
                 to="/music/listen"
@@ -72,13 +75,12 @@ export default () => {
             </div>
           </div>
           <div className="navbar-item has-dropdown is-hoverable">
-            <a
+            <div
               className="navbar-link is-arrowless"
-              href="#/"
               onClick={() => setShowBurgerMenu(false)}
             >
               Software
-            </a>
+            </div>
             <div
               className="navbar-dropdown is-right"
               onClick={() => setShowBurgerMenu(false)}
