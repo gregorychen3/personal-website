@@ -5,7 +5,7 @@ export default () => (
   <section className="section">
     <div className="container">
       <figure className="image">
-        <img src="riverside_church.jpg" alt="At Riverside church" />
+        <img src="riverside_church_fullhd.jpg" alt="At Riverside church" />
         <Link to="/credits">
           <div className="is-size-7 has-text-right has-text-black">
             Site Credits
