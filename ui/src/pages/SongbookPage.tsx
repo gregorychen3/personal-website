@@ -12,16 +12,25 @@ interface SortConfig {
 export default () => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ name: "asc" });
   const [songs, setSongs] = useState<ISongModel[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getSongs = async () => {
       const songs = await apiClient.fetchSongs();
       setSongs(songs.data);
+      setIsLoading(false);
     };
     getSongs();
   }, []);
 
-  return (
+  return isLoading ? (
+    <div
+      className="is-loading"
+      style={{
+        marginTop: "150px"
+      }}
+    />
+  ) : (
     <section className="section">
       <div className="container">
         <table className="table is-fullwidth is-striped is-narrow is-hoverable">
