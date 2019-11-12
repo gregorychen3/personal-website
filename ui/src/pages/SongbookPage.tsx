@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../apiClient";
 import { getDateDisplay } from "../helpers";
 import { ISongModel } from "../types";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 interface SortConfig {
   name?: "asc" | "desc";
@@ -24,12 +25,7 @@ export default () => {
   }, []);
 
   return isLoading ? (
-    <div
-      className="is-loading"
-      style={{
-        marginTop: "150px"
-      }}
-    />
+    <LoadingSpinner />
   ) : (
     <section className="section">
       <div className="container">
