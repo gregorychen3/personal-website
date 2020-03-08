@@ -1,7 +1,9 @@
 #!/bin/bash
 
-SRC_SHEETMUSIC="/Users/gregorychen3/google-drive/music_docs/sheetmusic"
-DEST_SHEETMUSIC="/Users/gregorychen3/google-drive/music_docs/website_sheetmusic"
+set -x
+
+SRC_SHEETMUSIC="/Users/gregorychen3/GoogleDrive/music_docs/sheetmusic"
+DEST_SHEETMUSIC="/Users/gregorychen3/GoogleDrive/music_docs/website_sheetmusic"
 
 # Start with clean slate
 rm -rf $DEST_SHEETMUSIC/*
