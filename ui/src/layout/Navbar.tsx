@@ -104,7 +104,7 @@ export default () => {
                 LinkedIn
               </a>
               <a
-                href="https://greg-ally-recipe-book.herokuapp.com/recipes"
+                href="https://ga-recipe-book.herokuapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowBurgerMenu(false)}
