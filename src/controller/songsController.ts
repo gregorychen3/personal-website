@@ -6,7 +6,7 @@ const websiteSheetmusicFolderId = "1XDfbY6K4GzA3Etm-dlwN0-HGhrIICkgw";
 
 const drive = google.drive({
   version: "v3",
-  auth: GOOGLE_API_KEY
+  auth: GOOGLE_API_KEY,
 });
 
 const songsController = express.Router();
@@ -17,7 +17,7 @@ songsController.get("/", async (req, res, next) => {
       pageSize: 1000,
       fields: "nextPageToken, files(id, name, modifiedTime)",
       q: `"${websiteSheetmusicFolderId}" in parents and trashed=false`,
-      orderBy: "name"
+      orderBy: "name",
     });
     return res.send(songs.data.files);
   } catch (e) {

@@ -4,7 +4,7 @@ const overlayStyles = {
   position: "absolute",
   filter: "blur(1px)",
   transition: "opacity ease-in 1000ms",
-  clipPath: "inset(0)"
+  clipPath: "inset(0)",
 };
 
 interface Props {
@@ -14,9 +14,5 @@ interface Props {
 export default ({ fullImageSrc, overlaySrc }: Props) => {
   const [isFullImageLoaded, setIsFullImageLoaded] = useState(false);
   <img src={fullImageSrc} onLoad={() => setIsFullImageLoaded(true)}></img>;
-  <img
-    {...(isFullImageLoaded && { style: { opacity: "0" } })}
-    src={overlaySrc}
-    className={`${overlayStyles}`}
-  />;
+  <img {...(isFullImageLoaded && { style: { opacity: "0" } })} src={overlaySrc} className={`${overlayStyles}`} />;
 };

@@ -7,9 +7,7 @@ export default () => (
       <figure className="image">
         <img src="riverside_church_fullhd.jpg" alt="At Riverside church" />
         <Link to="/credits">
-          <div className="is-size-7 has-text-right has-text-black">
-            Site Credits
-          </div>
+          <div className="is-size-7 has-text-right has-text-black">Site Credits</div>
         </Link>
       </figure>
     </div>

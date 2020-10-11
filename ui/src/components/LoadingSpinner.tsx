@@ -4,7 +4,7 @@ export default () => (
   <div
     className="is-loading"
     style={{
-      marginTop: "150px"
+      marginTop: "150px",
     }}
   />
 );

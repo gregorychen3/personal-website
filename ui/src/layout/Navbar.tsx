@@ -28,39 +28,20 @@ export default () => {
           <span aria-hidden="true"></span>
         </div>
       </div>
-      <div
-        id="navbarBasicExample"
-        className={classNames("navbar-menu", { "is-active": showBurgerMenu })}
-      >
+      <div id="navbarBasicExample" className={classNames("navbar-menu", { "is-active": showBurgerMenu })}>
         <div className="navbar-end">
           <div className="navbar-item has-dropdown is-hoverable">
-            <Link
-              to="/music/listen"
-              onClick={() => setShowBurgerMenu(false)}
-              className="navbar-link is-arrowless"
-            >
+            <Link to="/music/listen" onClick={() => setShowBurgerMenu(false)} className="navbar-link is-arrowless">
               Music
             </Link>
             <div className="navbar-dropdown is-right">
-              <Link
-                to="/music/listen"
-                onClick={() => setShowBurgerMenu(false)}
-                className="navbar-item"
-              >
+              <Link to="/music/listen" onClick={() => setShowBurgerMenu(false)} className="navbar-item">
                 Listen
               </Link>
-              <Link
-                to="/music/schedule"
-                onClick={() => setShowBurgerMenu(false)}
-                className="navbar-item"
-              >
+              <Link to="/music/schedule" onClick={() => setShowBurgerMenu(false)} className="navbar-item">
                 Schedule
               </Link>
-              <Link
-                to="/music/songbook"
-                onClick={() => setShowBurgerMenu(false)}
-                className="navbar-item"
-              >
+              <Link to="/music/songbook" onClick={() => setShowBurgerMenu(false)} className="navbar-item">
                 Songbook
               </Link>
               <a
@@ -75,16 +56,10 @@ export default () => {
             </div>
           </div>
           <div className="navbar-item has-dropdown is-hoverable">
-            <div
-              className="navbar-link is-arrowless"
-              onClick={() => setShowBurgerMenu(false)}
-            >
+            <div className="navbar-link is-arrowless" onClick={() => setShowBurgerMenu(false)}>
               Software
             </div>
-            <div
-              className="navbar-dropdown is-right"
-              onClick={() => setShowBurgerMenu(false)}
-            >
+            <div className="navbar-dropdown is-right" onClick={() => setShowBurgerMenu(false)}>
               <a
                 href={`${process.env.PUBLIC_URL}/software_resume.pdf`}
                 target="_blank"

@@ -62,7 +62,7 @@ export default () => {
             </tr>
           </thead>
           <tbody>
-            {songs.map(s => (
+            {songs.map((s) => (
               <tr>
                 <td>
                   <span className="icon has-text-grey">
@@ -70,11 +70,7 @@ export default () => {
                   </span>
                 </td>
                 <td>
-                  <a
-                    href={`https://drive.google.com/open?id=${s.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={`https://drive.google.com/open?id=${s.id}`} target="_blank" rel="noopener noreferrer">
                     {s.name}
                   </a>
                 </td>

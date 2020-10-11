@@ -7,7 +7,7 @@ const apiClient = {
   fetchSongs: (): AxiosPromise<ISongModel[]> => {
     const path = `/api/songs`;
     return axios.get(path);
-  }
+  },
 };
 
 export default apiClient;
