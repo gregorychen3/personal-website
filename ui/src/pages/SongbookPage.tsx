@@ -63,7 +63,7 @@ export default () => {
           </thead>
           <tbody>
             {songs.map((s) => (
-              <tr>
+              <tr key={s.id}>
                 <td>
                   <span className="icon has-text-grey">
                     <i className="fas fa-folder" />
