@@ -79,6 +79,15 @@ export default () => {
                 LinkedIn
               </a>
               <a
+                href="https://github.com/gregorychen3/espresso-controller"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setShowBurgerMenu(false)}
+                className="navbar-item"
+              >
+                Espresso Controller
+              </a>
+              <a
                 href="https://ga-recipe-book.herokuapp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
