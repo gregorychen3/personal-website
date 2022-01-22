@@ -22,14 +22,28 @@ export default () => (
       <div className="columns">
         <div className="column">
           <YoutubeVideo
+            title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 1"
+            src="https://www.youtube.com/embed/D9ulpdTD6hY"
+          />
+        </div>
+        <div className="column">
+          <YoutubeVideo
+            title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 2"
+            src="https://www.youtube.com/embed/wkXdCbxZD2w"
+          />
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column">
+          <YoutubeVideo
             title="I Can Dream, Can't I - Alex Hoffman Quintet 04-29-2018"
-            src="https://www.youtube.com/embed/QSAsV01_DFg?controls=0"
+            src="https://www.youtube.com/embed/QSAsV01_DFg"
           />
         </div>
         <div className="column">
           <YoutubeVideo
             title="I Concentrate On You - Alex Hoffman Quintet 04-29-2018"
-            src="https://www.youtube.com/embed/9u3LmdqAwDA?controls=0"
+            src="https://www.youtube.com/embed/9u3LmdqAwDA"
           />
         </div>
       </div>
@@ -37,13 +51,13 @@ export default () => (
         <div className="column">
           <YoutubeVideo
             title="Too Late Now - Alex Hoffman Quintet 04-29-2018"
-            src="https://www.youtube.com/embed/56r7TQrSnPo?controls=0"
+            src="https://www.youtube.com/embed/56r7TQrSnPo"
           />
         </div>
         <div className="column">
           <YoutubeVideo
             title="If I Could Be With You, James P. Johnson"
-            src="https://www.youtube.com/embed/bdLJmW7sR-4?controls=0"
+            src="https://www.youtube.com/embed/bdLJmW7sR-4"
           />
         </div>
       </div>
