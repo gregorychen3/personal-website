@@ -94,7 +94,7 @@ export default () => {
                 onClick={() => setShowBurgerMenu(false)}
                 className="navbar-item"
               >
-                Recipe Book Web App
+                Recipe Book
               </a>
               <a
                 href="https://gregorychen3.github.io/liquor-buddy-website/"
