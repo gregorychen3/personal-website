@@ -1,16 +1,16 @@
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import apiClient from "../apiClient";
+import { apiClient } from "../apiClient";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 import { getDateDisplay } from "../helpers";
 import { ISongModel } from "../types";
-import LoadingSpinner from "../components/LoadingSpinner";
 
 interface SortConfig {
   name?: "asc" | "desc";
   modifiedTime?: "asc" | "desc";
 }
 
-export default () => {
+export function SongbookPage() {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ name: "asc" });
   const [songs, setSongs] = useState<ISongModel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -82,4 +82,4 @@ export default () => {
       </div>
     </section>
   );
-};
+}

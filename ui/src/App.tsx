@@ -1,16 +1,14 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
-import Routes from "./Routes";
-import Navbar from "./layout/Navbar";
+import { Navbar } from "./layout/Navbar";
+import { Routes } from "./Routes";
 
-const App = () => {
+export function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes />
     </BrowserRouter>
   );
-};
-
-export default App;
+}
