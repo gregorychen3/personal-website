@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "./Navbar.scss";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.scss";
 
-export default () => {
+export function Navbar() {
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
   return (
@@ -120,4 +120,4 @@ export default () => {
       </div>
     </nav>
   );
-};
+}

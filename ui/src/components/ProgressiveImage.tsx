@@ -11,8 +11,8 @@ interface Props {
   fullImageSrc: string;
   overlaySrc: string;
 }
-export default ({ fullImageSrc, overlaySrc }: Props) => {
+export function ProgressiveImage({ fullImageSrc, overlaySrc }: Props) {
   const [isFullImageLoaded, setIsFullImageLoaded] = useState(false);
   <img src={fullImageSrc} onLoad={() => setIsFullImageLoaded(true)}></img>;
   <img {...(isFullImageLoaded && { style: { opacity: "0" } })} src={overlaySrc} className={`${overlayStyles}`} />;
-};
+}

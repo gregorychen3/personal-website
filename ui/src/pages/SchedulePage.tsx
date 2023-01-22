@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
-export default () => {
+export function SchedulePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -22,4 +22,4 @@ export default () => {
       </div>
     </section>
   );
-};
+}
