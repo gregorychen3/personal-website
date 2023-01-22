@@ -1,3 +1,3 @@
-import moment from "moment";
+import { format } from "date-fns";
 
-export const getDateDisplay = (dateString: string) => moment(dateString).format("M/D/YYYY");
+export const getDateDisplay = (dateString: string) => format(new Date(dateString), "M/dd/y");
