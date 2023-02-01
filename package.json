@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc",
     "build-ui": "cd ui && npm i && npm run build",
-    "prestart": "NODE_OPTIONS=--max-old-space-size=460 npm run tsc",
+    "prestart": "esbuild src/app.ts --platform=node --bundle --minify --outfile=build/app.js",
     "start": "node ./bin/www",
     "heroku-postbuild": "cd ui && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,7 @@
     "@types/http-errors": "^2.0.1",
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.11.18",
+    "esbuild": "^0.17.5",
     "express": "^4.18.2",
     "googleapis": "^110.0.0",
     "http-errors": "^2.0.0",
