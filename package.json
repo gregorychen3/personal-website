@@ -5,7 +5,7 @@
   "scripts": {
     "tsc": "tsc",
     "build-ui": "cd ui && npm i && npm run build",
-    "prestart": "npm run tsc",
+    "prestart": "NODE_OPTIONS=--max-old-space-size=8192 npm run tsc",
     "start": "node ./bin/www",
     "heroku-postbuild": "cd ui && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
