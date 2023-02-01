@@ -104,7 +104,7 @@ const DesktopNav = () => {
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, external }: NavItem) => {
   return (
     <Link
       href={href}
@@ -113,13 +113,13 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       p={2}
       rounded={"md"}
       _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      {...(external ? externalLinkProps : {})}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text transition={"all .3s ease"} _groupHover={{ color: "pink.400" }} fontWeight={500}>
             {label}
           </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
         </Box>
         <Flex
           transition={"all .3s ease"}
@@ -187,7 +187,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label} py={2} href={child.href} {...(child.external ? externalLinkProps : {})}>
                 {child.label}
               </Link>
             ))}
@@ -197,36 +197,35 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   );
 };
 
+const externalLinkProps = { target: "_blank", rel: "noopener noreferrer" };
+
 interface NavItem {
   label: string;
-  subLabel?: string;
   children?: Array<NavItem>;
   href?: string;
+  external?: boolean;
 }
 
-const NAV_ITEMS: Array<NavItem> = [
+const NAV_ITEMS: NavItem[] = [
   {
     label: "Music",
     children: [
       {
         label: "Listen",
-        //subLabel: "Selections",
-        href: "#",
+        href: "music/listen",
       },
       {
         label: "Schedule",
-        //subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: "music/schedule",
       },
       {
         label: "Songbook",
-        //subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: "music/songbook",
       },
       {
         label: "Resume",
-        //subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: `${process.env.PUBLIC_URL}/music_resume.pdf`,
+        external: true,
       },
     ],
   },
@@ -235,33 +234,34 @@ const NAV_ITEMS: Array<NavItem> = [
     children: [
       {
         label: "Resume",
-        //subLabel: "An exclusive list for contract work",
-        href: "#",
+        href: `${process.env.PUBLIC_URL}/software_resume.pdf`,
+        external: true,
       },
       {
         label: "LinkedIn",
-        //subLabel: "Find your dream design job",
-        href: "#",
+        href: "https://www.linkedin.com/in/gregorychen3",
+        external: true,
       },
       {
         label: "Espresso PID Controller",
-        //subLabel: "Find your dream design job",
-        href: "#",
+        href: "https://github.com/gregorychen3/espresso-controller",
+        external: true,
       },
       {
         label: "Recipe Book",
-        //subLabel: "Find your dream design job",
-        href: "#",
+        href: "https://ga-recipe-book.herokuapp.com/",
+        external: true,
       },
       {
         label: "LiquorBuddy Mobile App",
-        //subLabel: "Find your dream design job",
-        href: "#",
+        href: "https://gregorychen3.github.io/liquor-buddy-website/",
+        external: true,
       },
     ],
   },
   {
     label: "Contact",
-    href: "#",
+    href: "mailto:gregorychen3@gmail.com",
+    external: true,
   },
 ];
