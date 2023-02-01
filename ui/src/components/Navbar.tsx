@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-export function WithSubnavigation() {
+export function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
