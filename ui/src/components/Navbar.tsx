@@ -15,6 +15,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 export function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -53,6 +54,10 @@ export function Navbar() {
             <DesktopNav />
           </Flex>
         </Flex>
+
+        <Stack flex={{ base: 1, md: 0 }} justify={"flex-end"} direction={"row"} spacing={6}>
+          <ColorModeSwitcher justifySelf="flex-end" />
+        </Stack>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
