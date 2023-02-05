@@ -1,9 +1,6 @@
 import { Stack, styled } from "@mui/material";
 import Button from "@mui/material/Button";
 
-//const Header = styled(Typography)(() => ({ fontWeight: "bold", fontFamily: "serif", textTransform: "none" }));
-//Header.defaultProps = { variant: "subtitle2" };
-
 const Header = styled(Button)(({ theme }) => ({
   fontFamily: "georgia",
   textTransform: "none",
