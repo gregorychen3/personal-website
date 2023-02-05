@@ -4,10 +4,10 @@ export function SideNav() {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button size="large">Pianist</Button>
+        <Button size="large">Engineer</Button>
       </Grid>
       <Grid item xs={12}>
-        <Button size="large">Programmer</Button>
+        <Button size="large">Pianist</Button>
       </Grid>
       <Grid item xs={12}>
         <Button size="large">Contact</Button>
