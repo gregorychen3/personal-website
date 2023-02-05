@@ -1,4 +1,6 @@
 import { Box, Button, Container, CssBaseline, Toolbar } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
 
 export function App() {
   return (
@@ -6,8 +8,10 @@ export function App() {
       <CssBaseline />
       <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Button variant="contained">Hello World</Button>
+        <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
         </Container>
       </Box>
     </Box>
