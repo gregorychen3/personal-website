@@ -1,4 +1,4 @@
-import { Box, Button, Container, CssBaseline, Toolbar } from "@mui/material";
+import { Box, Container, CssBaseline, Toolbar } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 
