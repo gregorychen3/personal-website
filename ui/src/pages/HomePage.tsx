@@ -1,4 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 export function HomePage() {
   return (
@@ -14,6 +17,18 @@ export function HomePage() {
           California.
         </Typography>
       </Grid>
+      <Grid item xs={12}>
+        <IconButton color="primary">
+          <YouTubeIcon />
+        </IconButton>
+        <IconButton color="primary">
+          <LinkedInIcon />
+        </IconButton>
+        <IconButton color="primary">
+          <GitHubIcon />
+        </IconButton>
+      </Grid>
+      <Grid item xs={12}></Grid>
     </Grid>
   );
 }
