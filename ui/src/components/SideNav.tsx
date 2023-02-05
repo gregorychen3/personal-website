@@ -5,14 +5,19 @@ import Button from "@mui/material/Button";
 //Header.defaultProps = { variant: "subtitle2" };
 
 const Header = styled(Button)(({ theme }) => ({
-  fontWeight: "bold",
-  fontFamily: "serif",
+  fontFamily: "georgia",
   textTransform: "none",
   color: theme.palette.text.primary,
   pointerEvents: "none",
+  fontWeight: "normal",
 }));
 
-const Item = styled(Button)(({ theme }) => ({ paddingLeft: theme.spacing(2), paddingRight: theme.spacing(2) }));
+const Item = styled(Button)(({ theme }) => ({
+  fontFamily: "georgia",
+  paddingLeft: theme.spacing(3),
+  paddingRight: theme.spacing(3),
+  fontWeight: "normal",
+}));
 
 export function SideNav() {
   return (
