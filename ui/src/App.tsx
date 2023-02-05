@@ -11,10 +11,10 @@ export function App() {
         <Toolbar />
         <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
           <Grid container>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <SideNav />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={9}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
               </Routes>
