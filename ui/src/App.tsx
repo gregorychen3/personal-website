@@ -1,9 +1,15 @@
-import { Button } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Toolbar } from "@mui/material";
 
 export function App() {
   return (
-    <div className="App">
-      <Button variant="contained">Hello World</Button>
-    </div>
+    <Box display="flex">
+      <CssBaseline />
+      <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
+        <Toolbar />
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Button variant="contained">Hello World</Button>
+        </Container>
+      </Box>
+    </Box>
   );
 }
