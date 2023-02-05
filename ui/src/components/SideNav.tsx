@@ -1,5 +1,6 @@
 import { Stack, styled } from "@mui/material";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const Header = styled(Button)(({ theme }) => ({
   fontFamily: "georgia",
@@ -9,26 +10,29 @@ const Header = styled(Button)(({ theme }) => ({
   fontWeight: "normal",
 }));
 
-const Item = styled(Button)(({ theme }) => ({
-  fontFamily: "georgia",
-  paddingLeft: theme.spacing(3),
-  paddingRight: theme.spacing(3),
-  fontWeight: "normal",
-}));
+const sxButton = { fontFamily: "georgia", pl: 3, pr: 3, fontWeight: "normal" };
 
 export function SideNav() {
   return (
     <Stack alignItems="flex-start">
       <Header>music</Header>
-      <Item>resume</Item>
-      <Item>listen</Item>
-      <Item>schedule</Item>
-      <Item>songbook</Item>
+      <Item to="music/resume" label="resume" />
+      <Item to="music/listen" label="listen" />
+      <Item to="music/schedule" label="schedule" />
+      <Item to="music/songbook" label="songbook" />
 
       <Header>software</Header>
-      <Item>resume</Item>
-      <Item>linkedin</Item>
-      <Item>projects</Item>
+      <Item to="software/resume" label="resume" />
+      <Item to="software/linkedin" label="linkedin" />
+      <Item to="software/projects" label="projects" />
     </Stack>
+  );
+}
+
+function Item({ to, label }: { to: string; label: string }) {
+  return (
+    <Button component={Link} to={to} sx={sxButton}>
+      {label}
+    </Button>
   );
 }
