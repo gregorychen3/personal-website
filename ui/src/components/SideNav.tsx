@@ -1,17 +1,32 @@
-import { Button, Grid } from "@mui/material";
+import { Stack, styled } from "@mui/material";
+import Button from "@mui/material/Button";
+
+//const Header = styled(Typography)(() => ({ fontWeight: "bold", fontFamily: "serif", textTransform: "none" }));
+//Header.defaultProps = { variant: "subtitle2" };
+
+const Header = styled(Button)(({ theme }) => ({
+  fontWeight: "bold",
+  fontFamily: "serif",
+  textTransform: "none",
+  color: theme.palette.text.primary,
+  pointerEvents: "none",
+}));
+
+const Item = styled(Button)(({ theme }) => ({ paddingLeft: theme.spacing(2), paddingRight: theme.spacing(2) }));
 
 export function SideNav() {
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Button size="large">Music</Button>
-      </Grid>
-      <Grid item xs={12}>
-        <Button size="large">Software</Button>
-      </Grid>
-      <Grid item xs={12}>
-        <Button size="large">Contact</Button>
-      </Grid>
-    </Grid>
+    <Stack alignItems="flex-start">
+      <Header>music</Header>
+      <Item>resume</Item>
+      <Item>listen</Item>
+      <Item>schedule</Item>
+      <Item>songbook</Item>
+
+      <Header>software</Header>
+      <Item>resume</Item>
+      <Item>linkedin</Item>
+      <Item>projects</Item>
+    </Stack>
   );
 }
