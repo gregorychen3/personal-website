@@ -7,7 +7,7 @@ export function HomePage() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h3" fontFamily="serif">
+        <Typography variant="h4" fontFamily="serif">
           Gregory Chen
         </Typography>
       </Grid>
