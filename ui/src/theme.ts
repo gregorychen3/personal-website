@@ -10,4 +10,13 @@ export const theme = createTheme({
     background: { default: "#171717", paper: "#1E262E" },
     mode: "dark",
   },
+  typography: {
+    button: {
+      textTransform: "none",
+      fontFamily: "serif",
+      fontWeight: "bold",
+    },
+  },
 });
+
+theme.palette.primary.main = theme.palette.text.disabled;
