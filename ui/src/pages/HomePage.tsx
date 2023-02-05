@@ -1,7 +1,7 @@
-import { Grid, IconButton, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Grid, IconButton, Typography } from "@mui/material";
 
 export function HomePage() {
   return (
@@ -13,8 +13,7 @@ export function HomePage() {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body1">
-          Hello, I'm Gregory Chen. I'm a software engineer and jazz pianist based in New York City and the Bay Area,
-          California.
+          Hello, I'm Gregory Chen. I'm a jazz pianist and software engineer based in the Bay Area, CA and New York City.
         </Typography>
       </Grid>
       <Grid item xs={12}>
