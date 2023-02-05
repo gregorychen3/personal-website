@@ -12,7 +12,7 @@ export function HomePage() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="body1">
+        <Typography variant="body2">
           Hello, I'm Gregory Chen. I'm a jazz pianist and software engineer based in New York City and the Bay Area, CA.
         </Typography>
       </Grid>
