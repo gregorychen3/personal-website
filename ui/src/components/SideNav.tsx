@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function SideNav() {
   return (
-    <Stack alignItems="flex-start">
+    <Stack alignItems="flex-start" spacing={0.5}>
       <HeaderItem to="/" label="home" />
 
       <HeaderItem to="music/listen" label="music" />
@@ -25,7 +25,7 @@ const sxHeaderItem = { fontFamily: "georgia", fontWeight: "normal", textTransfor
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   return (
-    <Button component={Link} to={to} sx={sxHeaderItem}>
+    <Button component={Link} to={to} sx={sxHeaderItem} size="small">
       {label}
     </Button>
   );
@@ -35,7 +35,7 @@ const sxSubItem = { fontFamily: "georgia", pl: 3, pr: 3, fontWeight: "normal" };
 
 function SubItem({ to, label }: { to: string; label: string }) {
   return (
-    <Button component={Link} to={to} sx={sxSubItem}>
+    <Button component={Link} to={to} sx={sxSubItem} size="small">
       {label}
     </Button>
   );
