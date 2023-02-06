@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
+import { Box, Container, CssBaseline, Grid, Toolbar, Typography } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { SideNav } from "./components/SideNav";
 import { HomePage } from "./pages/HomePage";
@@ -12,7 +12,18 @@ export function App() {
         <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
           <Grid container>
             <Grid item xs={3}>
-              <SideNav />
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Typography variant="h4" fontFamily="serif" sx={{ pl: 1, mb: 3 }}>
+                      gc
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <SideNav />
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
             <Grid item xs={9}>
               <Routes>
