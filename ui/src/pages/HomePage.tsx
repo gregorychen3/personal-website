@@ -4,6 +4,24 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Grid, Stack, Typography } from "@mui/material";
 import { SocialLink } from "../components/SocialLink";
 
+const socialLinks = [
+  {
+    icon: <YouTubeIcon />,
+    text: "youtube",
+    to: "https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA",
+  },
+  {
+    icon: <LinkedInIcon />,
+    text: "linkedin",
+    to: "https://www.linkedin.com/in/gregorychen3",
+  },
+  {
+    icon: <GitHubIcon />,
+    text: "github",
+    to: "https://github.com/gregorychen3",
+  },
+];
+
 export function HomePage() {
   return (
     <Grid container spacing={8}>
@@ -20,13 +38,9 @@ export function HomePage() {
       </Grid>
       <Grid item xs={9}>
         <Stack alignItems="flex-start">
-          <SocialLink
-            icon={<YouTubeIcon />}
-            text="youtube"
-            to="https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA"
-          />
-          <SocialLink icon={<LinkedInIcon />} text="linkedin" to="https://www.linkedin.com/in/gregorychen3" />
-          <SocialLink icon={<GitHubIcon />} text="github" to="https://github.com/gregorychen3" />
+          {socialLinks.map((props) => (
+            <SocialLink {...props} key={props.text} />
+          ))}
         </Stack>
       </Grid>
       <Grid item xs={12}></Grid>

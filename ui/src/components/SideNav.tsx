@@ -25,7 +25,7 @@ const sxHeaderItem = { fontWeight: "normal", textTransform: "none", color: "text
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   return (
-    <Button component={Link} to={to} sx={sxHeaderItem} size="small">
+    <Button component={Link} to={to} sx={sxHeaderItem}>
       {label}
     </Button>
   );
@@ -39,7 +39,7 @@ function SubItem({ to, label }: { to: string; label: string }) {
   const sx = pathname === to ? { ...sxSubItem, backgroundColor: activeColor } : sxSubItem;
 
   return (
-    <Button component={Link} to={to} sx={sx} size="small">
+    <Button component={Link} to={to} sx={sx}>
       {label}
     </Button>
   );
