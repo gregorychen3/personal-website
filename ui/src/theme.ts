@@ -11,7 +11,7 @@ export const theme = createTheme({
     mode: "dark",
   },
   typography: {
-    fontSize: 16,
+    fontFamily: ["georgia", "serif"].join(","),
     button: {
       textTransform: "none",
       fontFamily: "serif",
