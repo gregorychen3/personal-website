@@ -20,9 +20,13 @@ export function HomePage() {
       </Grid>
       <Grid item xs={9}>
         <Stack alignItems="flex-start">
-          <SocialLink icon={<YouTubeIcon />} text="youtube" />
-          <SocialLink icon={<LinkedInIcon />} text="linkedin" />
-          <SocialLink icon={<GitHubIcon />} text="github" />
+          <SocialLink
+            icon={<YouTubeIcon />}
+            text="youtube"
+            to="https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA"
+          />
+          <SocialLink icon={<LinkedInIcon />} text="linkedin" to="https://www.linkedin.com/in/gregorychen3" />
+          <SocialLink icon={<GitHubIcon />} text="github" to="https://github.com/gregorychen3" />
         </Stack>
       </Grid>
       <Grid item xs={12}></Grid>
