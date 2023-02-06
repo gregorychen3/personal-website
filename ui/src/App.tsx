@@ -1,6 +1,5 @@
 import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
-import { HomeLogo } from "./components/HomeLogo";
 import { SideNav } from "./components/SideNav";
 import { HomePage } from "./pages/HomePage";
 
@@ -14,14 +13,7 @@ export function App() {
           <Grid container>
             <Grid item xs={3}>
               <Grid item xs={12}>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <HomeLogo />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <SideNav />
-                  </Grid>
-                </Grid>
+                <SideNav />
               </Grid>
             </Grid>
             <Grid item xs={9}>

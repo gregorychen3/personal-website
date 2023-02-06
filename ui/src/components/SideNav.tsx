@@ -15,6 +15,7 @@ const sxButton = { fontFamily: "georgia", pl: 3, pr: 3, fontWeight: "normal" };
 export function SideNav() {
   return (
     <Stack alignItems="flex-start">
+      <Header>home</Header>
       <Header>music</Header>
       <Item to="music/resume" label="resume" />
       <Item to="music/listen" label="listen" />
