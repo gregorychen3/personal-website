@@ -1,8 +1,8 @@
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Button, Grid, Stack, Typography } from "@mui/material";
-import { IconWithText } from "../components/IconWithText";
+import { Grid, Stack, Typography } from "@mui/material";
+import { SocialLink } from "../components/SocialLink";
 
 export function HomePage() {
   return (
@@ -20,15 +20,9 @@ export function HomePage() {
       </Grid>
       <Grid item xs={9}>
         <Stack alignItems="flex-start">
-          <Button color="primary">
-            <IconWithText icon={<YouTubeIcon />} text="youtube" />
-          </Button>
-          <Button color="primary">
-            <IconWithText icon={<LinkedInIcon />} text="linkedin" />
-          </Button>
-          <Button color="primary">
-            <IconWithText icon={<GitHubIcon />} text="github" />
-          </Button>
+          <SocialLink icon={<YouTubeIcon />} text="youtube" />
+          <SocialLink icon={<LinkedInIcon />} text="linkedin" />
+          <SocialLink icon={<GitHubIcon />} text="github" />
         </Stack>
       </Grid>
       <Grid item xs={12}></Grid>
