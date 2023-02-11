@@ -11,18 +11,16 @@ import _ from "lodash";
 import * as querystring from "querystring";
 import React, { useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  DelimitedArrayParam,
-  StringParam,
-  useQueryParams,
-  withDefault,
-} from "use-query-params";
-import { notEmpty } from "../../helpers";
+import { DelimitedArrayParam, StringParam, useQueryParams, withDefault } from "use-query-params";
 import { Action, SelectAction } from "./actions";
 import { Column } from "./column";
 import { isOrder, Order } from "./order";
 import { TableHead } from "./ResourceTableHead";
 import { Toolbar } from "./ResourceTableToolbar";
+
+function notEmpty<T>(value: T | undefined | null): value is T {
+  return value !== undefined && value !== null;
+}
 
 const Container = styled(Paper)`
   width: 100%;
@@ -86,11 +84,7 @@ export function ResourceTable<T, S>({
   const filteredItems = useMemo(() => {
     const query = querystring.parse(location.search.substring(1));
 
-    const searchedIds = new Set(
-      search
-        ? fuse.search(search).map((res) => searchIdExtractor(res.item))
-        : []
-    );
+    const searchedIds = new Set(search ? fuse.search(search).map((res) => searchIdExtractor(res.item)) : []);
 
     return items
       .filter((item) => !search || searchedIds.has(idExtractor(item)))
@@ -103,25 +97,12 @@ export function ResourceTable<T, S>({
           const filter = query[col.id];
           const value = col.getValue(item);
 
-          return Array.isArray(filter)
-            ? _.includes(filter, value)
-            : filter === value;
+          return Array.isArray(filter) ? _.includes(filter, value) : filter === value;
         })
       );
-  }, [
-    location.search,
-    columns,
-    items,
-    search,
-    fuse,
-    searchIdExtractor,
-    idExtractor,
-  ]);
+  }, [location.search, columns, items, search, fuse, searchIdExtractor, idExtractor]);
 
-  const getComparator = (
-    order: Order,
-    orderBy: string
-  ): ((a: T, b: T) => number) => {
+  const getComparator = (order: Order, orderBy: string): ((a: T, b: T) => number) => {
     const valueExtractor = columns.find((c) => c.id === orderBy)?.getValue;
     if (!valueExtractor) {
       return (_, __) => -1;
@@ -130,12 +111,7 @@ export function ResourceTable<T, S>({
     return (a: T, b: T) => {
       const aVal = valueExtractor(a);
       const bVal = valueExtractor(b);
-      if (
-        aVal === null ||
-        aVal === undefined ||
-        bVal === null ||
-        bVal === undefined
-      ) {
+      if (aVal === null || aVal === undefined || bVal === null || bVal === undefined) {
         return -1;
       }
 
@@ -203,48 +179,34 @@ export function ResourceTable<T, S>({
           />
 
           <TableBody>
-            {filteredItems
-              .sort(
-                getComparator(isOrder(q.order) ? q.order : "asc", q.orderBy)
-              )
-              .map((item, idx) => {
-                const itemId = idExtractor(item);
-                const isItemSelected =
-                  q.selectedIds.some((s) => s === itemId) ?? false;
-                const labelId = `enhanced-table-checkbox-${idx}`;
+            {filteredItems.sort(getComparator(isOrder(q.order) ? q.order : "asc", q.orderBy)).map((item, idx) => {
+              const itemId = idExtractor(item);
+              const isItemSelected = q.selectedIds.some((s) => s === itemId) ?? false;
+              const labelId = `enhanced-table-checkbox-${idx}`;
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={() => onRowClick?.(item)}
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={itemId}
-                    selected={isItemSelected}
-                  >
-                    <TableCell
-                      onClick={(e) => handleSelect(e, itemId)}
-                      id={labelId}
-                      padding="checkbox"
-                    >
-                      <Checkbox color="primary" checked={isItemSelected} />
-                    </TableCell>
-                    {columns.map((column) => {
-                      const contents =
-                        column.getDisplay?.(item) ?? column.getValue?.(item);
-                      return (
-                        <TableCell key={column.id} {...column.cellProps}>
-                          {contents != null ? (
-                            contents
-                          ) : (
-                            <Skeleton variant="text" />
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+              return (
+                <TableRow
+                  hover
+                  onClick={() => onRowClick?.(item)}
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={itemId}
+                  selected={isItemSelected}
+                >
+                  <TableCell onClick={(e) => handleSelect(e, itemId)} id={labelId} padding="checkbox">
+                    <Checkbox color="primary" checked={isItemSelected} />
+                  </TableCell>
+                  {columns.map((column) => {
+                    const contents = column.getDisplay?.(item) ?? column.getValue?.(item);
+                    return (
+                      <TableCell key={column.id} {...column.cellProps}>
+                        {contents != null ? contents : <Skeleton variant="text" />}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
