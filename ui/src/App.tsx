@@ -3,12 +3,15 @@ import { Route, Routes } from "react-router-dom";
 import { SideNav } from "./components/SideNav";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
+import { SchedulePage } from "./pages/SchedulePage";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export function App() {
   return (
     <Box display="flex">
       <CssBaseline />
       <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
+        <LinearProgress hidden />
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container>
@@ -21,6 +24,7 @@ export function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/music/listen" element={<ListenPage />} />
+                <Route path="/music/schedule" element={<SchedulePage />} />
               </Routes>
             </Grid>
           </Grid>
