@@ -34,7 +34,7 @@ export function SongbookPage() {
 
   return (
     <ResourceTable
-      title="Songs"
+      title="Songbook"
       size="small"
       columns={columns}
       onRowClick={handleRowClicked}

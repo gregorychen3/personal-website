@@ -5,7 +5,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
+import MuiTableRow from "@mui/material/TableRow";
 import Fuse from "fuse.js";
 import _ from "lodash";
 import * as querystring from "querystring";
@@ -22,8 +22,10 @@ function notEmpty<T>(value: T | undefined | null): value is T {
   return value !== undefined && value !== null;
 }
 
-const Container = styled(Paper)`
-  width: 100%;
+const Container = styled(Paper)(({ theme }) => ({ width: "100%", backgroundColor: theme.palette.background.default }));
+
+const TableRow = styled(MuiTableRow)`
+  cursor: pointer;
 `;
 
 const sxTable = { minWidth: 750 };

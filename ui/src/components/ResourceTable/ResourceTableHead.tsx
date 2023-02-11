@@ -83,7 +83,11 @@ function HeaderCell<T>({ column, orderBy, order, onClick, values }: HeaderCellPr
   const [selected, setSelected] = useQueryParam(column.id, ArrayParam);
 
   return (
-    <TableCell {...column.headerProps} sortDirection={orderBy === column.id ? order : false}>
+    <TableCell
+      {...column.headerProps}
+      sortDirection={orderBy === column.id ? order : false}
+      sx={{ fontWeight: "bold" }}
+    >
       {column.getValue ? (
         <TableSortLabel
           active={orderBy === column.id}
