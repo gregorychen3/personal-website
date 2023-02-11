@@ -19,7 +19,7 @@ import { Order } from "./order";
 export interface TableHeadProps<T> {
   numSelected: number;
   onRequestSort: (e: React.MouseEvent<unknown>, column: string) => void;
-  onSelectAllClick: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSelectAllClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
   orderBy: string;
   rowCount: number;
@@ -37,21 +37,21 @@ export function TableHead<T>({
   columns,
   items,
 }: TableHeadProps<T>) {
-  const createSortHandler =
-    (column: string) => (e: React.MouseEvent<unknown>) =>
-      onRequestSort(e, column);
+  const createSortHandler = (column: string) => (e: React.MouseEvent<unknown>) => onRequestSort(e, column);
 
   return (
     <MuiTableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-          />
-        </TableCell>
+        {onSelectAllClick && (
+          <TableCell padding="checkbox">
+            <Checkbox
+              color="primary"
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+            />
+          </TableCell>
+        )}
         {columns.map((c) => (
           <HeaderCell
             column={c}
@@ -75,13 +75,7 @@ interface HeaderCellProps<T> {
   values: (string | number | null | undefined)[];
 }
 
-function HeaderCell<T>({
-  column,
-  orderBy,
-  order,
-  onClick,
-  values,
-}: HeaderCellProps<T>) {
+function HeaderCell<T>({ column, orderBy, order, onClick, values }: HeaderCellProps<T>) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleFilterClicked = (e: React.MouseEvent<HTMLButtonElement>) =>
     anchorEl ? setAnchorEl(null) : setAnchorEl(e.currentTarget);
@@ -89,10 +83,7 @@ function HeaderCell<T>({
   const [selected, setSelected] = useQueryParam(column.id, ArrayParam);
 
   return (
-    <TableCell
-      {...column.headerProps}
-      sortDirection={orderBy === column.id ? order : false}
-    >
+    <TableCell {...column.headerProps} sortDirection={orderBy === column.id ? order : false}>
       {column.getValue ? (
         <TableSortLabel
           active={orderBy === column.id}
@@ -115,12 +106,7 @@ function HeaderCell<T>({
             <FilterListIcon />
           </IconButton>
 
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={!!anchorEl}
-            onClose={handleFilterClicked}
-          >
+          <Menu anchorEl={anchorEl} keepMounted open={!!anchorEl} onClose={handleFilterClicked}>
             <ListItem dense>
               <ListItemText>{column.label} Filter</ListItemText>
             </ListItem>
@@ -139,10 +125,7 @@ function HeaderCell<T>({
               return (
                 <MenuItem key={v} dense>
                   <ListItemIcon>
-                    <Checkbox
-                      checked={isSelected}
-                      onChange={handleFilterSelect}
-                    />
+                    <Checkbox checked={isSelected} onChange={handleFilterSelect} />
                   </ListItemIcon>
                   {v} ({count})
                 </MenuItem>

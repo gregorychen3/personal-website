@@ -134,15 +134,17 @@ export function ResourceTable<T, S>({
     setQ({ order: isAsc ? "desc" : "asc", orderBy: column });
   };
 
-  const handleSelectAllClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      const selectedIds = filteredItems.map((i) => idExtractor(i));
-      setQ({ selectedIds });
-      return;
-    }
+  const handleSelectAllClick = selectActions?.length
+    ? (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+          const selectedIds = filteredItems.map((i) => idExtractor(i));
+          setQ({ selectedIds });
+          return;
+        }
 
-    setQ({ selectedIds: [] });
-  };
+        setQ({ selectedIds: [] });
+      }
+    : undefined;
 
   const handleSelect = (e: React.MouseEvent<unknown>, itemId: string) => {
     e.stopPropagation();
@@ -193,9 +195,11 @@ export function ResourceTable<T, S>({
                   key={itemId}
                   selected={isItemSelected}
                 >
-                  <TableCell onClick={(e) => handleSelect(e, itemId)} id={labelId} padding="checkbox">
-                    <Checkbox color="primary" checked={isItemSelected} />
-                  </TableCell>
+                  {selectActions?.length && (
+                    <TableCell onClick={(e) => handleSelect(e, itemId)} id={labelId} padding="checkbox">
+                      <Checkbox color="primary" checked={isItemSelected} />
+                    </TableCell>
+                  )}
                   {columns.map((column) => {
                     const contents = column.getDisplay?.(item) ?? column.getValue?.(item);
                     return (
