@@ -7,6 +7,7 @@ import { selectShowLoading } from "./features/ui/uiSlice";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
 import { SchedulePage } from "./pages/SchedulePage";
+import { SongbookPage } from "./pages/SongbookPage";
 
 export function App() {
   const showLoading = useSelector(selectShowLoading);
@@ -29,6 +30,7 @@ export function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/music/listen" element={<ListenPage />} />
                 <Route path="/music/schedule" element={<SchedulePage />} />
+                <Route path="/music/songbook" element={<SongbookPage />} />
               </Routes>
             </Grid>
           </Grid>
