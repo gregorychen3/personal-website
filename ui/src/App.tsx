@@ -1,17 +1,21 @@
 import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { SideNav } from "./components/SideNav";
+import { selectShowLoading } from "./features/ui/uiSlice";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
 import { SchedulePage } from "./pages/SchedulePage";
-import LinearProgress from "@mui/material/LinearProgress";
 
 export function App() {
+  const showLoading = useSelector(selectShowLoading);
+
   return (
     <Box display="flex">
       <CssBaseline />
       <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
-        <LinearProgress hidden />
+        <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container>
