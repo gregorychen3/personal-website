@@ -1,18 +1,24 @@
-import Card from "@mui/material/Card";
+import { styled } from "@mui/material";
+import MuiCard from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+
+const Card = styled(MuiCard)(() => ({
+  height: "100%",
+  cursor: "pointer",
+}));
 
 interface MediaCardProps {
   title: string;
   description: string;
   mediaUrl: string;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export function MediaCard({ title, description, mediaUrl, onClick }: MediaCardProps) {
   return (
-    <Card sx={{ height: "100%", cursor: onClick ? "pointer" : undefined }} variant="outlined" onClick={onClick}>
+    <Card variant="outlined" onClick={onClick}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
