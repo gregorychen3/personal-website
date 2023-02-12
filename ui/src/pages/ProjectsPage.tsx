@@ -1,3 +1,6 @@
+import { Grid } from "@mui/material";
+import { MediaCard } from "../components/MediaCard";
+
 interface Project {
   url: string;
   name: string;
@@ -34,10 +37,12 @@ const projects: Project[] = [
 
 export function ProjectsPage() {
   return (
-    <div>
+    <Grid container spacing={2}>
       {projects.map((p) => (
-        <pre>{JSON.stringify(p, null, 2)}</pre>
+        <Grid item xs={12} sm={6}>
+          <MediaCard title={p.name} description={p.description} key={p.url} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 }

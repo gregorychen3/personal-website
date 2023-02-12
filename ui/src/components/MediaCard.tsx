@@ -11,9 +11,11 @@ interface MediaCardProps {
 export function MediaCard({ title, description }: MediaCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Typography gutterBottom variant="h5" component="div">
-        {title}
-      </Typography>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {title}
+        </Typography>
+      </CardContent>
       <CardMedia component="img" height="194" image="/static/images/cards/paella.jpg" alt="Paella dish" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
