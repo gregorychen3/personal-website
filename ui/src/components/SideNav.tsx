@@ -24,8 +24,11 @@ export function SideNav() {
 const sxHeaderItem = { fontWeight: "normal", textTransform: "none", color: "text.primary" };
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
+  const { pathname } = useLocation();
+  const sx = pathname === to ? { ...sxHeaderItem, backgroundColor: activeColor } : sxHeaderItem;
+
   return (
-    <Button component={Link} to={to} sx={sxHeaderItem}>
+    <Button component={Link} to={to} sx={sx}>
       {label}
     </Button>
   );
