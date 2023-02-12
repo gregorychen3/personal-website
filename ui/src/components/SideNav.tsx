@@ -21,7 +21,7 @@ export function SideNav() {
   );
 }
 
-const sxHeaderItem = { fontWeight: "normal", textTransform: "none", color: "text.primary" };
+const sxHeaderItem = {};
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
@@ -34,7 +34,7 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
   );
 }
 
-const sxSubItem = { pl: 3, pr: 3, fontWeight: "normal" };
+const sxSubItem = { pl: 3, pr: 3 };
 const activeColor = "rgba(255, 255, 255, 0.08)";
 
 function NavItem({ to, label }: { to: string; label: string }) {

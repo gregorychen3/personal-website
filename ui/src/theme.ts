@@ -12,11 +12,9 @@ export const theme = createTheme({
   },
   typography: {
     fontSize: 18,
-    fontFamily: ["georgia", "serif"].join(","),
+    fontFamily: ["gill sans", "sans-serif"].join(","),
     button: {
       textTransform: "none",
-      fontFamily: "serif",
-      fontWeight: "bold",
     },
   },
 });
