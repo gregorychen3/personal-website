@@ -33,11 +33,11 @@ export function HomePage() {
           Jazz pianist and software engineer based in New York City and the Bay Area, CA.
         </Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={6} md={3}>
         <img src="/avatar.png" alt="headshot" style={{ width: "100%" }} />
       </Grid>
-      <Grid item xs={9}>
-        <Stack alignItems="flex-start">
+      <Grid item xs={6} md={9}>
+        <Stack alignItems="flex-start" justifyContent="space-around" sx={{ height: "100%" }}>
           {socialLinks.map((props) => (
             <SocialLink {...props} key={props.text} />
           ))}
