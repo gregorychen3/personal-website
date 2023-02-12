@@ -9,7 +9,9 @@ const Card = styled(MuiCard)(({ onClick }) =>
     ? {
         height: "100%",
         cursor: "pointer",
-        ":hover": { opacity: 0.8 },
+        ":hover": {
+          filter: "brightness(120%)",
+        },
       }
     : { height: "100%" }
 );
