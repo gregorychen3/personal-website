@@ -4,16 +4,21 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const Card = styled(MuiCard)(() => ({
-  height: "100%",
-  cursor: "pointer",
-}));
+const Card = styled(MuiCard)(({ onClick }) =>
+  onClick
+    ? {
+        height: "100%",
+        cursor: "pointer",
+        ":hover": { opacity: 0.8 },
+      }
+    : { height: "100%" }
+);
 
 interface MediaCardProps {
   title: string;
   description: string;
   mediaUrl: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export function MediaCard({ title, description, mediaUrl, onClick }: MediaCardProps) {
