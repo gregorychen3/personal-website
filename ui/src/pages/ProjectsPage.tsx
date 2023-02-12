@@ -31,7 +31,7 @@ const projects: Project[] = [
     url: "https://github.com/gregorychen3/mui-label-divider",
     name: "mui-label-divider",
     description: "Labeled divider component for Material-UI / React",
-    imagePath: "",
+    imagePath: `${process.env.PUBLIC_URL}/mui_label_divider.png`,
   },
 ];
 
