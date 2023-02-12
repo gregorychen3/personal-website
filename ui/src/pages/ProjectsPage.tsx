@@ -13,19 +13,19 @@ const projects: Project[] = [
     url: "https://github.com/gregorychen3/espresso-controller",
     name: "Espresso Controller",
     description: "PID temperature control on Raspberry Pi for espresso machines",
-    imagePath: "",
+    imagePath: `${process.env.PUBLIC_URL}/espresso_controller.png`,
   },
   {
     url: "https://github.com/gregorychen3/recipe-book",
     name: "Greg and Ally's Recipe Book",
     description: "Greg and Ally's Recipe Book",
-    imagePath: "",
+    imagePath: `${process.env.PUBLIC_URL}/recipe_book.png`,
   },
   {
     url: "https://gregorychen3.github.io/liquor-buddy-website",
     name: "LiquorBuddy",
     description: "Mobile app for saving money at liquor stores (decommissioned)",
-    imagePath: "",
+    imagePath: `${process.env.PUBLIC_URL}/liquor_buddy.png`,
   },
   {
     url: "https://github.com/gregorychen3/mui-label-divider",
@@ -37,10 +37,16 @@ const projects: Project[] = [
 
 export function ProjectsPage() {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={8}>
       {projects.map((p) => (
         <Grid item xs={12} sm={6}>
-          <MediaCard title={p.name} description={p.description} key={p.url} />
+          <MediaCard
+            title={p.name}
+            description={p.description}
+            mediaUrl={p.imagePath}
+            onClick={() => window.open(p.url, "_blank", "noreferrer")}
+            key={p.url}
+          />
         </Grid>
       ))}
     </Grid>
