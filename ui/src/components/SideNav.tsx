@@ -8,15 +8,15 @@ export function SideNav() {
       <HeaderItem to="/" label="home" />
 
       <HeaderItem to="music/listen" label="music" />
-      <SubItem to="/music/listen" label="listen" />
-      <SubItem to="/music/schedule" label="schedule" />
-      <SubItem to="/music/songbook" label="songbook" />
-      <SubItem to="/music/resume" label="resume" />
+      <NavItem to="/music/listen" label="listen" />
+      <NavItem to="/music/schedule" label="schedule" />
+      <NavItem to="/music/songbook" label="songbook" />
+      <AnchorItem href={`${process.env.PUBLIC_URL}/music_resume.pdf`} label="resume" />
 
       <HeaderItem to="software/projects" label="software" />
-      <SubItem to="/software/projects" label="projects" />
-      <SubItem to="/software/linkedin" label="linkedin" />
-      <SubItem to="/software/resume" label="resume" />
+      <NavItem to="/software/projects" label="projects" />
+      <AnchorItem href="https://www.linkedin.com/in/gregorychen3" label="linkedin" />
+      <AnchorItem href={`${process.env.PUBLIC_URL}/software_resume.pdf`} label="resume" />
     </Stack>
   );
 }
@@ -34,12 +34,20 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
 const sxSubItem = { pl: 3, pr: 3, fontWeight: "normal" };
 const activeColor = "rgba(255, 255, 255, 0.08)";
 
-function SubItem({ to, label }: { to: string; label: string }) {
+function NavItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
   const sx = pathname === to ? { ...sxSubItem, backgroundColor: activeColor } : sxSubItem;
 
   return (
     <Button component={Link} to={to} sx={sx}>
+      {label}
+    </Button>
+  );
+}
+
+function AnchorItem({ label, href }: { label: string; href: string }) {
+  return (
+    <Button href={href} target="_blank" rel="noopener noreferrer" sx={sxSubItem}>
       {label}
     </Button>
   );
