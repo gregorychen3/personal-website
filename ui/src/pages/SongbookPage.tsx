@@ -1,85 +1,60 @@
-import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { apiClient } from "../apiClient";
-import { LoadingSpinner } from "../components/LoadingSpinner";
-import { getDateDisplay } from "../helpers";
+import { Column, ResourceTable } from "../components/ResourceTable";
+import { setShowLoading } from "../features/ui/uiSlice";
 import { ISongModel } from "../types";
 
-interface SortConfig {
-  name?: "asc" | "desc";
-  modifiedTime?: "asc" | "desc";
-}
+const columns: Column<ISongModel>[] = [
+  { id: "name", label: "Name", getValue: (s) => s.name },
+  { id: "lastModified", label: "Last Modified", getValue: (s) => new Date(s.modifiedTime).toLocaleString() },
+];
 
 export function SongbookPage() {
-  const [sortConfig, setSortConfig] = useState<SortConfig>({ name: "asc" });
+  const d = useDispatch();
+
   const [songs, setSongs] = useState<ISongModel[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getSongs = async () => {
+      d(setShowLoading(true));
+
       const songs = await apiClient.fetchSongs();
       setSongs(songs.data);
-      setIsLoading(false);
-    };
-    getSongs();
-  }, []);
+      console.log(songs);
 
-  return isLoading ? (
-    <LoadingSpinner />
-  ) : (
-    <section className="section">
-      <div className="container">
-        <table className="table is-fullwidth is-striped is-narrow is-hoverable">
-          <thead>
-            <tr>
-              <th />
-              <th
-                onClick={() => {
-                  if (sortConfig.name === "asc") {
-                    setSongs(_.sortBy(songs, "name").reverse());
-                    setSortConfig({ name: "desc" });
-                  } else {
-                    setSongs(_.sortBy(songs, "name"));
-                    setSortConfig({ name: "asc" });
-                  }
-                }}
-              >
-                Name
-              </th>
-              <th
-                onClick={() => {
-                  if (sortConfig.modifiedTime === "asc") {
-                    setSongs(_.sortBy(songs, "modifiedTime").reverse());
-                    setSortConfig({ modifiedTime: "desc" });
-                  } else {
-                    setSongs(_.sortBy(songs, "modifiedTime"));
-                    setSortConfig({ modifiedTime: "asc" });
-                  }
-                }}
-              >
-                Last Modified
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {songs.map((s) => (
-              <tr key={s.id}>
-                <td>
-                  <span className="icon has-text-grey">
-                    <i className="fas fa-folder" />
-                  </span>
-                </td>
-                <td>
-                  <a href={`https://drive.google.com/open?id=${s.id}`} target="_blank" rel="noopener noreferrer">
-                    {s.name}
-                  </a>
-                </td>
-                <td>{getDateDisplay(s.modifiedTime)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
+      d(setShowLoading(false));
+    };
+
+    getSongs();
+  }, [d]);
+
+  const handleRowClicked = (s: ISongModel) =>
+    window.open(`https://drive.google.com/open?id=${s.id}`, "_blank", "noreferrer");
+
+  return (
+    <ResourceTable
+      title="Songbook"
+      size="small"
+      columns={columns}
+      onRowClick={handleRowClicked}
+      items={songs}
+      defaultSortColumn="name"
+      idExtractor={(s) => s.id}
+      formatSearchEntry={toSearchEntry}
+      searchIdExtractor={searchIdExtractor}
+      searchOptions={{ keys: searchKeys, ignoreLocation: true, threshold: 0 }}
+    />
   );
 }
+
+const toSearchEntry = (s: ISongModel) => ({
+  id: s.id,
+  name: s.name,
+});
+
+type RecipeSearchEntry = ReturnType<typeof toSearchEntry>;
+
+const searchIdExtractor = (e: RecipeSearchEntry) => e.id;
+
+const searchKeys = ["name"];
