@@ -6,6 +6,7 @@ import { SideNav } from "./components/SideNav";
 import { selectShowLoading } from "./features/ui/uiSlice";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
+import { ProjectsPage } from "./pages/ProjectsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
 
@@ -31,6 +32,7 @@ export function App() {
                 <Route path="/music/listen" element={<ListenPage />} />
                 <Route path="/music/schedule" element={<SchedulePage />} />
                 <Route path="/music/songbook" element={<SongbookPage />} />
+                <Route path="/software/projects" element={<ProjectsPage />} />
               </Routes>
             </Grid>
           </Grid>
