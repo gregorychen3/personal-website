@@ -16,7 +16,7 @@ const projects: Project[] = [
     imagePath: `${process.env.PUBLIC_URL}/espresso_controller.png`,
   },
   {
-    url: "https://github.com/gregorychen3/recipe-book",
+    url: "https://ga-recipe-book.herokuapp.com/recipes",
     name: "Recipe Book",
     description: "Greg and Ally's Recipe Book",
     imagePath: `${process.env.PUBLIC_URL}/recipe_book.png`,
