@@ -10,7 +10,7 @@ export function IconWithText({ icon, text }: { icon: React.ReactNode; text: stri
   return (
     <Container>
       {icon}
-      <Typography variant="body1" sx={{ pl: 1 }}>
+      <Typography variant="body1" sx={{ pl: 1, color: "text.disabled" }}>
         {text}
       </Typography>
     </Container>

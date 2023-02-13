@@ -21,7 +21,7 @@ export function SideNav() {
   );
 }
 
-const sxHeaderItem = {};
+const sxHeaderItem = { color: "text.disabled" };
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
@@ -34,8 +34,8 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
   );
 }
 
-const sxSubItem = { pl: 3, pr: 3 };
-const activeColor = "rgba(255, 255, 255, 0.08)";
+const sxSubItem = { pl: 3, pr: 3, color: "text.disabled" };
+const activeColor = "rgba(0, 157, 219, 0.20)";
 
 function NavItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();

@@ -17,20 +17,20 @@ const projects: Project[] = [
   },
   {
     url: "https://github.com/gregorychen3/recipe-book",
-    name: "Greg and Ally's Recipe Book",
+    name: "Recipe Book",
     description: "Greg and Ally's Recipe Book",
     imagePath: `${process.env.PUBLIC_URL}/recipe_book.png`,
   },
   {
     url: "https://gregorychen3.github.io/liquor-buddy-website",
     name: "LiquorBuddy",
-    description: "Mobile app for saving money at liquor stores (decommissioned)",
+    description: "Mobile app for saving money at liquor stores",
     imagePath: `${process.env.PUBLIC_URL}/liquor_buddy.png`,
   },
   {
     url: "https://github.com/gregorychen3/mui-label-divider",
     name: "mui-label-divider",
-    description: "Labeled divider component for Material-UI / React",
+    description: "Labeled divider component for Material UI and React",
     imagePath: `${process.env.PUBLIC_URL}/mui_label_divider.png`,
   },
 ];

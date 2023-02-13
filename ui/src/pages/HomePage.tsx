@@ -4,19 +4,21 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Grid, Stack, Typography } from "@mui/material";
 import { SocialLink } from "../components/SocialLink";
 
+const sxIcon = { color: "text.disabled" };
+
 const socialLinks = [
   {
-    icon: <YouTubeIcon />,
+    icon: <YouTubeIcon sx={sxIcon} />,
     text: "youtube",
     to: "https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA",
   },
   {
-    icon: <LinkedInIcon />,
+    icon: <LinkedInIcon sx={sxIcon} />,
     text: "linkedin",
     to: "https://www.linkedin.com/in/gregorychen3",
   },
   {
-    icon: <GitHubIcon />,
+    icon: <GitHubIcon sx={sxIcon} />,
     text: "github",
     to: "https://github.com/gregorychen3",
   },
