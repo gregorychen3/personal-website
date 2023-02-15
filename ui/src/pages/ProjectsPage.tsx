@@ -37,7 +37,7 @@ const projects: Project[] = [
 
 export function ProjectsPage() {
   return (
-    <Grid container spacing={8}>
+    <Grid container>
       {projects.map((p) => (
         <Grid item sm={12} md={6}>
           <MediaCard

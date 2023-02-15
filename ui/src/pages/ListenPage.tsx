@@ -3,7 +3,7 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 
 export function ListenPage() {
   return (
-    <Grid container spacing={3}>
+    <Grid container>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
           title="Aaron Johnson Quintet 07-03-2022"

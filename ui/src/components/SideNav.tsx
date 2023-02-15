@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export function SideNav() {
   return (
-    <Stack alignItems="flex-start" spacing={0.5}>
+    <Stack alignItems="flex-start">
       <HeaderItem to="/" label="home" />
 
       <HeaderItem to="music/listen" label="music" />
@@ -34,7 +34,7 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
   );
 }
 
-const sxSubItem = { pl: 3, pr: 3, color: "text.disabled" };
+const sxSubItem = { color: "text.disabled" };
 const activeColor = "rgba(0, 157, 219, 0.20)";
 
 function NavItem({ to, label }: { to: string; label: string }) {
