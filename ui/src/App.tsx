@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
+import { Box, Container, CssBaseline, Grid, styled, Toolbar } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
@@ -10,13 +10,20 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
 
+const Main = styled(Box)(() => ({
+  flexGrow: 1,
+  height: "100vh",
+  overflow: "auto",
+}));
+Main.defaultProps = { component: "main" };
+
 export function App() {
   const showLoading = useSelector(selectShowLoading);
 
   return (
     <Box display="flex">
       <CssBaseline />
-      <Box component="main" sx={{ flexGrow: 1, height: "100vh", overflow: "auto" }}>
+      <Main>
         <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -37,7 +44,7 @@ export function App() {
             </Grid>
           </Grid>
         </Container>
-      </Box>
+      </Main>
     </Box>
   );
 }
