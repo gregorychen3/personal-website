@@ -1,21 +1,46 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Toolbar from "@mui/material/Toolbar";
+import MuiToolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const sxButton = { color: "text.disabled" };
 
+const LogoButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  ":hover": {
+    color: theme.palette.primary.main,
+    backgroundColor: "transparent",
+  },
+}));
+
+const LogoText = styled(Typography)(({ theme }) => ({
+  fontFamily: "serif",
+  paddingLeft: theme.spacing(2),
+  paddingRight: theme.spacing(2),
+}));
+LogoText.defaultProps = {
+  variant: "h6",
+  color: "inherit",
+  noWrap: true,
+};
+
+const Toolbar = styled(MuiToolbar)(() => ({
+  paddingLeft: "0px!important",
+}));
+
 export function TopNav() {
+  const nav = useNavigate();
   return (
     <AppBar position="absolute" sx={{ backgroundColor: "background.default" }}>
       <Toolbar>
-        <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          Gregory Chen
-        </Typography>
+        <LogoButton onClick={() => nav("/")}>
+          <LogoText>gc</LogoText>
+        </LogoButton>
+        <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex" }}>
           <MusicMenu />
           <SoftwareMenu />
