@@ -39,7 +39,7 @@ export function ProjectsPage() {
   return (
     <Grid container spacing={6}>
       {projects.map((p) => (
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} md={6} sx={{ border: "1px solid red", width: "100%" }}>
           <MediaCard
             title={p.name}
             description={p.description}
