@@ -14,7 +14,7 @@ export function TopNav() {
         <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
           Gregory Chen
         </Typography>
-        <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+        <Box sx={{ display: "flex" }}>
           <MusicMenu />
           <SoftwareMenu />
           <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer">

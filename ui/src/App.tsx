@@ -24,18 +24,20 @@ export function App() {
   return (
     <Box display="flex">
       <CssBaseline />
-      <TopNav />
+      <Box sx={{ display: { xs: "block", md: "none" } }}>
+        <TopNav />
+      </Box>
       <Main>
         <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
         <Container maxWidth="lg">
           <Grid container sx={{ border: "1px solid red" }}>
-            <Grid item xs={3} sx={{ border: "1px solid blue" }}>
+            <Grid item md={3} sx={{ border: "1px solid blue", display: { xs: "none", md: "flex" } }}>
               <Grid item xs={12}>
                 <SideNav />
               </Grid>
             </Grid>
-            <Grid item xs={9} sx={{ border: "1px solid green" }}>
+            <Grid item xs={12} md={9} sx={{ border: "1px solid green" }}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/music/listen" element={<ListenPage />} />
