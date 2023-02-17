@@ -30,7 +30,7 @@ export function App() {
       <Main>
         <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" sx={{ mt: { xs: 4, md: 0 } }}>
           <Grid container>
             <Grid item md={3} sx={{ display: { xs: "none", md: "flex" } }}>
               <Grid item xs={12}>
