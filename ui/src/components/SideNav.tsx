@@ -1,23 +1,51 @@
-import { Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link, useLocation } from "react-router-dom";
 
 export function SideNav() {
   return (
-    <Stack alignItems="flex-start">
-      <HeaderItem to="/" label="home" />
+    <Grid container spacing={0.5}>
+      <Grid item xs={12}>
+        <HeaderItem to="/" label="home" />
+      </Grid>
 
-      <HeaderItem to="music/listen" label="music" />
-      <NavItem to="/music/listen" label="listen" />
-      <NavItem to="/music/schedule" label="schedule" />
-      <NavItem to="/music/songbook" label="songbook" />
-      <AnchorItem href={`${process.env.PUBLIC_URL}/music_resume.pdf`} label="resume" />
+      <Grid item xs={12}>
+        <HeaderItem to="music/listen" label="music" />
+      </Grid>
 
-      <HeaderItem to="software/projects" label="software" />
-      <NavItem to="/software/projects" label="projects" />
-      <AnchorItem href="https://www.linkedin.com/in/gregorychen3" label="linkedin" />
-      <AnchorItem href={`${process.env.PUBLIC_URL}/software_resume.pdf`} label="resume" />
-    </Stack>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <NavItem to="/music/listen" label="listen" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <NavItem to="/music/schedule" label="schedule" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <NavItem to="/music/songbook" label="songbook" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <AnchorItem href={`${process.env.PUBLIC_URL}/music_resume.pdf`} label="resume" />
+      </Grid>
+
+      <Grid item xs={12}>
+        <HeaderItem to="software/projects" label="software" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <NavItem to="/software/projects" label="projects" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <AnchorItem href="https://www.linkedin.com/in/gregorychen3" label="linkedin" />
+      </Grid>
+      <Grid item xs={1} />
+      <Grid item xs={11}>
+        <AnchorItem href={`${process.env.PUBLIC_URL}/software_resume.pdf`} label="resume" />
+      </Grid>
+    </Grid>
   );
 }
 
