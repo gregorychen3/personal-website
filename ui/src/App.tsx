@@ -31,13 +31,13 @@ export function App() {
         <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
         <Container maxWidth="lg">
-          <Grid container sx={{ border: "1px solid red" }}>
-            <Grid item md={3} sx={{ border: "1px solid blue", display: { xs: "none", md: "flex" } }}>
+          <Grid container>
+            <Grid item md={3} sx={{ display: { xs: "none", md: "flex" } }}>
               <Grid item xs={12}>
                 <SideNav />
               </Grid>
             </Grid>
-            <Grid item xs={12} md={9} sx={{ border: "1px solid green" }}>
+            <Grid item xs={12} md={9}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/music/listen" element={<ListenPage />} />
