@@ -7,7 +7,7 @@ export const theme = createTheme({
     error: { main: "#EC1600" },
     warning: { main: "#EBA300" },
     success: { main: "#00C78E" },
-    background: { default: "#171717", paper: "#1E262E" },
+    background: { default: "black", paper: "#171717" },
     mode: "dark",
   },
   typography: {
@@ -19,7 +19,7 @@ export const theme = createTheme({
   },
 });
 
-theme.palette.primary.main = theme.palette.text.disabled;
+//theme.palette.primary.main = theme.palette.text.disabled;
 
 theme.components = {
   MuiTextField: {

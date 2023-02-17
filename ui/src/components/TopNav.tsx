@@ -7,9 +7,11 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+const sxButton = { color: "text.disabled" };
+
 export function TopNav() {
   return (
-    <AppBar position="absolute">
+    <AppBar position="absolute" sx={{ backgroundColor: "background.default" }}>
       <Toolbar>
         <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
           Gregory Chen
@@ -17,7 +19,7 @@ export function TopNav() {
         <Box sx={{ display: "flex" }}>
           <MusicMenu />
           <SoftwareMenu />
-          <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer">
+          <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer" sx={sxButton}>
             contact
           </Button>
         </Box>
@@ -39,7 +41,9 @@ function MusicMenu() {
 
   return (
     <div>
-      <Button onClick={handleClick}>music</Button>
+      <Button onClick={handleClick} sx={sxButton}>
+        music
+      </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
         <MenuItem onClick={handleNav("/music/listen")}>listen</MenuItem>
         <MenuItem onClick={handleNav("/music/schedule")}>schedule</MenuItem>
@@ -63,7 +67,9 @@ function SoftwareMenu() {
 
   return (
     <div>
-      <Button onClick={handleClick}>software</Button>
+      <Button onClick={handleClick} sx={sxButton}>
+        software
+      </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
         <MenuItem onClick={handleNav("/software/projects")}>projects</MenuItem>
         <MenuItem onClick={handleNav("https://www.linkedin.com/in/gregorychen3", true)}>linkedin</MenuItem>
