@@ -3,6 +3,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { SideNav } from "./components/SideNav";
+import { TopNav } from "./components/TopNav";
 import { selectShowLoading } from "./features/ui/uiSlice";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
@@ -23,6 +24,7 @@ export function App() {
   return (
     <Box display="flex">
       <CssBaseline />
+      <TopNav />
       <Main>
         <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
         <Toolbar />
