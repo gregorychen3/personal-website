@@ -27,6 +27,10 @@ export function SongbookPage() {
     };
 
     getSongs();
+
+    return () => {
+      d(setShowLoading(false));
+    };
   }, [d]);
 
   const handleRowClicked = (s: ISongModel) =>
