@@ -1,5 +1,5 @@
 import { Box, Container, CssBaseline, Grid, styled, Toolbar } from "@mui/material";
-import LinearProgress from "@mui/material/LinearProgress";
+import MuiLinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { SideNav } from "./components/SideNav";
@@ -10,6 +10,14 @@ import { ListenPage } from "./pages/ListenPage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
+
+const LinearProgress = styled(MuiLinearProgress)<{ show: boolean }>(({ theme, show }) => {
+  if (show) {
+    return { zIndex: theme.zIndex.appBar + 1 };
+  }
+
+  return { visibility: "hidden" };
+});
 
 const Main = styled(Box)(() => ({
   flexGrow: 1,
@@ -28,7 +36,7 @@ export function App() {
         <TopNav />
       </Box>
       <Main>
-        <LinearProgress sx={showLoading ? undefined : { visibility: "hidden" }} />
+        <LinearProgress show={showLoading} />
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: { xs: 4, md: 0 } }}>
           <Grid container>
