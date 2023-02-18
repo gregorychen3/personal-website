@@ -55,25 +55,27 @@ export function TopNav() {
 
 function MusicMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const nav = useNavigate();
-  const handleNav =
+  const handleItemClicked =
     (to: string, newTab: boolean = false) =>
-    () =>
+    () => {
+      handleClose();
       newTab ? window.open(to, "_blank", "noreferrer") : nav(to);
+    };
 
   return (
     <div>
-      <Button onClick={handleClick} sx={sxButton}>
+      <Button onClick={handleOpen} sx={sxButton}>
         music
       </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        <MenuItem onClick={handleNav("/music/listen")}>listen</MenuItem>
-        <MenuItem onClick={handleNav("/music/schedule")}>schedule</MenuItem>
-        <MenuItem onClick={handleNav("/music/songbook")}>songbook</MenuItem>
-        <MenuItem onClick={handleNav(`${process.env.PUBLIC_URL}/music_resume.pdf`, true)}>resume</MenuItem>
+        <MenuItem onClick={handleItemClicked("/music/listen")}>listen</MenuItem>
+        <MenuItem onClick={handleItemClicked("/music/schedule")}>schedule</MenuItem>
+        <MenuItem onClick={handleItemClicked("/music/songbook")}>songbook</MenuItem>
+        <MenuItem onClick={handleItemClicked(`${process.env.PUBLIC_URL}/music_resume.pdf`, true)}>resume</MenuItem>
       </Menu>
     </div>
   );
@@ -81,24 +83,25 @@ function MusicMenu() {
 
 function SoftwareMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const nav = useNavigate();
-  const handleNav =
+  const handleItemClicked =
     (to: string, newTab: boolean = false) =>
-    () =>
+    () => {
+      handleClose();
       newTab ? window.open(to, "_blank", "noreferrer") : nav(to);
-
+    };
   return (
     <div>
-      <Button onClick={handleClick} sx={sxButton}>
+      <Button onClick={handleOpen} sx={sxButton}>
         software
       </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        <MenuItem onClick={handleNav("/software/projects")}>projects</MenuItem>
-        <MenuItem onClick={handleNav("https://www.linkedin.com/in/gregorychen3", true)}>linkedin</MenuItem>
-        <MenuItem onClick={handleNav(`${process.env.PUBLIC_URL}/software_resume.pdf`, true)}>resume</MenuItem>
+        <MenuItem onClick={handleItemClicked("/software/projects")}>projects</MenuItem>
+        <MenuItem onClick={handleItemClicked("https://www.linkedin.com/in/gregorychen3", true)}>linkedin</MenuItem>
+        <MenuItem onClick={handleItemClicked(`${process.env.PUBLIC_URL}/software_resume.pdf`, true)}>resume</MenuItem>
       </Menu>
     </div>
   );
