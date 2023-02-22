@@ -40,12 +40,12 @@ const isTune = async (dirEntry) => {
 const initMetadata = async (tune) => {
   console.log(`Please initialize metadata for ${tune}:`);
 
-  const yearStr = prompt("Year: ");
+  const yearStr = prompt("Year: ").trim();
   const year = parseInt(yearStr) ?? 0;
 
   const authors = [];
   while (true) {
-    const author = prompt("Author: ");
+    const author = prompt("Author: ").trim();
     if (!author) {
       break;
     }
