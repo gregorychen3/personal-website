@@ -4,6 +4,7 @@
   "description": "",
   "main": "populate_song_meta.js",
   "scripts": {
+    "start": "node populate_song_meta.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
