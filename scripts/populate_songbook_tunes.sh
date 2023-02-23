@@ -15,3 +15,5 @@ for path in $SRC_SHEETMUSIC/*; do
         rm -rf $DEST_SHEETMUSIC/*/*.sib
     fi
 done
+
+cp $SRC_SHEETMUSIC/manifest.json $DEST_SHEETMUSIC/manifest.json
