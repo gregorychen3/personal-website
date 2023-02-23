@@ -19,12 +19,12 @@ const main = async () => {
 
   tuneNames.sort();
 
-  tuneNames.forEach(async (tune) => {
+  for (const tune of tuneNames) {
     const files = await fs.promises.readdir(`${songsDir}/${tune}`);
     if (!files.includes(mdFileName)) {
       await initMetadata(tune);
     }
-  });
+  }
 };
 
 const isTune = async (dirEntry) => {
