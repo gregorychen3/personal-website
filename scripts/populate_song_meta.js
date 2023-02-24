@@ -3,7 +3,7 @@ const prompt = require("prompt-sync")({ sigint: true });
 
 const songsDir = "/Users/gregorychen3/GoogleDrive/music_docs/sheetmusic";
 const mdFileName = "metadata.json";
-const manifestFileName = "manifest.json";
+const songIndexFileName = "songIndex.json";
 
 const main = async () => {
   const dirs = (await fs.promises.readdir(songsDir, { withFileTypes: true })).filter((entry) => entry.isDirectory());
@@ -20,7 +20,7 @@ const main = async () => {
 
   tuneNames.sort();
 
-  const tuneMds = [];
+  const tuneIndex = {};
 
   for (const tune of tuneNames) {
     const files = await fs.promises.readdir(`${songsDir}/${tune}`);
@@ -28,18 +28,26 @@ const main = async () => {
     const mdFile = files.find((f) => f === mdFileName);
     if (!mdFile) {
       const md = await ensureMd(tune);
-      tuneMds.push({ ...md, name: tune });
+      tuneIndex[tune] = {
+        name: tune,
+        year: md.year,
+        authors: md.authors,
+      };
+
+      continue;
     }
 
-    const mdFileData = await fs.promises.readFile(`${songsDir}/${tune}/${mdFileName}`, "utf8");
-    tuneMds.push({
-      ...JSON.parse(mdFileData),
+    const mdFileContents = await fs.promises.readFile(`${songsDir}/${tune}/${mdFileName}`, "utf8");
+    const mdFileJson = JSON.parse(mdFileContents);
+    tuneIndex[tune] = {
       name: tune,
-    });
+      year: mdFileJson.year,
+      authors: mdFileJson.authors,
+    };
   }
 
-  const manifestFilePath = `${songsDir}/${manifestFileName}`;
-  fs.writeFileSync(manifestFilePath, JSON.stringify(tuneMds));
+  const songIndexFilePath = `${songsDir}/${songIndexFileName}`;
+  fs.writeFileSync(songIndexFilePath, JSON.stringify(tuneIndex));
 };
 
 const isTune = async (dirEntry) => {
