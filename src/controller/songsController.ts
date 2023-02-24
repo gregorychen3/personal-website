@@ -5,8 +5,8 @@ import { GOOGLE_API_KEY } from "../config";
 interface Song {
   id: string;
   name: string;
-  authors: string[];
   year: number;
+  authors: string[];
 }
 
 const websiteSheetmusicFolderId = "1XDfbY6K4GzA3Etm-dlwN0-HGhrIICkgw";
@@ -29,36 +29,37 @@ songsController.get("/", async (req, res, next) => {
       })
     ).data.files;
 
-    const manifestFile = (
+    const indexFile = (
       await drive.files.list({
         pageSize: 1,
         fields: "nextPageToken, files(id, name)",
-        q: `"${websiteSheetmusicFolderId}" in parents and trashed=false and name = 'manifest.json'`,
+        q: `"${websiteSheetmusicFolderId}" in parents and trashed=false and name = 'songIndex.json'`,
         orderBy: "name",
       })
     ).data.files[0];
 
-    const manifestFileData = (
+    const indexFileData = (
       await drive.files.get({
-        fileId: manifestFile.id,
+        fileId: indexFile.id,
         alt: "media",
       })
     ).data;
 
-    console.log(manifestFileData);
-    console.log(typeof manifestFileData);
+    const index: { [key: string]: { name: string; authors: string[]; year: number } } = JSON.parse(
+      JSON.stringify(indexFileData)
+    );
     const songs: Song[] = [];
 
     for (const songDir of songDirs) {
       songs.push({
         id: songDir.id,
         name: songDir.name,
-        authors: [],
-        year: 0,
+        year: index[songDir.name].year,
+        authors: index[songDir.name].authors,
       });
     }
 
-    return res.send(songDirs);
+    return res.send(songs);
   } catch (e) {
     console.error(e);
     return res.status(e.code).send(e.errors ? { errors: e.errors } : e);

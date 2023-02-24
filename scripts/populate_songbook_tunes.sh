@@ -16,4 +16,4 @@ for path in $SRC_SHEETMUSIC/*; do
     fi
 done
 
-cp $SRC_SHEETMUSIC/manifest.json $DEST_SHEETMUSIC/manifest.json
+cp $SRC_SHEETMUSIC/songIndex.json $DEST_SHEETMUSIC/songIndex.json
