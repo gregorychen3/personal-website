@@ -28,11 +28,14 @@ const main = async () => {
     const mdFile = files.find((f) => f === mdFileName);
     if (!mdFile) {
       const md = await ensureMd(tune);
-      tuneMds.push(md);
+      tuneMds.push({ ...md, name: tune });
     }
 
     const mdFileData = await fs.promises.readFile(`${songsDir}/${tune}/${mdFileName}`, "utf8");
-    tuneMds.push(JSON.parse(mdFileData));
+    tuneMds.push({
+      ...JSON.parse(mdFileData),
+      name: tune,
+    });
   }
 
   const manifestFilePath = `${songsDir}/${manifestFileName}`;
@@ -64,8 +67,6 @@ const ensureMd = async (tune) => {
 
     authors.push(author);
   }
-
-  const md = { authors, year };
 
   const mdFilePath = `${songsDir}/${tune}/${mdFileName}`;
   fs.writeFileSync(mdFilePath, JSON.stringify(md));
