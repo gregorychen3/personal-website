@@ -59,7 +59,7 @@ export function SongbookPage() {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <TextField label="Search" variant="filled" fullWidth onChange={handleSearchChanged} />
+        <TextField label="Search songs" variant="filled" fullWidth onChange={handleSearchChanged} />
       </Grid>
       {songs.filter(filterFn).map((s) => (
         <Grid item xs={12}>
