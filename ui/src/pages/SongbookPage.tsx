@@ -12,6 +12,9 @@ export function SongbookPage() {
   const d = useDispatch();
 
   const [songs, setSongs] = useState<Song[]>([]);
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchChanged = (e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value);
 
   useEffect(() => {
     const getSongs = async () => {
@@ -31,12 +34,34 @@ export function SongbookPage() {
     };
   }, [d]);
 
+  const filterFn = (s: Song) => {
+    if (!searchText) {
+      return true;
+    }
+
+    const want = searchText.toLowerCase();
+
+    if (s.name.toLowerCase().includes(want)) {
+      return true;
+    }
+
+    if (s.year.toString().includes(want)) {
+      return true;
+    }
+
+    if (s.authors.find((author) => author.toLowerCase().includes(want))) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <TextField label="Search" variant="filled" fullWidth />
+        <TextField label="Search" variant="filled" fullWidth onChange={handleSearchChanged} />
       </Grid>
-      {songs.map((s) => (
+      {songs.filter(filterFn).map((s) => (
         <Grid item xs={12}>
           <SongCard song={s} key={s.id} />
         </Grid>
@@ -51,7 +76,7 @@ const SongCard = ({ song }: { song: Song }) => {
   return (
     <Card onClick={handleClick}>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           {song.name}
         </Typography>
         <Typography color="text.secondary">
