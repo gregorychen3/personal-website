@@ -23,9 +23,6 @@ export const theme = createTheme({
 
 theme.components = {
   MuiTextField: {
-    defaultProps: {
-      variant: "standard",
-      InputLabelProps: { shrink: true },
-    },
+    defaultProps: {},
   },
 };

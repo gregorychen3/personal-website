@@ -1,19 +1,20 @@
+import { Grid } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { apiClient } from "../apiClient";
-import { Column, ResourceTable } from "../components/ResourceTable";
+import { apiClient, Song } from "../apiClient";
 import { setShowLoading } from "../features/ui/uiSlice";
-import { ISongModel } from "../types";
-
-const columns: Column<ISongModel>[] = [
-  { id: "name", label: "Name", getValue: (s) => s.name },
-  { id: "lastModified", label: "Last Modified", getValue: (s) => new Date(s.modifiedTime).toLocaleString() },
-];
 
 export function SongbookPage() {
   const d = useDispatch();
 
-  const [songs, setSongs] = useState<ISongModel[]>([]);
+  const [songs, setSongs] = useState<Song[]>([]);
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchChanged = (e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value);
 
   useEffect(() => {
     const getSongs = async () => {
@@ -33,32 +34,55 @@ export function SongbookPage() {
     };
   }, [d]);
 
-  const handleRowClicked = (s: ISongModel) =>
-    window.open(`https://drive.google.com/open?id=${s.id}`, "_blank", "noreferrer");
+  const filterFn = (s: Song) => {
+    if (!searchText) {
+      return true;
+    }
+
+    const want = searchText.toLowerCase();
+
+    if (s.name.toLowerCase().includes(want)) {
+      return true;
+    }
+
+    if (s.year.toString().includes(want)) {
+      return true;
+    }
+
+    if (s.authors.find((author) => author.toLowerCase().includes(want))) {
+      return true;
+    }
+
+    return false;
+  };
 
   return (
-    <ResourceTable
-      title="Songbook"
-      size="small"
-      columns={columns}
-      onRowClick={handleRowClicked}
-      items={songs}
-      defaultSortColumn="name"
-      idExtractor={(s) => s.id}
-      formatSearchEntry={toSearchEntry}
-      searchIdExtractor={searchIdExtractor}
-      searchOptions={{ keys: searchKeys, ignoreLocation: true, threshold: 0 }}
-    />
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <TextField label="Search" variant="filled" fullWidth onChange={handleSearchChanged} />
+      </Grid>
+      {songs.filter(filterFn).map((s) => (
+        <Grid item xs={12}>
+          <SongCard song={s} key={s.id} />
+        </Grid>
+      ))}
+    </Grid>
   );
 }
 
-const toSearchEntry = (s: ISongModel) => ({
-  id: s.id,
-  name: s.name,
-});
+const SongCard = ({ song }: { song: Song }) => {
+  const handleClick = () => window.open(`https://drive.google.com/open?id=${song.id}`, "_blank", "noreferrer");
 
-type RecipeSearchEntry = ReturnType<typeof toSearchEntry>;
-
-const searchIdExtractor = (e: RecipeSearchEntry) => e.id;
-
-const searchKeys = ["name"];
+  return (
+    <Card onClick={handleClick}>
+      <CardContent>
+        <Typography variant="h6" component="div">
+          {song.name}
+        </Typography>
+        <Typography color="text.secondary">
+          {song.year}; {song.authors.join(", ")}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};

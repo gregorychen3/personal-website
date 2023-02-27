@@ -1,10 +1,16 @@
 import axios, { AxiosPromise } from "axios";
-import { ISongModel } from "./types";
+
+export interface Song {
+  id: string;
+  name: string;
+  year: number;
+  authors: string[];
+}
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const apiClient = {
-  fetchSongs: (): AxiosPromise<ISongModel[]> => {
+  fetchSongs: (): AxiosPromise<Song[]> => {
     const path = `/api/songs`;
     return axios.get(path);
   },
