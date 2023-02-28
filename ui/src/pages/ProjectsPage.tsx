@@ -12,7 +12,7 @@ const projects: Project[] = [
   {
     url: "https://github.com/gregorychen3/espresso-controller",
     name: "Espresso Controller",
-    description: "PID temperature control on Raspberry Pi for espresso machines",
+    description: "PID temperature control on Raspberry Pi",
     imagePath: `${process.env.PUBLIC_URL}/espresso_controller.png`,
   },
   {
@@ -30,7 +30,7 @@ const projects: Project[] = [
   {
     url: "https://github.com/gregorychen3/mui-label-divider",
     name: "mui-label-divider",
-    description: "Labeled divider component for Material UI and React",
+    description: "Component for Material UI and React",
     imagePath: `${process.env.PUBLIC_URL}/mui_label_divider.png`,
   },
 ];

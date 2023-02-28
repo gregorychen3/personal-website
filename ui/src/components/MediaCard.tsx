@@ -1,20 +1,12 @@
-import { styled } from "@mui/material";
+import { CardActionArea, styled } from "@mui/material";
 import MuiCard from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const Card = styled(MuiCard)(({ onClick }) =>
-  onClick
-    ? {
-        height: "100%",
-        cursor: "pointer",
-        ":hover": {
-          filter: "brightness(120%)",
-        },
-      }
-    : { height: "100%" }
-);
+const Card = styled(MuiCard)(() => ({
+  height: "100%",
+}));
 
 interface MediaCardProps {
   title: string;
@@ -26,17 +18,19 @@ interface MediaCardProps {
 export function MediaCard({ title, description, mediaUrl, onClick }: MediaCardProps) {
   return (
     <Card variant="outlined" onClick={onClick}>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-      </CardContent>
-      <CardMedia component="img" height="194" image={mediaUrl} />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="div">
+            {title}
+          </Typography>
+        </CardContent>
+        <CardMedia component="img" height="194px" image={mediaUrl} />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 }
