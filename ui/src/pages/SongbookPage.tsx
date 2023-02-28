@@ -21,8 +21,8 @@ export function SongbookPage() {
       d(setShowLoading(true));
 
       const songs = await apiClient.fetchSongs();
-      setSongs(songs.data);
       console.log(songs);
+      setSongs(songs);
 
       d(setShowLoading(false));
     };
@@ -45,7 +45,7 @@ export function SongbookPage() {
       return true;
     }
 
-    if (s.year.toString().includes(want)) {
+    if (s.year?.toString().includes(want)) {
       return true;
     }
 
