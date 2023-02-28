@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { CardActionArea, Grid } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
@@ -75,14 +75,15 @@ const SongCard = ({ song }: { song: Song }) => {
 
   return (
     <Card onClick={handleClick}>
-      <CardContent>
-        <Typography variant="h6" component="div">
-          {song.name}
-        </Typography>
-        <Typography color="text.secondary">
-          {song.year}; {song.authors.join(", ")}
-        </Typography>
-      </CardContent>
+      <CardActionArea>
+        <CardContent>
+          <Typography variant="body2">{song.name}</Typography>
+          <Typography variant="body2" color="text.disabled">
+            <div>{song.year}</div>
+            <div>{song.authors.join(", ")}</div>
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };
