@@ -11,7 +11,7 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const fetchSongs = async () => {
   const path = `/api/songs`;
-  const resp: any[] = await axios.get(path);
+  const resp: any[] = (await axios.get(path)).data;
 
   const songs = resp.map((resp) => ({
     id: resp.id ?? "",
