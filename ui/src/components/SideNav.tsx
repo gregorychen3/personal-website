@@ -38,6 +38,11 @@ export function SideNav() {
       <Grid item xs={12}>
         <AnchorItem href={`${process.env.PUBLIC_URL}/software_resume.pdf`} label="resume" />
       </Grid>
+      <Grid item xs={12}>
+        <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer" sx={sxItem}>
+          contact
+        </Button>
+      </Grid>
     </Grid>
   );
 }
