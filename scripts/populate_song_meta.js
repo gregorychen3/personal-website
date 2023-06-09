@@ -77,6 +77,7 @@ const ensureMd = async (tune) => {
   }
 
   const mdFilePath = `${songsDir}/${tune}/${mdFileName}`;
+  const md = { authors, year };
   fs.writeFileSync(mdFilePath, JSON.stringify(md));
 
   return md;
