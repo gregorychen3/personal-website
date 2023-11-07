@@ -1,7 +1,7 @@
 const fs = require("fs");
 const prompt = require("prompt-sync")({ sigint: true });
 
-const songsDir = "/Users/gregorychen3/GoogleDrive/music_docs/sheetmusic";
+const songsDir = `/Users/gregorychen3/My\ Drive/music_docs/sheetmusic`;
 const mdFileName = "metadata.json";
 const songIndexFileName = "songIndex.json";
 
