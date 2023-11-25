@@ -6,25 +6,24 @@ const mdFileName = "metadata.json";
 const songIndexFileName = "songIndex.json";
 
 const main = async () => {
-  const dirs = (
+  const songDirs = (
     await fs.promises.readdir(songsDir, { withFileTypes: true })
-  ).filter((entry) => entry.isDirectory());
+  ).filter((x) => x.isDirectory());
 
-  const tuneNames = [];
+  const songNames = [];
   await Promise.all(
-    dirs.map(async (dir) => {
-      const tune = await isTune(dir);
-      if (tune) {
-        tuneNames.push(dir.name);
+    songDirs.map(async (dir) => {
+      if (await isSongbookTune(dir)) {
+        songNames.push(dir.name);
       }
     })
   );
 
-  tuneNames.sort();
+  songNames.sort();
 
   const tuneIndex = {};
 
-  for (const tune of tuneNames) {
+  for (const tune of songNames) {
     const files = await fs.promises.readdir(`${songsDir}/${tune}`);
 
     const mdFile = files.find((f) => f === mdFileName);
@@ -55,7 +54,7 @@ const main = async () => {
   fs.writeFileSync(songIndexFilePath, JSON.stringify(tuneIndex));
 };
 
-const isTune = async (dirEntry) => {
+const isSongbookTune = async (dirEntry) => {
   try {
     const files = await fs.promises.readdir(`${songsDir}/${dirEntry.name}`);
     const score = files.find((file) => file.toLowerCase().includes("score"));
