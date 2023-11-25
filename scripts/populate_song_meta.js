@@ -6,7 +6,9 @@ const mdFileName = "metadata.json";
 const songIndexFileName = "songIndex.json";
 
 const main = async () => {
-  const dirs = (await fs.promises.readdir(songsDir, { withFileTypes: true })).filter((entry) => entry.isDirectory());
+  const dirs = (
+    await fs.promises.readdir(songsDir, { withFileTypes: true })
+  ).filter((entry) => entry.isDirectory());
 
   const tuneNames = [];
   await Promise.all(
@@ -37,7 +39,10 @@ const main = async () => {
       continue;
     }
 
-    const mdFileContents = await fs.promises.readFile(`${songsDir}/${tune}/${mdFileName}`, "utf8");
+    const mdFileContents = await fs.promises.readFile(
+      `${songsDir}/${tune}/${mdFileName}`,
+      "utf8"
+    );
     const mdFileJson = JSON.parse(mdFileContents);
     tuneIndex[tune] = {
       name: tune,
