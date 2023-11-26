@@ -11,7 +11,7 @@ interface SongMetadata {
   authors: string[];
 }
 
-const main = async () => {
+const main = () => {
   const songNames = fs
     .readdirSync(songsDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
@@ -23,11 +23,11 @@ const main = async () => {
   const tuneIndex: { [k: string]: SongMetadata } = {};
 
   for (const tune of songNames) {
-    const files = await fs.promises.readdir(`${songsDir}/${tune}`);
+    const files = fs.readdirSync(`${songsDir}/${tune}`);
 
     const mdFile = files.find((f) => f === mdFileName);
     if (!mdFile) {
-      const md = await ensureMd(tune);
+      const md = ensureMd(tune);
       tuneIndex[tune] = {
         name: tune,
         year: md.year,
@@ -37,7 +37,7 @@ const main = async () => {
       continue;
     }
 
-    const mdFileContents = await fs.promises.readFile(
+    const mdFileContents = fs.readFileSync(
       `${songsDir}/${tune}/${mdFileName}`,
       "utf8"
     );
@@ -58,7 +58,7 @@ const isSongbookTune = (dirEntry: fs.Dirent) =>
     .readdirSync(`${songsDir}/${dirEntry.name}`)
     .some((file) => file.toLowerCase().includes("score"));
 
-const ensureMd = async (tune: string) => {
+const ensureMd = (tune: string) => {
   console.log(`Please initialize metadata for ${tune}:`);
 
   const yearStr = prompt("Year: ").trim();
