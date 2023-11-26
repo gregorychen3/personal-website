@@ -12,19 +12,11 @@ interface SongMetadata {
 }
 
 const main = async () => {
-  const songDirs = (
-    await fs.promises.readdir(songsDir, { withFileTypes: true })
-  ).filter((x) => x.isDirectory());
-
-  const songNames: string[] = [];
-
-  await Promise.all(
-    songDirs.map(async (dir) => {
-      if (await isSongbookTune(dir)) {
-        songNames.push(dir.name);
-      }
-    })
-  );
+  const songNames = fs
+    .readdirSync(songsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter(isSongbookTune)
+    .map((dir) => dir.name);
 
   songNames.sort();
 
@@ -61,15 +53,10 @@ const main = async () => {
   fs.writeFileSync(songIndexFilePath, JSON.stringify(tuneIndex));
 };
 
-const isSongbookTune = async (dirEntry: fs.Dirent) => {
-  try {
-    const files = await fs.promises.readdir(`${songsDir}/${dirEntry.name}`);
-    const score = files.find((file) => file.toLowerCase().includes("score"));
-    return !!score;
-  } catch {
-    return false;
-  }
-};
+const isSongbookTune = (dirEntry: fs.Dirent) =>
+  fs
+    .readdirSync(`${songsDir}/${dirEntry.name}`)
+    .some((file) => file.toLowerCase().includes("score"));
 
 const ensureMd = async (tune: string) => {
   console.log(`Please initialize metadata for ${tune}:`);
