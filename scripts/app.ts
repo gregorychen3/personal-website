@@ -4,6 +4,9 @@ const prompt = require("prompt-sync")({ sigint: true });
 const songsDir = `/Users/gregorychen3/My\ Drive/music_docs/sheetmusic`;
 const mdFileName = "metadata.json";
 const songIdxFileName = "songIndex.json";
+const songIdxFilePath = `${songsDir}/${songIdxFileName}`;
+const websiteSongsDir =
+  "/Users/gregorychen3/My Drive/music_docs/website_sheetmusic";
 
 interface SongMetadata {
   name: string;
@@ -38,7 +41,6 @@ const main = () => {
     {}
   );
 
-  const songIdxFilePath = `${songsDir}/${songIdxFileName}`;
   fs.writeFileSync(songIdxFilePath, JSON.stringify(songIdx));
 };
 
