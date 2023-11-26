@@ -47,6 +47,8 @@ const main = () => {
   fs.mkdirSync(websiteSongsDir);
 
   songNames.forEach(publishSong);
+
+  fs.copyFileSync(songIdxFilePath, `${websiteSongsDir}/${songIdxFileName}`);
 };
 
 const isSongbookTune = (dirEntry: fs.Dirent) =>
