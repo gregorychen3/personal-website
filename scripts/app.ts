@@ -43,6 +43,9 @@ const main = () => {
 
   fs.writeFileSync(songIdxFilePath, JSON.stringify(songIdx));
 
+  fs.rmSync(websiteSongsDir, { recursive: true, force: true });
+  fs.mkdirSync(websiteSongsDir);
+
   songNames.forEach(publishSong);
 };
 
@@ -75,6 +78,20 @@ const ensureMetadata = (song: string) => {
   const mdFilePath = `${songsDir}/${song}/${mdFileName}`;
   const md = { authors, year };
   fs.writeFileSync(mdFilePath, JSON.stringify(md));
+};
+
+const publishSong = (song: string) => {
+  fs.mkdirSync(`${websiteSongsDir}/${song}`);
+
+  const songFiles = fs.readdirSync(`${songsDir}/${song}`);
+  songFiles
+    .filter((file) => file.endsWith(".pdf"))
+    .forEach((file) =>
+      fs.copyFileSync(
+        `${songsDir}/${song}/${file}`,
+        `${websiteSongsDir}/${song}/${file}`
+      )
+    );
 };
 
 main();
