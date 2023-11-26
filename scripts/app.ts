@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 const prompt = require("prompt-sync")({ sigint: true });
 
 const songsDir = `/Users/gregorychen3/My\ Drive/music_docs/sheetmusic`;
@@ -10,7 +10,8 @@ const main = async () => {
     await fs.promises.readdir(songsDir, { withFileTypes: true })
   ).filter((x) => x.isDirectory());
 
-  const songNames = [];
+  const songNames: string[] = [];
+
   await Promise.all(
     songDirs.map(async (dir) => {
       if (await isSongbookTune(dir)) {
@@ -70,7 +71,7 @@ const ensureMd = async (tune) => {
   const yearStr = prompt("Year: ").trim();
   const year = parseInt(yearStr) ?? 0;
 
-  const authors = [];
+  const authors: string[] = [];
   while (true) {
     const author = prompt("Author: ").trim();
     if (!author) {
