@@ -43,8 +43,9 @@ const main = () => {
 
   fs.writeFileSync(songIdxFilePath, JSON.stringify(songIdx));
 
-  fs.rmSync(websiteSongsDir, { recursive: true, force: true });
-  fs.mkdirSync(websiteSongsDir);
+  fs.readdirSync(websiteSongsDir).forEach((file) =>
+    fs.rmSync(`${websiteSongsDir}/${file}`, { recursive: true, force: true })
+  );
 
   songNames.forEach(publishSong);
 
