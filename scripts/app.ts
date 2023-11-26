@@ -11,6 +11,11 @@ interface SongMetadata {
   authors: string[];
 }
 
+/*
+ * 1. Ensures each songbook tune directory has a metadata.json
+ * 2. Creates a JSON object containing all song metadatas
+ * 3. Copies appropriate files to the website sheetmusic directory
+ */
 const main = () => {
   const songNames = fs
     .readdirSync(songsDir, { withFileTypes: true })
