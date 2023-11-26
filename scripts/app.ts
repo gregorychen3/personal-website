@@ -5,6 +5,12 @@ const songsDir = `/Users/gregorychen3/My\ Drive/music_docs/sheetmusic`;
 const mdFileName = "metadata.json";
 const songIndexFileName = "songIndex.json";
 
+interface SongMetadata {
+  name: string;
+  year: number;
+  authors: string[];
+}
+
 const main = async () => {
   const songDirs = (
     await fs.promises.readdir(songsDir, { withFileTypes: true })
@@ -22,7 +28,7 @@ const main = async () => {
 
   songNames.sort();
 
-  const tuneIndex = {};
+  const tuneIndex: { [k: string]: SongMetadata } = {};
 
   for (const tune of songNames) {
     const files = await fs.promises.readdir(`${songsDir}/${tune}`);
@@ -55,7 +61,7 @@ const main = async () => {
   fs.writeFileSync(songIndexFilePath, JSON.stringify(tuneIndex));
 };
 
-const isSongbookTune = async (dirEntry) => {
+const isSongbookTune = async (dirEntry: fs.Dirent) => {
   try {
     const files = await fs.promises.readdir(`${songsDir}/${dirEntry.name}`);
     const score = files.find((file) => file.toLowerCase().includes("score"));
@@ -65,7 +71,7 @@ const isSongbookTune = async (dirEntry) => {
   }
 };
 
-const ensureMd = async (tune) => {
+const ensureMd = async (tune: string) => {
   console.log(`Please initialize metadata for ${tune}:`);
 
   const yearStr = prompt("Year: ").trim();
