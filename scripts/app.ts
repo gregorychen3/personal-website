@@ -17,7 +17,7 @@ interface SongMetadata {
 /*
  * 1. Ensures each songbook tune directory has a metadata.json
  * 2. Creates a JSON object containing all song metadatas
- * 3. Copies appropriate files to the website sheetmusic directory
+ * 3. Publish each song by copying files to the website sheetmusic directory
  */
 const main = () => {
   const songNames = fs
@@ -42,6 +42,8 @@ const main = () => {
   );
 
   fs.writeFileSync(songIdxFilePath, JSON.stringify(songIdx));
+
+  songNames.forEach(publishSong);
 };
 
 const isSongbookTune = (dirEntry: fs.Dirent) =>
