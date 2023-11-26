@@ -18,36 +18,28 @@ const main = () => {
     .filter(isSongbookTune)
     .map((dir) => dir.name);
 
-  songNames.sort();
+  const tuneIndex: { [k: string]: SongMetadata } = songNames.reduce(
+    (acc, cur) => {
+      const songFiles = fs.readdirSync(`${songsDir}/${cur}`);
 
-  const tuneIndex: { [k: string]: SongMetadata } = {};
+      if (!songFiles.includes(mdFileName)) {
+        const { year, authors } = ensureMd(cur);
+        return {
+          ...acc,
+          [cur]: { name: cur, year, authors },
+        };
+      }
 
-  for (const tune of songNames) {
-    const files = fs.readdirSync(`${songsDir}/${tune}`);
-
-    const mdFile = files.find((f) => f === mdFileName);
-    if (!mdFile) {
-      const md = ensureMd(tune);
-      tuneIndex[tune] = {
-        name: tune,
-        year: md.year,
-        authors: md.authors,
+      const { year, authors } = JSON.parse(
+        fs.readFileSync(`${songsDir}/${cur}/${mdFileName}`, "utf8")
+      );
+      return {
+        ...acc,
+        [cur]: { name: cur, year, authors },
       };
-
-      continue;
-    }
-
-    const mdFileContents = fs.readFileSync(
-      `${songsDir}/${tune}/${mdFileName}`,
-      "utf8"
-    );
-    const mdFileJson = JSON.parse(mdFileContents);
-    tuneIndex[tune] = {
-      name: tune,
-      year: mdFileJson.year,
-      authors: mdFileJson.authors,
-    };
-  }
+    },
+    {}
+  );
 
   const songIndexFilePath = `${songsDir}/${songIndexFileName}`;
   fs.writeFileSync(songIndexFilePath, JSON.stringify(tuneIndex));
