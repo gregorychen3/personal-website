@@ -9,7 +9,7 @@ interface Song {
   authors: string[];
 }
 
-const websiteSheetmusicFolderId = "1XDfbY6K4GzA3Etm-dlwN0-HGhrIICkgw";
+const websiteSheetmusicFolderId = "10czZ43fMvAURo_xoNHk-fKqUwCeTE0fu";
 
 const drive = google.drive({
   version: "v3",
@@ -45,9 +45,9 @@ songsController.get("/", async (req, res, next) => {
       })
     ).data;
 
-    const index: { [key: string]: { name: string; authors: string[]; year: number } } = JSON.parse(
-      JSON.stringify(indexFileData)
-    );
+    const index: {
+      [key: string]: { name: string; authors: string[]; year: number };
+    } = JSON.parse(JSON.stringify(indexFileData));
     const songs: Song[] = [];
 
     for (const songDir of songDirs) {
