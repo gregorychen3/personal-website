@@ -9,7 +9,6 @@ import {
 import MuiLinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
-import "./App.css";
 import { SideNav } from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
 import { selectShowLoading } from "./features/ui/uiSlice";
