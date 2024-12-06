@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MuiToolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const sxButton = { color: "text.disabled" };
 

@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import _ from "lodash";
 import * as querystring from "querystring";
 import React, { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { DelimitedArrayParam, StringParam, useQueryParams, withDefault } from "use-query-params";
 import { Action, SelectAction } from "./actions";
 import { Column } from "./column";
