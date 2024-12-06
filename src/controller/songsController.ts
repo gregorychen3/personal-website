@@ -62,7 +62,7 @@ songsController.get("/", async (req, res, next) => {
     return res.send(songs);
   } catch (e) {
     console.error(e);
-    return res.status(e.code).send(e.errors ? { errors: e.errors } : e);
+    return res.status(e?.code ?? 500).send(e.errors ? { errors: e.errors } : e);
   }
 });
 
