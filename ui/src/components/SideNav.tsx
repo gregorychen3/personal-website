@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link, useLocation } from "react-router-dom";
+import musicResume from "../assets/music_resume.pdf";
+import softwareResume from "../assets/software_resume.pdf";
 
 export function SideNav() {
   return (
@@ -23,7 +25,7 @@ export function SideNav() {
         <NavItem to="/music/songbook" label="songbook" />
       </Grid>
       <Grid item xs={12}>
-        <AnchorItem href={`${process.env.PUBLIC_URL}/music_resume.pdf`} label="resume" />
+        <AnchorItem href={musicResume} label="resume" />
       </Grid>
 
       <Grid item xs={12}>
@@ -33,13 +35,21 @@ export function SideNav() {
         <NavItem to="/software/projects" label="projects" />
       </Grid>
       <Grid item xs={12}>
-        <AnchorItem href="https://www.linkedin.com/in/gregorychen3" label="linkedin" />
+        <AnchorItem
+          href="https://www.linkedin.com/in/gregorychen3"
+          label="linkedin"
+        />
       </Grid>
       <Grid item xs={12}>
-        <AnchorItem href={`${process.env.PUBLIC_URL}/software_resume.pdf`} label="resume" />
+        <AnchorItem href={softwareResume} label="resume" />
       </Grid>
       <Grid item xs={12}>
-        <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer" sx={sxItem}>
+        <Button
+          href="mailto:gregorychen3@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={sxItem}
+        >
           contact
         </Button>
       </Grid>
@@ -53,7 +63,8 @@ const activeColor = "rgba(0, 157, 219, 0.20)";
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
-  const sx = pathname === to ? { ...sxItem, backgroundColor: activeColor } : sxItem;
+  const sx =
+    pathname === to ? { ...sxItem, backgroundColor: activeColor } : sxItem;
 
   return (
     <Button component={Link} to={to} sx={sx}>
@@ -64,7 +75,10 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
 
 function NavItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
-  const sx = pathname === to ? { ...sxIndentedItem, backgroundColor: activeColor } : sxIndentedItem;
+  const sx =
+    pathname === to
+      ? { ...sxIndentedItem, backgroundColor: activeColor }
+      : sxIndentedItem;
 
   return (
     <Button component={Link} to={to} sx={sx}>
@@ -75,7 +89,12 @@ function NavItem({ to, label }: { to: string; label: string }) {
 
 function AnchorItem({ label, href }: { label: string; href: string }) {
   return (
-    <Button href={href} target="_blank" rel="noopener noreferrer" sx={sxIndentedItem}>
+    <Button
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={sxIndentedItem}
+    >
       {label}
     </Button>
   );

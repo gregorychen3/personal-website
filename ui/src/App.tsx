@@ -1,7 +1,15 @@
-import { Box, Container, CssBaseline, Grid, styled, Toolbar } from "@mui/material";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Grid,
+  styled,
+  Toolbar,
+} from "@mui/material";
 import MuiLinearProgress from "@mui/material/LinearProgress";
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import "./App.css";
 import { SideNav } from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
 import { selectShowLoading } from "./features/ui/uiSlice";
@@ -11,7 +19,10 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
 
-const LinearProgress = styled(MuiLinearProgress)<{ show: boolean }>(({ theme, show }) => {
+const LinearProgress = styled(MuiLinearProgress)<{ show: boolean }>(({
+  theme,
+  show,
+}) => {
   if (show) {
     return { zIndex: theme.zIndex.appBar + 1 };
   }
@@ -24,7 +35,6 @@ const Main = styled(Box)(() => ({
   height: "100vh",
   overflow: "auto",
 }));
-Main.defaultProps = { component: "main" };
 
 export function App() {
   const showLoading = useSelector(selectShowLoading);

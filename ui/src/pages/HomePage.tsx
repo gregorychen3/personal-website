@@ -2,6 +2,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Grid, Stack, Typography } from "@mui/material";
+import avatarImg from "../assets/avatar.png";
 import { SocialLink } from "../components/SocialLink";
 
 const sxIcon = { color: "text.disabled" };
@@ -32,14 +33,19 @@ export function HomePage() {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body2">
-          Jazz pianist and software engineer based in New York City, Boston, and San Francisco.
+          Jazz pianist and software engineer based in New York City, Boston, and
+          San Francisco.
         </Typography>
       </Grid>
       <Grid item xs={6} md={3}>
-        <img src="/avatar.png" alt="headshot" style={{ width: "100%" }} />
+        <img src={avatarImg} alt="headshot" style={{ width: "100%" }} />
       </Grid>
       <Grid item xs={6} md={9}>
-        <Stack alignItems="flex-start" justifyContent="space-around" sx={{ height: "100%" }}>
+        <Stack
+          alignItems="flex-start"
+          justifyContent="space-around"
+          sx={{ height: "100%" }}
+        >
           {socialLinks.map((props) => (
             <SocialLink {...props} key={props.text} />
           ))}

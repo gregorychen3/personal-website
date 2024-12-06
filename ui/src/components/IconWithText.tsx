@@ -6,7 +6,13 @@ const Container = styled("div")(() => ({
   flexWrap: "wrap",
 }));
 
-export function IconWithText({ icon, text }: { icon: React.ReactNode; text: string }) {
+export function IconWithText({
+  icon,
+  text,
+}: {
+  icon: React.ReactNode;
+  text: string;
+}) {
   return (
     <Container>
       {icon}

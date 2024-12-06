@@ -8,7 +8,7 @@ import testController from "./controller/testController";
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, "/../ui/build")));
+app.use(express.static(path.join(__dirname, "/../ui/dist")));
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -21,8 +21,7 @@ app.use("/api/songs", songsController);
 // the "catchall" handler: for any request that doesn't match one above, send
 // back React's index.html file.
 app.get("*", (req, res) => {
-  const file = path.join(__dirname + "/../ui/build/index.html");
-  console.log(__dirname);
+  const file = path.join(__dirname + "/../ui/dist/index.html");
   res.sendFile(file);
 });
 
