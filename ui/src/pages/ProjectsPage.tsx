@@ -1,5 +1,9 @@
 import { Grid } from "@mui/material";
 import { MediaCard } from "../components/MediaCard";
+import espressoControllerImg from "../assets/espresso_controller.png";
+import recipeBookImg from "../assets/recipe_book.png";
+import liquorBuddyImg from "../assets/liquor_buddy.png";
+import muiLabelDividerImg from "../assets/mui_label_divider.png";
 
 interface Project {
   url: string;
@@ -13,25 +17,25 @@ const projects: Project[] = [
     url: "https://github.com/gregorychen3/espresso-controller",
     name: "Espresso Controller",
     description: "PID temperature control on Raspberry Pi",
-    imagePath: `${process.env.PUBLIC_URL}/espresso_controller.png`,
+    imagePath: espressoControllerImg,
   },
   {
     url: "https://ga-recipe-book.herokuapp.com/recipes",
     name: "Recipe Book",
     description: "Greg and Ally's Recipe Book",
-    imagePath: `${process.env.PUBLIC_URL}/recipe_book.png`,
+    imagePath: recipeBookImg,
   },
   {
     url: "https://gregorychen3.github.io/liquor-buddy-website",
     name: "LiquorBuddy",
     description: "Mobile app for saving money at liquor stores",
-    imagePath: `${process.env.PUBLIC_URL}/liquor_buddy.png`,
+    imagePath: liquorBuddyImg,
   },
   {
     url: "https://github.com/gregorychen3/mui-label-divider",
     name: "mui-label-divider",
     description: "Component for Material UI and React",
-    imagePath: `${process.env.PUBLIC_URL}/mui_label_divider.png`,
+    imagePath: muiLabelDividerImg,
   },
 ];
 

@@ -1,4 +1,6 @@
 import { Box, Button, styled } from "@mui/material";
+import softwareResume from "../assets/software_resume.pdf";
+import musicResume from "../assets/music_resume.pdf";
 import AppBar from "@mui/material/AppBar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -44,7 +46,12 @@ export function TopNav() {
         <Box sx={{ display: "flex" }}>
           <MusicMenu />
           <SoftwareMenu />
-          <Button href="mailto:gregorychen3@gmail.com" target="_blank" rel="noopener noreferrer" sx={sxButton}>
+          <Button
+            href="mailto:gregorychen3@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={sxButton}
+          >
             contact
           </Button>
         </Box>
@@ -55,7 +62,8 @@ export function TopNav() {
 
 function MusicMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const nav = useNavigate();
@@ -73,9 +81,15 @@ function MusicMenu() {
       </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
         <MenuItem onClick={handleItemClicked("/music/listen")}>listen</MenuItem>
-        <MenuItem onClick={handleItemClicked("/music/schedule")}>schedule</MenuItem>
-        <MenuItem onClick={handleItemClicked("/music/songbook")}>songbook</MenuItem>
-        <MenuItem onClick={handleItemClicked(`${process.env.PUBLIC_URL}/music_resume.pdf`, true)}>resume</MenuItem>
+        <MenuItem onClick={handleItemClicked("/music/schedule")}>
+          schedule
+        </MenuItem>
+        <MenuItem onClick={handleItemClicked("/music/songbook")}>
+          songbook
+        </MenuItem>
+        <MenuItem onClick={handleItemClicked(musicResume, true)}>
+          resume
+        </MenuItem>
       </Menu>
     </div>
   );
@@ -83,7 +97,8 @@ function MusicMenu() {
 
 function SoftwareMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const nav = useNavigate();
@@ -99,9 +114,20 @@ function SoftwareMenu() {
         software
       </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        <MenuItem onClick={handleItemClicked("/software/projects")}>projects</MenuItem>
-        <MenuItem onClick={handleItemClicked("https://www.linkedin.com/in/gregorychen3", true)}>linkedin</MenuItem>
-        <MenuItem onClick={handleItemClicked(`${process.env.PUBLIC_URL}/software_resume.pdf`, true)}>resume</MenuItem>
+        <MenuItem onClick={handleItemClicked("/software/projects")}>
+          projects
+        </MenuItem>
+        <MenuItem
+          onClick={handleItemClicked(
+            "https://www.linkedin.com/in/gregorychen3",
+            true,
+          )}
+        >
+          linkedin
+        </MenuItem>
+        <MenuItem onClick={handleItemClicked(softwareResume, true)}>
+          resume
+        </MenuItem>
       </Menu>
     </div>
   );
