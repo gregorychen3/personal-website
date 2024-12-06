@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "tsc": "tsc",
-    "build-ui": "cd ui2 && npm i && npm run build",
+    "build-ui": "cd ui && npm i && npm run build",
     "prestart": "esbuild src/app.ts --platform=node --bundle --minify --outfile=build/app.js",
     "start": "node ./bin/www",
-    "heroku-postbuild": "cd ui2 && npm i && npm run build",
+    "heroku-postbuild": "cd ui && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
