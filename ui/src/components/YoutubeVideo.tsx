@@ -38,7 +38,11 @@ function LoadingSkeleton() {
         <Skeleton variant="text" animation="wave" sx={{ height: "100%" }} />
       </Grid>
       <Grid item xs={12} sx={{ height: "80%" }}>
-        <Skeleton variant="rectangular" animation="wave" sx={{ height: "100%" }} />
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          sx={{ height: "100%" }}
+        />
       </Grid>
     </Grid>
   );

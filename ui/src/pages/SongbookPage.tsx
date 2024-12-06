@@ -14,7 +14,8 @@ export function SongbookPage() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [searchText, setSearchText] = useState("");
 
-  const handleSearchChanged = (e: React.ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value);
+  const handleSearchChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSearchText(e.target.value);
 
   useEffect(() => {
     const getSongs = async () => {
@@ -59,7 +60,12 @@ export function SongbookPage() {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <TextField label="Search songs" variant="filled" fullWidth onChange={handleSearchChanged} />
+        <TextField
+          label="Search songs"
+          variant="filled"
+          fullWidth
+          onChange={handleSearchChanged}
+        />
       </Grid>
       {songs.filter(filterFn).map((s) => (
         <Grid item xs={12}>
@@ -71,7 +77,12 @@ export function SongbookPage() {
 }
 
 const SongCard = ({ song }: { song: Song }) => {
-  const handleClick = () => window.open(`https://drive.google.com/open?id=${song.id}`, "_blank", "noreferrer");
+  const handleClick = () =>
+    window.open(
+      `https://drive.google.com/open?id=${song.id}`,
+      "_blank",
+      "noreferrer",
+    );
 
   return (
     <Card onClick={handleClick}>

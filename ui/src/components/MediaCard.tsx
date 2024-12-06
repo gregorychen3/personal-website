@@ -15,7 +15,12 @@ interface MediaCardProps {
   onClick?: () => void;
 }
 
-export function MediaCard({ title, description, mediaUrl, onClick }: MediaCardProps) {
+export function MediaCard({
+  title,
+  description,
+  mediaUrl,
+  onClick,
+}: MediaCardProps) {
   return (
     <Card variant="outlined" onClick={onClick}>
       <CardActionArea>
