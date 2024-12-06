@@ -22,7 +22,6 @@ export function SongbookPage() {
       d(setShowLoading(true));
 
       const songs = await apiClient.fetchSongs();
-      console.log(songs);
       setSongs(songs);
 
       d(setShowLoading(false));
