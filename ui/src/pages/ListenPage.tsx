@@ -6,6 +6,12 @@ export function ListenPage() {
     <Grid container spacing={6}>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
+          title="Bye Bye Baby"
+          src="https://www.youtube.com/embed/VlYeIZZwdqc"
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <YoutubeVideo
           title="Aaron Johnson Quintet 07-03-2022"
           src="https://www.youtube.com/embed/bkfCbIMIqA4?start=88"
         />
@@ -32,12 +38,6 @@ export function ListenPage() {
         <YoutubeVideo
           title="Too Late Now - Alex Hoffman Quintet 04-29-2018"
           src="https://www.youtube.com/embed/56r7TQrSnPo"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <YoutubeVideo
-          title="If I Could Be With You, James P. Johnson"
-          src="https://www.youtube.com/embed/bdLJmW7sR-4"
         />
       </Grid>
     </Grid>
