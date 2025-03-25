@@ -1,15 +1,25 @@
 import { Box, Grid, SvgIcon } from "@mui/material";
-import { YoutubeVideo } from "../components/YoutubeVideo";
 import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
+import { AppleMusicIcon } from "../components/AppleMusicIcon";
 import { SocialLink } from "../components/SocialLink";
-import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
 import { SpotifyIcon } from "../components/SpotifyIcon";
+import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
+import { YoutubeVideo } from "../components/YoutubeVideo";
 
 export function ListenPage() {
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} sm={6}>
         New Album Out!
+        <SocialLink
+          icon={
+            <SvgIcon>
+              <AppleMusicIcon />
+            </SvgIcon>
+          }
+          text="apple music"
+          to="asdf"
+        />
         <SocialLink
           icon={
             <SvgIcon>
