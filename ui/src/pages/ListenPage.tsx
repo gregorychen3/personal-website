@@ -25,38 +25,43 @@ export function ListenPage() {
         />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <ul>
-          <li>Gregory Chen, piano</li>
-          <li>Kevin Hsieh, bass</li>
-          <li>Benjamin Zweig, drums</li>
-        </ul>
-        <SocialLink
-          icon={
-            <SvgIcon>
-              <AppleMusicIcon />
-            </SvgIcon>
-          }
-          text="apple music"
-          to="https://music.apple.com/us/album/sessions-vol-1/1794181040"
-        />
-        <SocialLink
-          icon={
-            <SvgIcon>
-              <YoutubeMusicIcon />
-            </SvgIcon>
-          }
-          text="youtube music"
-          to="https://music.youtube.com/playlist?list=OLAK5uy_kW68C9nTy7JtCQ45pqL0Hm7pKMc4FkT-c&si=44XlD7dyuZWQI1_m"
-        />
-        <SocialLink
-          icon={
-            <SvgIcon>
-              <SpotifyIcon />
-            </SvgIcon>
-          }
-          text="spotify"
-          to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
-        />
+        <Box>Gregory Chen, piano</Box>
+        <Box>Kevin Hsieh, bass</Box>
+        <Box>Benjamin Zweig, drums</Box>
+
+        <Box>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <AppleMusicIcon />
+              </SvgIcon>
+            }
+            text="apple music"
+            to="https://music.apple.com/us/album/sessions-vol-1/1794181040"
+          />
+        </Box>
+        <Box>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <YoutubeMusicIcon />
+              </SvgIcon>
+            }
+            text="youtube music"
+            to="https://music.youtube.com/playlist?list=OLAK5uy_kW68C9nTy7JtCQ45pqL0Hm7pKMc4FkT-c&si=44XlD7dyuZWQI1_m"
+          />
+        </Box>
+        <Box>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <SpotifyIcon />
+              </SvgIcon>
+            }
+            text="spotify"
+            to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
+          />
+        </Box>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h4">Videos</Typography>
