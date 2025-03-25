@@ -3,6 +3,7 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
 import { SocialLink } from "../components/SocialLink";
 import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
+import { SpotifyIcon } from "../components/SpotifyIcon";
 
 export function ListenPage() {
   return (
@@ -13,6 +14,15 @@ export function ListenPage() {
           icon={
             <SvgIcon>
               <YoutubeMusicIcon />
+            </SvgIcon>
+          }
+          text="youtube music"
+          to="asdf"
+        />
+        <SocialLink
+          icon={
+            <SvgIcon>
+              <SpotifyIcon />
             </SvgIcon>
           }
           text="youtube music"
