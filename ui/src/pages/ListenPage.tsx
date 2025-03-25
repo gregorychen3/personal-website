@@ -1,9 +1,75 @@
-import { Grid } from "@mui/material";
+import { Box, Divider, Grid, SvgIcon, Typography } from "@mui/material";
+import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
+import { AppleMusicIcon } from "../components/AppleMusicIcon";
+import { SocialLink } from "../components/SocialLink";
+import { SpotifyIcon } from "../components/SpotifyIcon";
+import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
 import { YoutubeVideo } from "../components/YoutubeVideo";
 
 export function ListenPage() {
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <Typography variant="h4">Albums</Typography>
+        <Divider />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h5">Sessions, Vol. 1</Typography>
+      </Grid>
+      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
+        <Box
+          component="img"
+          src={sessionsVol1Img}
+          alt="alt"
+          sx={{ width: "100%" }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
+        <Typography variant="body2">Gregory Chen, piano</Typography>
+        <Typography variant="body2">Kevin Hsieh, bass</Typography>
+        <Typography variant="body2">Benjamin Zweig, drums</Typography>
+        <Typography variant="body2" mt={4}>
+          HighHorse Records
+        </Typography>
+        <Typography variant="body2">Recorded 08/31/2024</Typography>
+        <Box mt={4}>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <AppleMusicIcon />
+              </SvgIcon>
+            }
+            text="apple music"
+            to="https://music.apple.com/us/album/sessions-vol-1/1794181040"
+          />
+        </Box>
+        <Box>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <YoutubeMusicIcon />
+              </SvgIcon>
+            }
+            text="youtube music"
+            to="https://music.youtube.com/playlist?list=OLAK5uy_kW68C9nTy7JtCQ45pqL0Hm7pKMc4FkT-c&si=44XlD7dyuZWQI1_m"
+          />
+        </Box>
+        <Box>
+          <SocialLink
+            icon={
+              <SvgIcon>
+                <SpotifyIcon />
+              </SvgIcon>
+            }
+            text="spotify"
+            to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h4">Videos</Typography>
+        <Divider />
+      </Grid>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
           title="Bye Bye Baby"
