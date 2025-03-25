@@ -1,4 +1,4 @@
-import { Box, Grid, SvgIcon } from "@mui/material";
+import { Box, Divider, Grid, SvgIcon, Typography } from "@mui/material";
 import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
 import { AppleMusicIcon } from "../components/AppleMusicIcon";
 import { SocialLink } from "../components/SocialLink";
@@ -9,8 +9,17 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 export function ListenPage() {
   return (
     <Grid container spacing={6}>
+      <Grid item xs={12}>
+        <Typography variant="h4">Albums</Typography>
+        <Divider />
+      </Grid>
       <Grid item xs={12} sm={6}>
-        New Album Out!
+        <Typography variant="h6">Sessions, Vol. 1</Typography>
+        <ul>
+          <li>Gregory Chen, piano</li>
+          <li>Kevin Hsieh, bass</li>
+          <li>Benjamin Zweig, drums</li>
+        </ul>
         <SocialLink
           icon={
             <SvgIcon>
@@ -46,6 +55,10 @@ export function ListenPage() {
           alt="alt"
           sx={{ width: "100%" }}
         />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h4">Videos</Typography>
+        <Divider />
       </Grid>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
