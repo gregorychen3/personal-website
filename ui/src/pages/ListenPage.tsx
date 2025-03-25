@@ -1,9 +1,21 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { YoutubeVideo } from "../components/YoutubeVideo";
+import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
 
 export function ListenPage() {
   return (
     <Grid container spacing={6}>
+      <Grid item xs={12} sm={6}>
+        New Album Out!
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Box
+          component="img"
+          src={sessionsVol1Img}
+          alt="alt"
+          sx={{ width: "100%" }}
+        />
+      </Grid>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
           title="Bye Bye Baby"
