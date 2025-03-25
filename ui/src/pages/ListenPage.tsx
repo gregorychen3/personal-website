@@ -35,7 +35,7 @@ export function ListenPage() {
               <SpotifyIcon />
             </SvgIcon>
           }
-          text="youtube music"
+          text="spotify"
           to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
         />
       </Grid>
