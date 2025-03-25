@@ -18,7 +18,7 @@ export function ListenPage() {
             </SvgIcon>
           }
           text="apple music"
-          to="asdf"
+          to="https://music.apple.com/us/album/sessions-vol-1/1794181040"
         />
         <SocialLink
           icon={
@@ -27,7 +27,7 @@ export function ListenPage() {
             </SvgIcon>
           }
           text="youtube music"
-          to="asdf"
+          to="https://music.youtube.com/playlist?list=OLAK5uy_kW68C9nTy7JtCQ45pqL0Hm7pKMc4FkT-c&si=44XlD7dyuZWQI1_m"
         />
         <SocialLink
           icon={
@@ -36,7 +36,7 @@ export function ListenPage() {
             </SvgIcon>
           }
           text="youtube music"
-          to="asdf"
+          to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
         />
       </Grid>
       <Grid item xs={12} sm={6}>
