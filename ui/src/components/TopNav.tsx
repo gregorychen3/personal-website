@@ -24,11 +24,6 @@ const LogoText = styled(Typography)(({ theme }) => ({
   paddingLeft: theme.spacing(2),
   paddingRight: theme.spacing(2),
 }));
-LogoText.defaultProps = {
-  variant: "h6",
-  color: "inherit",
-  noWrap: true,
-};
 
 const Toolbar = styled(MuiToolbar)(() => ({
   paddingLeft: "0px!important",
@@ -40,7 +35,9 @@ export function TopNav() {
     <AppBar position="absolute" sx={{ backgroundColor: "background.default" }}>
       <Toolbar>
         <LogoButton onClick={() => nav("/")}>
-          <LogoText>gc</LogoText>
+          <LogoText variant="h6" color="inherit" noWrap>
+            gc
+          </LogoText>
         </LogoButton>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex" }}>
@@ -71,7 +68,13 @@ function MusicMenu() {
     (to: string, newTab: boolean = false) =>
     () => {
       handleClose();
-      newTab ? window.open(to, "_blank", "noreferrer") : nav(to);
+
+      if (newTab) {
+        window.open(to, "_blank", "noreferrer");
+        return;
+      }
+
+      nav(to);
     };
 
   return (
@@ -106,8 +109,14 @@ function SoftwareMenu() {
     (to: string, newTab: boolean = false) =>
     () => {
       handleClose();
-      newTab ? window.open(to, "_blank", "noreferrer") : nav(to);
+      if (newTab) {
+        window.open(to, "_blank", "noreferrer");
+        return;
+      }
+
+      nav(to);
     };
+
   return (
     <div>
       <Button onClick={handleOpen} sx={sxButton}>
