@@ -1,12 +1,23 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, SvgIcon } from "@mui/material";
 import { YoutubeVideo } from "../components/YoutubeVideo";
 import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
+import { SocialLink } from "../components/SocialLink";
+import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
 
 export function ListenPage() {
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} sm={6}>
         New Album Out!
+        <SocialLink
+          icon={
+            <SvgIcon>
+              <YoutubeMusicIcon />
+            </SvgIcon>
+          }
+          text="youtube music"
+          to="asdf"
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <Box
