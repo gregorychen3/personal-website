@@ -8,13 +8,23 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 
 export function ListenPage() {
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
         <Typography variant="h4">Albums</Typography>
         <Divider />
       </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h5">Sessions, Vol. 1</Typography>
+      </Grid>
       <Grid item xs={12} sm={6}>
-        <Typography variant="h6">Sessions, Vol. 1</Typography>
+        <Box
+          component="img"
+          src={sessionsVol1Img}
+          alt="alt"
+          sx={{ width: "100%" }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
         <ul>
           <li>Gregory Chen, piano</li>
           <li>Kevin Hsieh, bass</li>
@@ -46,14 +56,6 @@ export function ListenPage() {
           }
           text="spotify"
           to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box
-          component="img"
-          src={sessionsVol1Img}
-          alt="alt"
-          sx={{ width: "100%" }}
         />
       </Grid>
       <Grid item xs={12}>
