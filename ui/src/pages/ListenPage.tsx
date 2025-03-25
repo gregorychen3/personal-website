@@ -16,7 +16,7 @@ export function ListenPage() {
       <Grid item xs={12}>
         <Typography variant="h5">Sessions, Vol. 1</Typography>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
         <Box
           component="img"
           src={sessionsVol1Img}
