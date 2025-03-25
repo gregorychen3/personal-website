@@ -1,4 +1,8 @@
+import { useTheme } from "@mui/material";
+
 export function AppleMusicIcon() {
+  const disabledColor = useTheme().palette.text.disabled;
+
   return (
     <svg
       version="1.1"
@@ -43,7 +47,7 @@ export function AppleMusicIcon() {
           style={{
             fillRule: "evenodd",
             clipRule: "evenodd",
-            fill: "url(#SVGID_1_)",
+            fill: disabledColor,
           }}
         />
       </g>
