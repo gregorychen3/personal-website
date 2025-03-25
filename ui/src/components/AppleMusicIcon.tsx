@@ -67,7 +67,7 @@ export function AppleMusicIcon() {
             style={{
               fillRule: "evenodd",
               clipRule: "evenodd",
-              fill: "#FFFFFF",
+              fill: "black",
             }}
           />
         </g>

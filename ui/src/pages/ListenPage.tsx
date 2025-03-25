@@ -29,7 +29,7 @@ export function ListenPage() {
         <Typography variant="body2">Kevin Hsieh, bass</Typography>
         <Typography variant="body2">Benjamin Zweig, drums</Typography>
 
-        <Box>
+        <Box mt={2}>
           <SocialLink
             icon={
               <SvgIcon>
