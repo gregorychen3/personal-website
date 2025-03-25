@@ -24,12 +24,15 @@ export function ListenPage() {
           sx={{ width: "100%" }}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
         <Typography variant="body2">Gregory Chen, piano</Typography>
         <Typography variant="body2">Kevin Hsieh, bass</Typography>
         <Typography variant="body2">Benjamin Zweig, drums</Typography>
-
-        <Box mt={2}>
+        <Typography variant="body2" mt={4}>
+          HighHorse Records
+        </Typography>
+        <Typography variant="body2">Recorded 08/31/2024</Typography>
+        <Box mt={4}>
           <SocialLink
             icon={
               <SvgIcon>
