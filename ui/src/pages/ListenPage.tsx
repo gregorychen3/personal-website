@@ -28,6 +28,7 @@ export function ListenPage() {
         <Typography variant="body2">Gregory Chen, piano</Typography>
         <Typography variant="body2">Kevin Hsieh, bass</Typography>
         <Typography variant="body2">Benjamin Zweig, drums</Typography>
+        <Typography variant="body2">Micah Fong, album art</Typography>
         <Typography variant="body2" mt={4}>
           HighHorse Records
         </Typography>
