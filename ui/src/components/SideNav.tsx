@@ -27,32 +27,6 @@ export function SideNav() {
       <Grid item xs={12}>
         <AnchorItem href={musicResume} label="resume" />
       </Grid>
-
-      <Grid item xs={12}>
-        <HeaderItem to="software/projects" label="software" />
-      </Grid>
-      <Grid item xs={12}>
-        <NavItem to="/software/projects" label="projects" />
-      </Grid>
-      <Grid item xs={12}>
-        <AnchorItem
-          href="https://www.linkedin.com/in/gregorychen3"
-          label="linkedin"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <AnchorItem href={softwareResume} label="resume" />
-      </Grid>
-      <Grid item xs={12}>
-        <Button
-          href="mailto:gregorychen3@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={sxItem}
-        >
-          contact
-        </Button>
-      </Grid>
     </Grid>
   );
 }

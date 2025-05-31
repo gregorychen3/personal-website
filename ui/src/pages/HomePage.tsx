@@ -33,8 +33,7 @@ export function HomePage() {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body2">
-          Jazz pianist and software engineer based in New York City, Boston, and
-          San Francisco.
+          Jazz pianist based in New York City, Boston, and San Francisco.
         </Typography>
       </Grid>
       <Grid item xs={6} md={3}>

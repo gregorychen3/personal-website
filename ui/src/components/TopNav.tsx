@@ -42,15 +42,6 @@ export function TopNav() {
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex" }}>
           <MusicMenu />
-          <SoftwareMenu />
-          <Button
-            href="mailto:gregorychen3@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={sxButton}
-          >
-            contact
-          </Button>
         </Box>
       </Toolbar>
     </AppBar>
