@@ -73,12 +73,6 @@ export function ListenPage() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <YoutubeVideo
-          title="Bye Bye Baby"
-          src="https://www.youtube.com/embed/VlYeIZZwdqc"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <YoutubeVideo
           title="Aaron Johnson Quintet 07-03-2022"
           src="https://www.youtube.com/embed/bkfCbIMIqA4?start=88"
         />
