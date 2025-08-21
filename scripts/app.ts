@@ -55,7 +55,7 @@ const main = () => {
 const isSongbookTune = (dirEntry: fs.Dirent) =>
   fs
     .readdirSync(`${songsDir}/${dirEntry.name}`)
-    .some((file) => file.toLowerCase().includes("score"));
+    .some((file) => file.toLowerCase().includes("folio"));
 
 const ensureMetadata = (song: string) => {
   const songFiles = fs.readdirSync(`${songsDir}/${song}`);
