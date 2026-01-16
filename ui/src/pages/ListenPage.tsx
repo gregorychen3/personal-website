@@ -51,8 +51,8 @@ export function ListenPage() {
                 <YoutubeMusicIcon />
               </SvgIcon>
             }
-            text="youtube music"
-            to="https://music.youtube.com/playlist?list=OLAK5uy_kW68C9nTy7JtCQ45pqL0Hm7pKMc4FkT-c&si=44XlD7dyuZWQI1_m"
+            text="youtube"
+            to="https://youtu.be/iIC2dBC2ZZ8?si=eVFCnaVVO0LAq7Nh"
           />
         </Box>
         <Box>
