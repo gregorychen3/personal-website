@@ -28,30 +28,42 @@ const socialLinks = [
 export function HomePage() {
   return (
     <Grid container spacing={8}>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="h4">Gregory Chen</Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="body2">
           Jazz pianist and software engineer based in New York City, Boston, and
           San Francisco.
         </Typography>
       </Grid>
-      <Grid item xs={6} md={3}>
+      <Grid
+        size={{
+          xs: 6,
+          md: 3,
+        }}
+      >
         <img src={avatarImg} alt="headshot" style={{ width: "100%" }} />
       </Grid>
-      <Grid item xs={6} md={9}>
+      <Grid
+        size={{
+          xs: 6,
+          md: 9,
+        }}
+      >
         <Stack
-          alignItems="flex-start"
-          justifyContent="space-around"
-          sx={{ height: "100%" }}
+          sx={{
+            alignItems: "flex-start",
+            justifyContent: "space-around",
+            height: "100%",
+          }}
         >
           {socialLinks.map((props) => (
             <SocialLink {...props} key={props.text} />
           ))}
         </Stack>
       </Grid>
-      <Grid item xs={12}></Grid>
+      <Grid size={12}></Grid>
     </Grid>
   );
 }

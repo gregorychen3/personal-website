@@ -7,43 +7,40 @@ import softwareResume from "../assets/software_resume.pdf";
 export function SideNav() {
   return (
     <Grid container spacing={0.5}>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <HeaderItem to="/" label="home" />
       </Grid>
-
-      <Grid item xs={12}>
+      <Grid size={12}>
         <HeaderItem to="music/listen" label="music" />
       </Grid>
-
-      <Grid item xs={12}>
+      <Grid size={12}>
         <NavItem to="/music/listen" label="listen" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <NavItem to="/music/schedule" label="schedule" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <NavItem to="/music/songbook" label="songbook" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <AnchorItem href={musicResume} label="resume" />
       </Grid>
-
-      <Grid item xs={12}>
+      <Grid size={12}>
         <HeaderItem to="software/projects" label="software" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <NavItem to="/software/projects" label="projects" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <AnchorItem
           href="https://www.linkedin.com/in/gregorychen3"
           label="linkedin"
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <AnchorItem href={softwareResume} label="resume" />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Button
           href="mailto:gregorychen3@gmail.com"
           target="_blank"

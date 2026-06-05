@@ -31,13 +31,13 @@ export function YoutubeVideo({ title, src }: YoutubeVideoProps) {
 function LoadingSkeleton() {
   return (
     <Grid container sx={{ height: "315px" }} spacing={2}>
-      <Grid item xs={3} sx={{ height: "20%" }}>
+      <Grid sx={{ height: "20%" }} size={3}>
         <Skeleton variant="circular" animation="wave" sx={{ height: "100%" }} />
       </Grid>
-      <Grid item xs={9} sx={{ height: "20%" }}>
+      <Grid sx={{ height: "20%" }} size={9}>
         <Skeleton variant="text" animation="wave" sx={{ height: "100%" }} />
       </Grid>
-      <Grid item xs={12} sx={{ height: "80%" }}>
+      <Grid sx={{ height: "80%" }} size={12}>
         <Skeleton
           variant="rectangular"
           animation="wave"

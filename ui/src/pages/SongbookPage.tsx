@@ -58,7 +58,7 @@ export function SongbookPage() {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <TextField
           label="Search songs"
           variant="filled"
@@ -67,7 +67,7 @@ export function SongbookPage() {
         />
       </Grid>
       {songs.filter(filterFn).map((s) => (
-        <Grid item xs={12}>
+        <Grid size={12}>
           <SongCard song={s} key={s.id} />
         </Grid>
       ))}
@@ -88,7 +88,12 @@ const SongCard = ({ song }: { song: Song }) => {
       <CardActionArea>
         <CardContent>
           <Typography variant="body2">{song.name}</Typography>
-          <Typography variant="body2" color="text.disabled">
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.disabled",
+            }}
+          >
             <div>{song.year}</div>
             <div>{song.authors.join(", ")}</div>
           </Typography>

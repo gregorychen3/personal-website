@@ -9,14 +9,20 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 export function ListenPage() {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="h4">Albums</Typography>
         <Divider />
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="h5">Sessions, Vol. 1</Typography>
       </Grid>
-      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
+      <Grid
+        sx={{ mt: -2 }}
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <Box
           component="img"
           src={sessionsVol1Img}
@@ -24,16 +30,31 @@ export function ListenPage() {
           sx={{ width: "100%" }}
         />
       </Grid>
-      <Grid item xs={12} sm={6} sx={{ mt: -2 }}>
+      <Grid
+        sx={{ mt: -2 }}
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <Typography variant="body2">Gregory Chen, piano</Typography>
         <Typography variant="body2">Kevin Hsieh, bass</Typography>
         <Typography variant="body2">Benjamin Zweig, drums</Typography>
         <Typography variant="body2">Micah Fong, album art</Typography>
-        <Typography variant="body2" mt={4}>
+        <Typography
+          variant="body2"
+          sx={{
+            mt: 4,
+          }}
+        >
           HighHorse Records
         </Typography>
         <Typography variant="body2">Recorded 08/31/2024</Typography>
-        <Box mt={4}>
+        <Box
+          sx={{
+            mt: 4,
+          }}
+        >
           <SocialLink
             icon={
               <SvgIcon>
@@ -67,35 +88,60 @@ export function ListenPage() {
           />
         </Box>
       </Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Typography variant="h4">Videos</Typography>
         <Divider />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <YoutubeVideo
           title="Aaron Johnson Quintet 07-03-2022"
           src="https://www.youtube.com/embed/bkfCbIMIqA4?start=88"
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <YoutubeVideo
           title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 1"
           src="https://www.youtube.com/embed/D9ulpdTD6hY"
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <YoutubeVideo
           title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 2"
           src="https://www.youtube.com/embed/wkXdCbxZD2w"
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <YoutubeVideo
           title="I Concentrate On You - Alex Hoffman Quintet 04-29-2018"
           src="https://www.youtube.com/embed/9u3LmdqAwDA"
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
         <YoutubeVideo
           title="Too Late Now - Alex Hoffman Quintet 04-29-2018"
           src="https://www.youtube.com/embed/56r7TQrSnPo"

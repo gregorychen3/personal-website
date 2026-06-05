@@ -31,7 +31,12 @@ export function MediaCard({
         </CardContent>
         <CardMedia component="img" height="194px" image={mediaUrl} />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary",
+            }}
+          >
             {description}
           </Typography>
         </CardContent>

@@ -39,7 +39,11 @@ export function App() {
   const showLoading = useSelector(selectShowLoading);
 
   return (
-    <Box display="flex">
+    <Box
+      sx={{
+        display: "flex",
+      }}
+    >
       <CssBaseline />
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         <TopNav />
@@ -49,12 +53,22 @@ export function App() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: { xs: 4, md: 0 } }}>
           <Grid container>
-            <Grid item md={3} sx={{ display: { xs: "none", md: "flex" } }}>
-              <Grid item xs={12}>
+            <Grid
+              sx={{ display: { xs: "none", md: "flex" } }}
+              size={{
+                md: 3,
+              }}
+            >
+              <Grid size={12}>
                 <SideNav />
               </Grid>
             </Grid>
-            <Grid item xs={12} md={9}>
+            <Grid
+              size={{
+                xs: 12,
+                md: 9,
+              }}
+            >
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/music/listen" element={<ListenPage />} />

@@ -43,7 +43,14 @@ export function ProjectsPage() {
   return (
     <Grid container spacing={6}>
       {projects.map((p) => (
-        <Grid item sm={12} md={6} sx={{ width: "100%" }} key={p.name}>
+        <Grid
+          sx={{ width: "100%" }}
+          key={p.name}
+          size={{
+            sm: 12,
+            md: 6,
+          }}
+        >
           <MediaCard
             title={p.name}
             description={p.description}
