@@ -11,7 +11,7 @@ export function YoutubeMusicIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_5547_43)">
+      <g clipPath="url(#clip0_5547_43)">
         <path
           d="M12 24C18.63 24 24 18.63 24 12C24 5.37 18.63 0 12 0C5.37 0 0 5.37 0 12C0 18.63 5.37 24 12 24Z"
           fill={disabledColor}

@@ -18,10 +18,9 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
 
-const LinearProgress = styled(MuiLinearProgress)<{ show: boolean }>(({
-  theme,
-  show,
-}) => {
+const LinearProgress = styled(MuiLinearProgress, {
+  shouldForwardProp: (prop) => prop !== "show",
+})<{ show: boolean }>(({ theme, show }) => {
   if (show) {
     return { zIndex: theme.zIndex.appBar + 1 };
   }

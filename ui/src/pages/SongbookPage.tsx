@@ -67,8 +67,8 @@ export function SongbookPage() {
         />
       </Grid>
       {songs.filter(filterFn).map((s) => (
-        <Grid size={12}>
-          <SongCard song={s} key={s.id} />
+        <Grid size={12} key={s.id}>
+          <SongCard song={s} />
         </Grid>
       ))}
     </Grid>
@@ -90,6 +90,7 @@ const SongCard = ({ song }: { song: Song }) => {
           <Typography variant="body2">{song.name}</Typography>
           <Typography
             variant="body2"
+            component="div"
             sx={{
               color: "text.disabled",
             }}
