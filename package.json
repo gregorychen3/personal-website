@@ -20,7 +20,7 @@
     "googleapis": "^144.0.0",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
-    "typescript": "^5.7.2",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.17.0"
   },
   "engines": {
