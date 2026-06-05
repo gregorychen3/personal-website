@@ -33,12 +33,7 @@ app.get("/{*splat}", (req, res, next) => {
 app.use((req, res, next) => next(createError(404)));
 
 // error handler
-app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
+app.use((err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
   return res.sendStatus(err.status ? err.status : 500);
 });
 

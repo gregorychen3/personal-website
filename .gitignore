@@ -27,5 +27,8 @@ benchmarks/graphs
 
 build/
 
+# TypeScript incremental build cache
+*.tsbuildinfo
+
 # Local environment variables (contains secrets)
 .env

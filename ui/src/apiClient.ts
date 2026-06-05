@@ -7,8 +7,6 @@ export interface Song {
   authors: string[];
 }
 
-axios.defaults.headers.post["Content-Type"] = "application/json";
-
 const fetchSongs = async () => {
   const path = `/api/songs`;
   const resp = (await axios.get<Partial<Song>[]>(path)).data;

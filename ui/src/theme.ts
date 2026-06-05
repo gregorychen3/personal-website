@@ -18,11 +18,3 @@ export const theme = createTheme({
     },
   },
 });
-
-//theme.palette.primary.main = theme.palette.text.disabled;
-
-theme.components = {
-  MuiTextField: {
-    defaultProps: {},
-  },
-};

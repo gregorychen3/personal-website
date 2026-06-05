@@ -32,7 +32,6 @@
     "react-router-dom": "^7.4.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
-    "use-query-params": "^2.2.1",
     "vite": "^8.0.16"
   },
   "engines": {
