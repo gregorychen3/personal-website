@@ -6,7 +6,7 @@
     "tsc": "tsc",
     "build-ui": "cd ui && npm i && npm run build",
     "prestart": "esbuild src/app.ts --platform=node --bundle --minify --outfile=build/app.js",
-    "start": "node ./bin/www",
+    "start": "node --env-file-if-exists=.env ./bin/www",
     "heroku-postbuild": "cd ui && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +24,7 @@
     "typescript-eslint": "^8.17.0"
   },
   "engines": {
-    "node": "=20",
-    "npm": "=10"
+    "node": ">=22.12.0",
+    "npm": ">=10"
   }
 }

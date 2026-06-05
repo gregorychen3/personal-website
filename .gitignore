@@ -26,3 +26,6 @@ coverage
 benchmarks/graphs
 
 build/
+
+# Local environment variables (contains secrets)
+.env
