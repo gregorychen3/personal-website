@@ -49,16 +49,14 @@ songsController.get("/", async (req, res) => {
       return res.status(500).send({ error: "songIndex.json not found" });
     }
 
-    const indexFileData = (
+    // alt: "media" returns the file's contents; for a JSON file googleapis
+    // parses it into an object for us.
+    const index = (
       await drive.files.get({
         fileId: indexFile.id,
         alt: "media",
       })
-    ).data;
-
-    const index: Record<string, SongIndexEntry> = JSON.parse(
-      JSON.stringify(indexFileData),
-    );
+    ).data as Record<string, SongIndexEntry>;
 
     const songs: Song[] = [];
     for (const songDir of songDirs) {

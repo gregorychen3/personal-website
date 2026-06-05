@@ -1,6 +1,4 @@
 import { Box, Button, styled } from "@mui/material";
-import softwareResume from "../assets/software_resume.pdf";
-import musicResume from "../assets/music_resume.pdf";
 import AppBar from "@mui/material/AppBar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,6 +6,7 @@ import MuiToolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { useNavigate } from "react-router";
+import { contactHref, NavLink, NavSection, navSections } from "../navConfig";
 
 const sxButton = { color: "text.disabled" };
 
@@ -41,10 +40,11 @@ export function TopNav() {
         </LogoButton>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex" }}>
-          <MusicMenu />
-          <SoftwareMenu />
+          {navSections.map((section) => (
+            <DropdownMenu key={section.label} section={section} />
+          ))}
           <Button
-            href="mailto:gregorychen3@gmail.com"
+            href={contactHref}
             target="_blank"
             rel="noopener noreferrer"
             sx={sxButton}
@@ -57,86 +57,35 @@ export function TopNav() {
   );
 }
 
-function MusicMenu() {
+function DropdownMenu({ section }: { section: NavSection }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const nav = useNavigate();
-  const handleItemClicked =
-    (to: string, newTab: boolean = false) =>
-    () => {
-      handleClose();
+  const handleItemClicked = (link: NavLink) => () => {
+    handleClose();
 
-      if (newTab) {
-        window.open(to, "_blank", "noreferrer");
-        return;
-      }
+    if (link.external) {
+      window.open(link.to, "_blank", "noreferrer");
+      return;
+    }
 
-      nav(to);
-    };
+    nav(link.to);
+  };
 
   return (
     <div>
       <Button onClick={handleOpen} sx={sxButton}>
-        music
+        {section.label}
       </Button>
       <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        <MenuItem onClick={handleItemClicked("/music/listen")}>listen</MenuItem>
-        <MenuItem onClick={handleItemClicked("/music/schedule")}>
-          schedule
-        </MenuItem>
-        <MenuItem onClick={handleItemClicked("/music/songbook")}>
-          songbook
-        </MenuItem>
-        <MenuItem onClick={handleItemClicked(musicResume, true)}>
-          resume
-        </MenuItem>
-      </Menu>
-    </div>
-  );
-}
-
-function SoftwareMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
-  const nav = useNavigate();
-  const handleItemClicked =
-    (to: string, newTab: boolean = false) =>
-    () => {
-      handleClose();
-      if (newTab) {
-        window.open(to, "_blank", "noreferrer");
-        return;
-      }
-
-      nav(to);
-    };
-
-  return (
-    <div>
-      <Button onClick={handleOpen} sx={sxButton}>
-        software
-      </Button>
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        <MenuItem onClick={handleItemClicked("/software/projects")}>
-          projects
-        </MenuItem>
-        <MenuItem
-          onClick={handleItemClicked(
-            "https://www.linkedin.com/in/gregorychen3",
-            true,
-          )}
-        >
-          linkedin
-        </MenuItem>
-        <MenuItem onClick={handleItemClicked(softwareResume, true)}>
-          resume
-        </MenuItem>
+        {section.links.map((link) => (
+          <MenuItem key={link.label} onClick={handleItemClicked(link)}>
+            {link.label}
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );

@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
+import { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
-import musicResume from "../assets/music_resume.pdf";
-import softwareResume from "../assets/software_resume.pdf";
+import { contactHref, navSections } from "../navConfig";
 
 export function SideNav() {
   return (
@@ -10,39 +10,25 @@ export function SideNav() {
       <Grid size={12}>
         <HeaderItem to="/" label="home" />
       </Grid>
-      <Grid size={12}>
-        <HeaderItem to="music/listen" label="music" />
-      </Grid>
-      <Grid size={12}>
-        <NavItem to="/music/listen" label="listen" />
-      </Grid>
-      <Grid size={12}>
-        <NavItem to="/music/schedule" label="schedule" />
-      </Grid>
-      <Grid size={12}>
-        <NavItem to="/music/songbook" label="songbook" />
-      </Grid>
-      <Grid size={12}>
-        <AnchorItem href={musicResume} label="resume" />
-      </Grid>
-      <Grid size={12}>
-        <HeaderItem to="software/projects" label="software" />
-      </Grid>
-      <Grid size={12}>
-        <NavItem to="/software/projects" label="projects" />
-      </Grid>
-      <Grid size={12}>
-        <AnchorItem
-          href="https://www.linkedin.com/in/gregorychen3"
-          label="linkedin"
-        />
-      </Grid>
-      <Grid size={12}>
-        <AnchorItem href={softwareResume} label="resume" />
-      </Grid>
+      {navSections.map((section) => (
+        <Fragment key={section.label}>
+          <Grid size={12}>
+            <HeaderItem to={section.to} label={section.label} />
+          </Grid>
+          {section.links.map((link) => (
+            <Grid size={12} key={`${section.label}/${link.label}`}>
+              {link.external ? (
+                <AnchorItem href={link.to} label={link.label} />
+              ) : (
+                <NavItem to={link.to} label={link.label} />
+              )}
+            </Grid>
+          ))}
+        </Fragment>
+      ))}
       <Grid size={12}>
         <Button
-          href="mailto:gregorychen3@gmail.com"
+          href={contactHref}
           target="_blank"
           rel="noopener noreferrer"
           sx={sxItem}
