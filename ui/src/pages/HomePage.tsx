@@ -5,7 +5,7 @@ import { Grid, Stack, Typography } from "@mui/material";
 import avatarImg from "../assets/avatar.png";
 import { SocialLink } from "../components/SocialLink";
 
-const sxIcon = { color: "text.disabled" };
+const sxIcon = { color: "text.primary" };
 
 const socialLinks = [
   {

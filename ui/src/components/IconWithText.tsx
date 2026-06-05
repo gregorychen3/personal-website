@@ -16,7 +16,7 @@ export function IconWithText({
   return (
     <Container>
       {icon}
-      <Typography variant="body1" sx={{ pl: 1, color: "text.disabled" }}>
+      <Typography variant="body1" sx={{ pl: 1, color: "text.primary" }}>
         {text}
       </Typography>
     </Container>
