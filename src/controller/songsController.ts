@@ -80,10 +80,15 @@ songsController.get("/", async (req, res) => {
 
     return res.send(songs);
   } catch (e) {
+    // Log the full error server-side; return a generic message so we don't
+    // leak internal/upstream details to the client.
     console.error(e);
-    const err = e as { code?: number; errors?: unknown };
-    const status = typeof err.code === "number" ? err.code : 500;
-    return res.status(status).send(err.errors ? { errors: err.errors } : e);
+    const err = e as { code?: number };
+    const status =
+      typeof err.code === "number" && err.code >= 400 && err.code < 600
+        ? err.code
+        : 500;
+    return res.status(status).send({ error: "Failed to fetch songs" });
   }
 });
 
