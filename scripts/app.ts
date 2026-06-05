@@ -66,7 +66,7 @@ const ensureMetadata = (song: string) => {
   console.log(`Please initialize metadata for ${song}:`);
 
   const yearStr = prompt("Year: ").trim();
-  const year = parseInt(yearStr) ?? 0;
+  const year = Number.parseInt(yearStr, 10) || 0;
 
   const authors: string[] = [];
   while (true) {

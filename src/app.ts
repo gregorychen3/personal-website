@@ -18,9 +18,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/", testController);
 app.use("/api/songs", songsController);
 
-// the "catchall" handler: for any request that doesn't match one above, send
-// back React's index.html file.
-app.get("/{*splat}", (req, res) => {
+// the "catchall" handler: for any non-API request that doesn't match one
+// above, send back React's index.html file. Unmatched /api paths fall through
+// to the 404 handler so clients get a real error instead of the SPA shell.
+app.get("/{*splat}", (req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    return next();
+  }
   const file = path.join(__dirname + "/../ui/dist/index.html");
   res.sendFile(file);
 });
