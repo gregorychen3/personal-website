@@ -20,7 +20,7 @@ app.use("/api/songs", songsController);
 
 // the "catchall" handler: for any request that doesn't match one above, send
 // back React's index.html file.
-app.get("*", (req, res) => {
+app.get("/{*splat}", (req, res) => {
   const file = path.join(__dirname + "/../ui/dist/index.html");
   res.sendFile(file);
 });
