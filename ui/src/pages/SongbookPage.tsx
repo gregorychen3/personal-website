@@ -57,8 +57,8 @@ export function SongbookPage() {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid size={12}>
+    <Grid container spacing={2}>
+      <Grid size={12} sx={{ mb: 1 }}>
         <TextField
           label="Search songs"
           variant="filled"
@@ -84,7 +84,10 @@ const SongCard = ({ song }: { song: Song }) => {
     );
 
   return (
-    <Card onClick={handleClick}>
+    <Card
+      onClick={handleClick}
+      sx={{ "&:hover": { borderColor: "primary.main" } }}
+    >
       <CardActionArea>
         <CardContent>
           <Typography variant="body2">{song.name}</Typography>

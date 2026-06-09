@@ -41,7 +41,7 @@ const projects: Project[] = [
 
 export function ProjectsPage() {
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={4}>
       {projects.map((p) => (
         <Grid
           sx={{ width: "100%" }}

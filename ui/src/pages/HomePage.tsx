@@ -27,12 +27,10 @@ const socialLinks = [
 
 export function HomePage() {
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={4}>
       <Grid size={12}>
         <Typography variant="h4">Gregory Chen</Typography>
-      </Grid>
-      <Grid size={12}>
-        <Typography variant="body2">
+        <Typography variant="body2" sx={{ mt: 1 }}>
           Jazz pianist and software engineer based in New York City, Boston, and
           San Francisco.
         </Typography>
@@ -63,7 +61,6 @@ export function HomePage() {
           ))}
         </Stack>
       </Grid>
-      <Grid size={12}></Grid>
     </Grid>
   );
 }

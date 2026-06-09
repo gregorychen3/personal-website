@@ -8,7 +8,7 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 
 export function ListenPage() {
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={4}>
       <Grid size={12}>
         <Typography variant="h4">Albums</Typography>
         <Divider />
@@ -17,7 +17,6 @@ export function ListenPage() {
         <Typography variant="h5">Sessions, Vol. 1</Typography>
       </Grid>
       <Grid
-        sx={{ mt: -2 }}
         size={{
           xs: 12,
           sm: 6,
@@ -26,12 +25,11 @@ export function ListenPage() {
         <Box
           component="img"
           src={sessionsVol1Img}
-          alt="alt"
-          sx={{ width: "100%" }}
+          alt="Sessions, Vol. 1 album cover"
+          sx={{ width: "100%", borderRadius: 1 }}
         />
       </Grid>
       <Grid
-        sx={{ mt: -2 }}
         size={{
           xs: 12,
           sm: 6,

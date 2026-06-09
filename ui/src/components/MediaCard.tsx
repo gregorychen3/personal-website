@@ -4,8 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-const Card = styled(MuiCard)(() => ({
+const Card = styled(MuiCard)(({ theme }) => ({
   height: "100%",
+  "&:hover": {
+    borderColor: theme.palette.primary.main,
+    transform: "translateY(-4px)",
+  },
 }));
 
 interface MediaCardProps {
