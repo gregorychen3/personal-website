@@ -8,7 +8,10 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { contactHref, NavLink, NavSection, navSections } from "../navConfig";
 
-const sxButton = { color: "text.disabled" };
+const sxButton = {
+  color: "text.secondary",
+  "&:hover": { color: "text.primary", backgroundColor: "action.hover" },
+};
 
 const LogoButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,

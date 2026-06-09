@@ -40,14 +40,22 @@ export function SideNav() {
   );
 }
 
-const sxItem = { color: "text.disabled", justifyContent: "flex-start" };
+const sxItem = {
+  color: "text.secondary",
+  justifyContent: "flex-start",
+  "&:hover": { color: "text.primary", backgroundColor: "action.hover" },
+};
 const sxIndentedItem = { ...sxItem, pl: 3, pr: 3 };
-const activeColor = "rgba(0, 157, 219, 0.20)";
+const sxActive = {
+  color: "primary.main",
+  fontWeight: 600,
+  backgroundColor: "rgba(60, 185, 240, 0.12)",
+  "&:hover": { color: "primary.main", backgroundColor: "rgba(60, 185, 240, 0.18)" },
+};
 
 function HeaderItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
-  const sx =
-    pathname === to ? { ...sxItem, backgroundColor: activeColor } : sxItem;
+  const sx = pathname === to ? { ...sxItem, ...sxActive } : sxItem;
 
   return (
     <Button component={Link} to={to} sx={sx}>
@@ -58,10 +66,7 @@ function HeaderItem({ to, label }: { to: string; label: string }) {
 
 function NavItem({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
-  const sx =
-    pathname === to
-      ? { ...sxIndentedItem, backgroundColor: activeColor }
-      : sxIndentedItem;
+  const sx = pathname === to ? { ...sxIndentedItem, ...sxActive } : sxIndentedItem;
 
   return (
     <Button component={Link} to={to} sx={sx}>
