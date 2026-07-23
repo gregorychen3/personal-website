@@ -14,6 +14,13 @@ interface SongMetadata {
   authors: string[];
 }
 
+// The shape actually persisted in each song's metadata.json (name is derived
+// from the directory name, not stored on disk).
+interface SongFileMetadata {
+  year: number;
+  authors: string[];
+}
+
 /*
  * 1. Ensures each songbook tune directory has a metadata.json
  * 2. Creates a JSON object containing all song metadatas
@@ -30,9 +37,16 @@ const main = () => {
 
   const songIdx: { [k: string]: SongMetadata } = songNames.reduce(
     (acc, cur) => {
-      const { year, authors } = JSON.parse(
-        fs.readFileSync(`${songsDir}/${cur}/${mdFileName}`, "utf8")
-      );
+      const mdPath = `${songsDir}/${cur}/${mdFileName}`;
+      let year: number;
+      let authors: string[];
+      try {
+        ({ year, authors } = JSON.parse(
+          fs.readFileSync(mdPath, "utf8")
+        ) as SongFileMetadata);
+      } catch (err) {
+        throw new Error(`Failed to parse metadata for "${cur}" (${mdPath}): ${err}`);
+      }
       return {
         ...acc,
         [cur]: { name: cur, year, authors },
@@ -79,12 +93,12 @@ const ensureMetadata = (song: string) => {
   }
 
   const mdFilePath = `${songsDir}/${song}/${mdFileName}`;
-  const md = { authors, year };
+  const md: SongFileMetadata = { authors, year };
   fs.writeFileSync(mdFilePath, JSON.stringify(md));
 };
 
 const publishSong = (song: string) => {
-  fs.mkdirSync(`${websiteSongsDir}/${song}`);
+  fs.mkdirSync(`${websiteSongsDir}/${song}`, { recursive: true });
 
   const songFiles = fs.readdirSync(`${songsDir}/${song}`);
   songFiles
