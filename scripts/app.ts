@@ -1,7 +1,7 @@
 import fs from "fs";
 const prompt = require("prompt-sync")({ sigint: true });
 
-const songsDir = `/Users/gregorychen3/My\ Drive/music_docs/sheetmusic`;
+const songsDir = "/Users/gregorychen3/My Drive/music_docs/sheetmusic";
 const mdFileName = "metadata.json";
 const songIdxFileName = "songIndex.json";
 const songIdxFilePath = `${songsDir}/${songIdxFileName}`;
@@ -35,25 +35,20 @@ const main = () => {
 
   songNames.forEach(ensureMetadata);
 
-  const songIdx: { [k: string]: SongMetadata } = songNames.reduce(
-    (acc, cur) => {
-      const mdPath = `${songsDir}/${cur}/${mdFileName}`;
-      let year: number;
-      let authors: string[];
-      try {
-        ({ year, authors } = JSON.parse(
-          fs.readFileSync(mdPath, "utf8")
-        ) as SongFileMetadata);
-      } catch (err) {
-        throw new Error(`Failed to parse metadata for "${cur}" (${mdPath}): ${err}`);
-      }
-      return {
-        ...acc,
-        [cur]: { name: cur, year, authors },
-      };
-    },
-    {}
-  );
+  const songIdx: { [k: string]: SongMetadata } = {};
+  for (const song of songNames) {
+    const mdPath = `${songsDir}/${song}/${mdFileName}`;
+    let year: number;
+    let authors: string[];
+    try {
+      ({ year, authors } = JSON.parse(
+        fs.readFileSync(mdPath, "utf8")
+      ) as SongFileMetadata);
+    } catch (err) {
+      throw new Error(`Failed to parse metadata for "${song}" (${mdPath}): ${err}`);
+    }
+    songIdx[song] = { name: song, year, authors };
+  }
 
   fs.writeFileSync(songIdxFilePath, JSON.stringify(songIdx));
 
