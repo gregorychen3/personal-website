@@ -97,7 +97,7 @@ const publishSong = (song: string) => {
 
   const songFiles = fs.readdirSync(`${songsDir}/${song}`);
   songFiles
-    .filter((file) => file.endsWith(".pdf"))
+    .filter((file) => file.endsWith(".pdf") && !file.includes("hanges"))
     .forEach((file) =>
       fs.copyFileSync(
         `${songsDir}/${song}/${file}`,
