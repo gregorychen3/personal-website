@@ -22,7 +22,7 @@ const matches = (song: Song, query: string) => {
   );
 };
 
-export function SongbookPage() {
+export function SheetmusicPage() {
   const state = useAsync(apiClient.fetchSongs);
   const [query, setQuery] = useState("");
 
@@ -35,8 +35,7 @@ export function SongbookPage() {
   return (
     <Box>
       <PageHeading
-        title="songbook"
-        subtitle="Charts I keep on hand. Select a title to open the sheet music."
+        title="vintage sheetmusic"
       />
 
       <TextField
@@ -54,7 +53,7 @@ export function SongbookPage() {
 
       {state.status === "error" && (
         <StatusMessage>
-          The songbook could not be loaded just now. Please try again later.
+          The sheetmusic collection could not be loaded just now. Please try again later.
         </StatusMessage>
       )}
 

@@ -6,7 +6,7 @@ import { legacyRedirects } from "./navConfig";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
 import { SchedulePage } from "./pages/SchedulePage";
-import { SongbookPage } from "./pages/SongbookPage";
+import { SheetmusicPage } from "./pages/SheetmusicPage";
 
 export function App() {
   return (
@@ -30,7 +30,7 @@ export function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/listen" element={<ListenPage />} />
               <Route path="/schedule" element={<SchedulePage />} />
-              <Route path="/songbook" element={<SongbookPage />} />
+              <Route path="/sheetmusic" element={<SheetmusicPage />} />
               {legacyRedirects.map(({ from, to }) => (
                 <Route
                   key={from}

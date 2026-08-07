@@ -14,7 +14,7 @@ export const navLinks: NavLink[] = [
   { label: "home", to: "/" },
   { label: "listen", to: "/listen" },
   { label: "schedule", to: "/schedule" },
-  { label: "songbook", to: "/songbook" },
+  { label: "sheetmusic", to: "/sheetmusic" },
   { label: "resume", to: musicResume, external: true },
 ];
 
@@ -26,7 +26,7 @@ export const navLinks: NavLink[] = [
 export const legacyRedirects: { from: string; to: string }[] = [
   { from: "/music/listen", to: "/listen" },
   { from: "/music/schedule", to: "/schedule" },
-  { from: "/music/songbook", to: "/songbook" },
+  { from: "/music/sheetmusic", to: "/sheetmusic" },
   { from: "/music", to: "/listen" },
   { from: "/software/projects", to: "/" },
 ];
