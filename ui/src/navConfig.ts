@@ -1,5 +1,4 @@
 import musicResume from "./assets/music_resume.pdf";
-import softwareResume from "./assets/software_resume.pdf";
 
 export interface NavLink {
   label: string;
@@ -27,19 +26,6 @@ export const navSections: NavSection[] = [
       { label: "schedule", to: "/music/schedule" },
       { label: "songbook", to: "/music/songbook" },
       { label: "resume", to: musicResume, external: true },
-    ],
-  },
-  {
-    label: "software",
-    to: "/software/projects",
-    links: [
-      { label: "projects", to: "/software/projects" },
-      {
-        label: "linkedin",
-        to: "https://www.linkedin.com/in/gregorychen3",
-        external: true,
-      },
-      { label: "resume", to: softwareResume, external: true },
     ],
   },
 ];
