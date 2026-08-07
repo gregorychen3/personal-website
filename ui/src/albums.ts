@@ -3,6 +3,14 @@ import sessionsVol1Img from "./assets/sessions-vol-1-album-cover.png";
 
 export type ServiceKind = "apple" | "youtube" | "spotify";
 
+const serviceLabels: Record<ServiceKind, string> = {
+  apple: "apple music",
+  youtube: "youtube",
+  spotify: "spotify",
+};
+
+export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
+
 export interface ServiceLink {
   kind: ServiceKind;
   to: string;

@@ -1,7 +1,9 @@
 import { useTheme } from "@mui/material";
 
-export function AppleMusicIcon() {
-  const disabledColor = useTheme().palette.text.disabled;
+/** See `ServiceIcon` — badges share one fill treatment across the site. */
+export function AppleMusicIcon({ color }: { color?: string } = {}) {
+  const defaultColor = useTheme().palette.text.primary;
+  const fillColor = color ?? defaultColor;
 
   return (
     <svg
@@ -47,7 +49,7 @@ export function AppleMusicIcon() {
           style={{
             fillRule: "evenodd",
             clipRule: "evenodd",
-            fill: disabledColor,
+            fill: fillColor,
           }}
         />
       </g>

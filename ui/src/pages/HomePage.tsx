@@ -1,21 +1,12 @@
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  SvgIcon,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { albums } from "../albums";
+import { albums, serviceLabel, ServiceKind } from "../albums";
 import { apiClient } from "../apiClient";
 import avatarImg from "../assets/avatar.png";
 import { GigList } from "../components/GigList";
 import { SectionLabel } from "../components/PageHeading";
+import { ServiceIcon } from "../components/ServiceIcon";
 import { SocialLink } from "../components/SocialLink";
-import { SpotifyIcon } from "../components/SpotifyIcon";
 import { StatusMessage } from "../components/StatusMessage";
 import { parseGigs } from "../gigs";
 import { useAsync } from "../useAsync";
@@ -87,26 +78,26 @@ export function HomePage() {
   );
 }
 
+/**
+ * Profile links, drawn from the same badge set the album links use and kept in
+ * the same order the listen page shows them.
+ */
+const socialLinks: { kind: ServiceKind; to: string }[] = [
+  {
+    kind: "apple",
+    to: "https://music.apple.com/au/artist/gregory-chen/1778527626",
+  },
+  {
+    kind: "youtube",
+    to: "https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA",
+  },
+  {
+    kind: "spotify",
+    to: "https://open.spotify.com/artist/6kfl8Cg6QSQZUetovdNLyj",
+  },
+];
+
 function Hero() {
-  const iconColor = useTheme().palette.text.primary;
-
-  const socialLinks = [
-    {
-      icon: <YouTubeIcon sx={{ color: "text.primary" }} />,
-      text: "youtube",
-      to: "https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA",
-    },
-    {
-      icon: (
-        <SvgIcon>
-          <SpotifyIcon color={iconColor} />
-        </SvgIcon>
-      ),
-      text: "spotify",
-      to: "https://open.spotify.com/artist/6kfl8Cg6QSQZUetovdNLyj",
-    },
-  ];
-
   return (
     <Grid container spacing={4} sx={{ mb: 8, alignItems: "center" }}>
       <Grid size={{ xs: 12, sm: 7 }}>
@@ -121,8 +112,13 @@ function Hero() {
           direction="row"
           sx={{ mt: 2, ml: -1, flexWrap: "wrap", alignItems: "center" }}
         >
-          {socialLinks.map((props) => (
-            <SocialLink {...props} key={props.text} />
+          {socialLinks.map((link) => (
+            <SocialLink
+              key={link.kind}
+              icon={<ServiceIcon kind={link.kind} />}
+              text={serviceLabel(link.kind)}
+              to={link.to}
+            />
           ))}
         </Stack>
       </Grid>
