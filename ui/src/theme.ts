@@ -1,50 +1,107 @@
 import { createTheme } from "@mui/material";
 
-// Brand font (Gill Sans) leads, but it only ships on Apple devices — so we
-// follow it with a humanist system stack so Windows/Android visitors still get
-// a clean, intentional typeface rather than default sans-serif.
-const fontFamily = [
+/**
+ * The palette is sampled from the Serenade In Blue cover art: the flat cyan
+ * field is 58% of the image, with black line work and near-white lettering.
+ * Using the record's own ink keeps the site and the release visually of a
+ * piece. Cyan on the near-black canvas measures 7.7:1, so it carries body
+ * text and not just decoration.
+ */
+const CYAN = "#30B0C8";
+const INK = "#0B0B0B";
+const CREAM = "#F0EBE0";
+
+const alpha = (hex: string, a: number) => {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+};
+
+// Headlines are set in a heavy grotesque, lowercase and tightly tracked, the
+// way the cover sets "serenade in blue". Chasing a true condensed face across
+// platforms is unreliable — weight plus negative tracking gets the same
+// density everywhere.
+const displayFamily = [
+  '"Helvetica Neue"',
+  "Helvetica",
+  "Inter",
+  '"Segoe UI"',
+  "system-ui",
+  "Arial",
+  "sans-serif",
+].join(",");
+
+// Gill Sans leads the body stack: a humanist face with genuine mid-century
+// credentials that sits comfortably beside the display grotesque. It only
+// ships on Apple devices, so a humanist system stack follows it.
+const bodyFamily = [
   '"Gill Sans"',
   '"Gill Sans MT"',
   "Seravek",
   '"Segoe UI"',
   "system-ui",
   "-apple-system",
-  "BlinkMacSystemFont",
   "Roboto",
   "sans-serif",
 ].join(",");
 
+const display = {
+  fontFamily: displayFamily,
+  fontWeight: 800,
+  textTransform: "lowercase" as const,
+};
+
 let theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#3CB9F0" }, // brightened from #009DDB for AA contrast on dark
-    secondary: { main: "#F09000" },
-    error: { main: "#EC1600" },
+    primary: { main: CYAN, contrastText: INK },
+    secondary: { main: "#E8B33C" },
+    error: { main: "#EC5B45" },
     warning: { main: "#EBA300" },
-    success: { main: "#00C78E" },
-    // Soften pure black; layer surfaces with a subtle elevation step.
-    background: { default: "#0A0A0A", paper: "#161616" },
-    divider: "rgba(255, 255, 255, 0.10)",
+    success: { main: "#5BC28E" },
+    background: { default: INK, paper: "#151515" },
+    divider: alpha(CREAM, 0.14),
     text: {
-      primary: "rgba(255, 255, 255, 0.92)",
-      secondary: "rgba(255, 255, 255, 0.62)",
-      disabled: "rgba(255, 255, 255, 0.38)",
+      primary: CREAM,
+      secondary: alpha(CREAM, 0.66),
+      disabled: alpha(CREAM, 0.4),
     },
   },
-  shape: { borderRadius: 10 },
+  // Mid-century print has no rounded corners. Everything is a hard edge.
+  shape: { borderRadius: 0 },
   typography: {
-    fontFamily,
+    fontFamily: bodyFamily,
     fontSize: 16,
-    h1: { fontWeight: 600, fontSize: "3rem", letterSpacing: "-0.02em", lineHeight: 1.1 },
-    h2: { fontWeight: 600, fontSize: "2.25rem", letterSpacing: "-0.02em", lineHeight: 1.15 },
-    h3: { fontWeight: 600, fontSize: "1.875rem", letterSpacing: "-0.015em", lineHeight: 1.2 },
-    h4: { fontWeight: 600, fontSize: "1.5rem", letterSpacing: "-0.01em", lineHeight: 1.25 },
-    h5: { fontWeight: 500, fontSize: "1.25rem", letterSpacing: "-0.005em", lineHeight: 1.3 },
-    h6: { fontWeight: 500, fontSize: "1.0625rem", lineHeight: 1.4 },
+    h1: { ...display, fontSize: "4rem", letterSpacing: "-0.035em", lineHeight: 0.95 },
+    h2: { ...display, fontSize: "3rem", letterSpacing: "-0.03em", lineHeight: 1 },
+    h3: { ...display, fontSize: "2.25rem", letterSpacing: "-0.03em", lineHeight: 1.05 },
+    h4: { ...display, fontSize: "1.75rem", letterSpacing: "-0.025em", lineHeight: 1.1 },
+    h5: {
+      ...display,
+      fontWeight: 700,
+      fontSize: "1.3125rem",
+      letterSpacing: "-0.02em",
+      lineHeight: 1.2,
+    },
+    h6: {
+      ...display,
+      fontWeight: 700,
+      fontSize: "1.0625rem",
+      letterSpacing: "-0.01em",
+      lineHeight: 1.3,
+    },
     body1: { lineHeight: 1.6 },
-    body2: { lineHeight: 1.6, color: "rgba(255, 255, 255, 0.62)" },
-    button: { textTransform: "none", fontWeight: 500 },
+    body2: { lineHeight: 1.6 },
+    // The wide-tracked uppercase label is the other half of the idiom: it
+    // marks sections without competing with the display type.
+    overline: {
+      fontFamily: displayFamily,
+      fontWeight: 700,
+      fontSize: "0.6875rem",
+      letterSpacing: "0.18em",
+      lineHeight: 1,
+      textTransform: "uppercase",
+    },
+    button: { textTransform: "none", fontWeight: 500, letterSpacing: "0.01em" },
   },
 });
 
@@ -57,19 +114,20 @@ theme = createTheme(theme, {
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
         },
+        "::selection": { backgroundColor: CYAN, color: INK },
         "*:focus-visible": {
-          outline: `2px solid ${theme.palette.primary.main}`,
+          outline: `2px solid ${CYAN}`,
           outlineOffset: 2,
         },
       },
     },
     MuiButton: {
-      defaultProps: { disableElevation: true },
+      defaultProps: { disableElevation: true, disableRipple: true },
       styleOverrides: {
         root: {
-          borderRadius: 8,
+          borderRadius: 0,
           transition: theme.transitions.create(
-            ["background-color", "color", "box-shadow"],
+            ["background-color", "color", "border-color"],
             { duration: theme.transitions.duration.shorter },
           ),
         },
@@ -79,9 +137,10 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           backgroundImage: "none",
+          backgroundColor: "transparent",
           border: `1px solid ${theme.palette.divider}`,
           transition: theme.transitions.create(
-            ["border-color", "background-color", "transform"],
+            ["border-color", "background-color"],
             { duration: theme.transitions.duration.shorter },
           ),
         },
@@ -96,8 +155,21 @@ theme = createTheme(theme, {
       },
     },
     MuiDivider: {
+      styleOverrides: { root: { borderColor: theme.palette.divider } },
+    },
+    MuiLinearProgress: {
       styleOverrides: {
-        root: { borderColor: theme.palette.divider },
+        root: { height: 2, backgroundColor: "transparent" },
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          backgroundColor: alpha(CREAM, 0.05),
+          "&:hover": { backgroundColor: alpha(CREAM, 0.08) },
+          "&.Mui-focused": { backgroundColor: alpha(CREAM, 0.08) },
+        },
       },
     },
   },

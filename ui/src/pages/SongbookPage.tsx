@@ -1,82 +1,96 @@
-import { CardActionArea, Grid } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { Box, ButtonBase, Divider, Stack, TextField, Typography } from "@mui/material";
+import { useMemo, useState } from "react";
 import { apiClient, Song } from "../apiClient";
-import { setShowLoading } from "../features/ui/uiSlice";
+import { PageHeading } from "../components/PageHeading";
+import { StatusMessage } from "../components/StatusMessage";
+import { useAsync } from "../useAsync";
 
-export function SongbookPage() {
-  const d = useDispatch();
+/** Stable reference so the filter memo does not rerun on every render. */
+const NO_SONGS: Song[] = [];
 
-  const [songs, setSongs] = useState<Song[]>([]);
-  const [searchText, setSearchText] = useState("");
+const matches = (song: Song, query: string) => {
+  if (!query) {
+    return true;
+  }
 
-  const handleSearchChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchText(e.target.value);
-
-  useEffect(() => {
-    const getSongs = async () => {
-      d(setShowLoading(true));
-
-      const songs = await apiClient.fetchSongs();
-      setSongs(songs);
-
-      d(setShowLoading(false));
-    };
-
-    getSongs();
-
-    return () => {
-      d(setShowLoading(false));
-    };
-  }, [d]);
-
-  const filterFn = (s: Song) => {
-    if (!searchText) {
-      return true;
-    }
-
-    const want = searchText.toLowerCase();
-
-    if (s.name.toLowerCase().includes(want)) {
-      return true;
-    }
-
-    if (s.year?.toString().includes(want)) {
-      return true;
-    }
-
-    if (s.authors.find((author) => author.toLowerCase().includes(want))) {
-      return true;
-    }
-
-    return false;
-  };
+  const want = query.toLowerCase();
 
   return (
-    <Grid container spacing={2}>
-      <Grid size={12} sx={{ mb: 1 }}>
-        <TextField
-          label="Search songs"
-          variant="filled"
-          fullWidth
-          onChange={handleSearchChanged}
-        />
-      </Grid>
-      {songs.filter(filterFn).map((s) => (
-        <Grid size={12} key={s.id}>
-          <SongCard song={s} />
-        </Grid>
-      ))}
-    </Grid>
+    song.name.toLowerCase().includes(want) ||
+    !!song.year?.toString().includes(want) ||
+    song.authors.some((author) => author.toLowerCase().includes(want))
+  );
+};
+
+export function SongbookPage() {
+  const state = useAsync(apiClient.fetchSongs);
+  const [query, setQuery] = useState("");
+
+  const songs = state.status === "ready" ? state.data : NO_SONGS;
+  const visible = useMemo(
+    () => songs.filter((song) => matches(song, query)),
+    [songs, query],
+  );
+
+  return (
+    <Box>
+      <PageHeading
+        title="songbook"
+        subtitle="Charts I keep on hand. Select a title to open the sheet music."
+      />
+
+      <TextField
+        placeholder="Search by title, composer, or year"
+        variant="filled"
+        hiddenLabel
+        fullWidth
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        disabled={state.status !== "ready"}
+        slotProps={{ htmlInput: { "aria-label": "Search songs" } }}
+      />
+
+      {state.status === "loading" && <StatusMessage>loading…</StatusMessage>}
+
+      {state.status === "error" && (
+        <StatusMessage>
+          The songbook could not be loaded just now. Please try again later.
+        </StatusMessage>
+      )}
+
+      {state.status === "ready" && (
+        <>
+          <Typography
+            variant="overline"
+            sx={{ display: "block", color: "text.disabled", mt: 3, mb: 1 }}
+          >
+            {visible.length} {visible.length === 1 ? "tune" : "tunes"}
+          </Typography>
+
+          {visible.length === 0 ? (
+            <StatusMessage>
+              {songs.length === 0
+                ? "No charts here yet."
+                : `Nothing matching “${query}”.`}
+            </StatusMessage>
+          ) : (
+            <Box>
+              {visible.map((song, i) => (
+                <Box key={song.id}>
+                  {i > 0 && <Divider />}
+                  <SongRow song={song} />
+                </Box>
+              ))}
+            </Box>
+          )}
+        </>
+      )}
+    </Box>
   );
 }
 
-const SongCard = ({ song }: { song: Song }) => {
-  const handleClick = () =>
+function SongRow({ song }: { song: Song }) {
+  const open = () =>
     window.open(
       `https://drive.google.com/open?id=${song.id}`,
       "_blank",
@@ -84,25 +98,40 @@ const SongCard = ({ song }: { song: Song }) => {
     );
 
   return (
-    <Card
-      onClick={handleClick}
-      sx={{ "&:hover": { borderColor: "primary.main" } }}
+    <ButtonBase
+      onClick={open}
+      sx={{
+        display: "block",
+        width: "100%",
+        textAlign: "left",
+        px: 1,
+        py: 1.5,
+        "&:hover": { backgroundColor: "action.hover" },
+        "&:hover .song-title": { color: "primary.main" },
+      }}
     >
-      <CardActionArea>
-        <CardContent>
-          <Typography variant="body2">{song.name}</Typography>
-          <Typography
-            variant="body2"
-            component="div"
-            sx={{
-              color: "text.disabled",
-            }}
-          >
-            <div>{song.year}</div>
-            <div>{song.authors.join(", ")}</div>
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        sx={{
+          gap: { xs: 0, sm: 2 },
+          alignItems: { xs: "flex-start", sm: "baseline" },
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="body1" className="song-title">
+          {song.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.disabled",
+            textAlign: { xs: "left", sm: "right" },
+            flexShrink: 0,
+          }}
+        >
+          {[song.authors.join(", "), song.year].filter(Boolean).join(" · ")}
+        </Typography>
+      </Stack>
+    </ButtonBase>
   );
-};
+}

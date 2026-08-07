@@ -1,89 +1,78 @@
-import { Grid } from "@mui/material";
-import Button from "@mui/material/Button";
-import { Fragment } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { contactHref, navSections } from "../navConfig";
-
-export function SideNav() {
-  return (
-    <Grid container spacing={0.5}>
-      <Grid size={12}>
-        <HeaderItem to="/" label="home" />
-      </Grid>
-      {navSections.map((section) => (
-        <Fragment key={section.label}>
-          <Grid size={12}>
-            <HeaderItem to={section.to} label={section.label} />
-          </Grid>
-          {section.links.map((link) => (
-            <Grid size={12} key={`${section.label}/${link.label}`}>
-              {link.external ? (
-                <AnchorItem href={link.to} label={link.label} />
-              ) : (
-                <NavItem to={link.to} label={link.label} />
-              )}
-            </Grid>
-          ))}
-        </Fragment>
-      ))}
-      <Grid size={12}>
-        <Button
-          href={contactHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={sxItem}
-        >
-          contact
-        </Button>
-      </Grid>
-    </Grid>
-  );
-}
+import { contactHref, navLinks } from "../navConfig";
 
 const sxItem = {
+  display: "block",
+  width: "100%",
+  px: 1.5,
+  py: 0.75,
   color: "text.secondary",
-  justifyContent: "flex-start",
-  "&:hover": { color: "text.primary", backgroundColor: "action.hover" },
+  textAlign: "left",
+  borderLeft: "2px solid transparent",
+  "&:hover": {
+    color: "text.primary",
+    backgroundColor: "action.hover",
+    borderLeftColor: "divider",
+  },
 };
-const sxIndentedItem = { ...sxItem, pl: 3, pr: 3 };
+
 const sxActive = {
   color: "primary.main",
-  fontWeight: 600,
-  backgroundColor: "rgba(60, 185, 240, 0.12)",
-  "&:hover": { color: "primary.main", backgroundColor: "rgba(60, 185, 240, 0.18)" },
+  borderLeftColor: "primary.main",
+  "&:hover": { color: "primary.main", borderLeftColor: "primary.main" },
 };
 
-function HeaderItem({ to, label }: { to: string; label: string }) {
+export function SideNav() {
   const { pathname } = useLocation();
-  const sx = pathname === to ? { ...sxItem, ...sxActive } : sxItem;
 
   return (
-    <Button component={Link} to={to} sx={sx}>
-      {label}
-    </Button>
-  );
-}
+    <Box component="nav" sx={{ position: "sticky", top: 48 }}>
+      <Typography
+        component={Link}
+        to="/"
+        variant="h5"
+        sx={{
+          display: "block",
+          mb: 3,
+          px: 1.5,
+          color: "text.primary",
+          textDecoration: "none",
+          "&:hover": { color: "primary.main" },
+        }}
+      >
+        gregory
+        <Box component="span" sx={{ display: "block" }}>
+          chen
+        </Box>
+      </Typography>
 
-function NavItem({ to, label }: { to: string; label: string }) {
-  const { pathname } = useLocation();
-  const sx = pathname === to ? { ...sxIndentedItem, ...sxActive } : sxIndentedItem;
+      {navLinks.map((link) =>
+        link.external ? (
+          <Button
+            key={link.label}
+            href={link.to}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={sxItem}
+          >
+            {link.label}
+          </Button>
+        ) : (
+          <Button
+            key={link.label}
+            component={Link}
+            to={link.to}
+            sx={pathname === link.to ? { ...sxItem, ...sxActive } : sxItem}
+          >
+            {link.label}
+          </Button>
+        ),
+      )}
 
-  return (
-    <Button component={Link} to={to} sx={sx}>
-      {label}
-    </Button>
-  );
-}
-
-function AnchorItem({ label, href }: { label: string; href: string }) {
-  return (
-    <Button
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      sx={sxIndentedItem}
-    >
-      {label}
-    </Button>
+      <Button href={contactHref} sx={sxItem}>
+        contact
+      </Button>
+    </Box>
   );
 }

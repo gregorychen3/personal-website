@@ -1,204 +1,99 @@
-import { Box, Divider, Grid, Stack, SvgIcon, Typography } from "@mui/material";
-import serenadeInBlueImg from "../assets/serenade-in-blue-album-cover.webp";
-import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
-import { AppleMusicIcon } from "../components/AppleMusicIcon";
-import { SocialLink } from "../components/SocialLink";
-import { SpotifyIcon } from "../components/SpotifyIcon";
-import { YoutubeMusicIcon } from "../components/YoutubeMusicIcon";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Album, albums } from "../albums";
+import { PageHeading, SectionLabel } from "../components/PageHeading";
+import { ServiceLinks } from "../components/ServiceLinks";
 import { YoutubeVideo } from "../components/YoutubeVideo";
+
+const videos = [
+  {
+    title: "Aaron Johnson Quintet 07-03-2022",
+    src: "https://www.youtube.com/embed/bkfCbIMIqA4?start=88",
+  },
+  {
+    title: "Alex Hoffman Quintet - Smalls 10/31/2021 Set 1",
+    src: "https://www.youtube.com/embed/D9ulpdTD6hY",
+  },
+  {
+    title: "Alex Hoffman Quintet - Smalls 10/31/2021 Set 2",
+    src: "https://www.youtube.com/embed/wkXdCbxZD2w",
+  },
+  {
+    title: "I Concentrate On You - Alex Hoffman Quintet 04-29-2018",
+    src: "https://www.youtube.com/embed/9u3LmdqAwDA",
+  },
+  {
+    title: "Too Late Now - Alex Hoffman Quintet 04-29-2018",
+    src: "https://www.youtube.com/embed/56r7TQrSnPo",
+  },
+];
 
 export function ListenPage() {
   return (
-    <Grid container spacing={4}>
-      <Grid size={12}>
-        <Typography variant="h4">Albums</Typography>
-        <Divider />
+    <Box>
+      <PageHeading title="listen" />
+
+      <SectionLabel>albums</SectionLabel>
+      {albums.map((album) => (
+        <AlbumBlock key={album.title} album={album} />
+      ))}
+
+      <Box sx={{ mt: 8 }}>
+        <SectionLabel>videos</SectionLabel>
+        <Grid container spacing={3}>
+          {videos.map((video) => (
+            <Grid key={video.src} size={{ xs: 12, sm: 6 }}>
+              <YoutubeVideo title={video.title} src={video.src} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
+  );
+}
+
+function AlbumBlock({ album }: { album: Album }) {
+  return (
+    <Grid container spacing={4} sx={{ mb: 7 }}>
+      <Grid size={{ xs: 12, sm: 6 }}>
+        <Box
+          component="img"
+          src={album.cover}
+          alt={`${album.title} album cover`}
+          sx={{ width: "100%", display: "block" }}
+        />
       </Grid>
-      <Grid size={12}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <Stack
           direction="row"
-          sx={{ alignItems: "baseline", gap: 1.5, flexWrap: "wrap" }}
+          sx={{ alignItems: "baseline", gap: 1.5, flexWrap: "wrap", mb: 2 }}
         >
-          <Typography variant="h5">Serenade In Blue</Typography>
-          <Typography variant="body2" sx={{ color: "primary.main" }}>
-            coming soon
-          </Typography>
+          <Typography variant="h4">{album.title}</Typography>
+          {album.upcoming && (
+            <Typography variant="overline" sx={{ color: "primary.main" }}>
+              coming soon
+            </Typography>
+          )}
         </Stack>
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <Box
-          component="img"
-          src={serenadeInBlueImg}
-          alt="Serenade In Blue album cover"
-          sx={{ width: "100%", borderRadius: 1 }}
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <Typography variant="body2">
-          Aaron Johnson, clarinet and tenor saxophone
-        </Typography>
-        <Typography variant="body2">Gregory Chen, piano</Typography>
-        <Typography variant="body2">Ilya Lushtak, guitar and vocal</Typography>
-        <Typography variant="body2">Daniel Duke, bass</Typography>
-        <Typography variant="body2">Masahiro Sakuma, drums</Typography>
-        <Typography variant="body2">Graham Marsh, cover art</Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 4,
-          }}
-        >
-          Boptimist Records
-        </Typography>
-        <Typography variant="body2">Recorded 08/31/2025</Typography>
-        <Typography variant="body2">
-          Pinch Recording, Long Island City, Queens
-        </Typography>
-        <Typography variant="body2">
-          Engineered, mixed, and mastered by Grady Bajorek
-        </Typography>
-      </Grid>
-      <Grid size={12}>
-        <Typography variant="h5">Sessions, Vol. 1</Typography>
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <Box
-          component="img"
-          src={sessionsVol1Img}
-          alt="Sessions, Vol. 1 album cover"
-          sx={{ width: "100%", borderRadius: 1 }}
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <Typography variant="body2">Gregory Chen, piano</Typography>
-        <Typography variant="body2">Kevin Hsieh, bass</Typography>
-        <Typography variant="body2">Benjamin Zweig, drums</Typography>
-        <Typography variant="body2">Micah Fong, album art</Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 4,
-          }}
-        >
-          HighHorse Records
-        </Typography>
-        <Typography variant="body2">Recorded 08/31/2024</Typography>
-        <Box
-          sx={{
-            mt: 4,
-          }}
-        >
-          <SocialLink
-            icon={
-              <SvgIcon>
-                <AppleMusicIcon />
-              </SvgIcon>
-            }
-            text="apple music"
-            to="https://music.apple.com/us/album/sessions-vol-1/1794181040"
-          />
+
+        {album.personnel.map((line) => (
+          <Typography key={line} variant="body2" sx={{ color: "text.secondary" }}>
+            {line}
+          </Typography>
+        ))}
+
+        <Box sx={{ mt: 3 }}>
+          {album.credits.map((line) => (
+            <Typography key={line} variant="body2" sx={{ color: "text.disabled" }}>
+              {line}
+            </Typography>
+          ))}
         </Box>
-        <Box>
-          <SocialLink
-            icon={
-              <SvgIcon>
-                <YoutubeMusicIcon />
-              </SvgIcon>
-            }
-            text="youtube"
-            to="https://youtu.be/iIC2dBC2ZZ8?si=eVFCnaVVO0LAq7Nh"
-          />
-        </Box>
-        <Box>
-          <SocialLink
-            icon={
-              <SvgIcon>
-                <SpotifyIcon />
-              </SvgIcon>
-            }
-            text="spotify"
-            to="https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ"
-          />
-        </Box>
-      </Grid>
-      <Grid size={12}>
-        <Typography variant="h4">Videos</Typography>
-        <Divider />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <YoutubeVideo
-          title="Aaron Johnson Quintet 07-03-2022"
-          src="https://www.youtube.com/embed/bkfCbIMIqA4?start=88"
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <YoutubeVideo
-          title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 1"
-          src="https://www.youtube.com/embed/D9ulpdTD6hY"
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <YoutubeVideo
-          title="Alex Hoffman Quintet - Smalls 10/31/2021 Set 2"
-          src="https://www.youtube.com/embed/wkXdCbxZD2w"
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <YoutubeVideo
-          title="I Concentrate On You - Alex Hoffman Quintet 04-29-2018"
-          src="https://www.youtube.com/embed/9u3LmdqAwDA"
-        />
-      </Grid>
-      <Grid
-        size={{
-          xs: 12,
-          sm: 6,
-        }}
-      >
-        <YoutubeVideo
-          title="Too Late Now - Alex Hoffman Quintet 04-29-2018"
-          src="https://www.youtube.com/embed/56r7TQrSnPo"
-        />
+
+        {album.links.length > 0 && (
+          <Box sx={{ mt: 3 }}>
+            <ServiceLinks links={album.links} />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );

@@ -1,19 +1,35 @@
-import { styled } from "@mui/material";
-
-const Iframe = styled("iframe")(() => ({ border: "unset" }));
+import { Box } from "@mui/material";
+import { apiClient } from "../apiClient";
+import { GigList } from "../components/GigList";
+import { PageHeading } from "../components/PageHeading";
+import { StatusMessage } from "../components/StatusMessage";
+import { parseGigs } from "../gigs";
+import { useAsync } from "../useAsync";
 
 export function SchedulePage() {
+  const state = useAsync(apiClient.fetchGigs);
+
   return (
-    <div className="container">
-      <Iframe
-        title="Music Schedule"
-        src="https://calendar.google.com/calendar/embed?src=toactmj2ehimlgf5b4ru2ppvh4%40group.calendar.google.com&ctz=America%2FNew_York"
-        width="100%"
-        height="600"
-        data-frameborder="0"
-        data-scrolling="no"
-        style={{ borderWidth: "0" }}
+    <Box>
+      <PageHeading
+        title="schedule"
+        subtitle="Upcoming public performances, each shown in its own local time. Dates marked tbd are not yet confirmed."
       />
-    </div>
+
+      {state.status === "loading" && <StatusMessage>loading…</StatusMessage>}
+
+      {state.status === "error" && (
+        <StatusMessage>
+          The schedule could not be loaded just now. Please try again later.
+        </StatusMessage>
+      )}
+
+      {state.status === "ready" &&
+        (state.data.length === 0 ? (
+          <StatusMessage>No dates on the calendar right now.</StatusMessage>
+        ) : (
+          <GigList gigs={parseGigs(state.data)} />
+        ))}
+    </Box>
   );
 }

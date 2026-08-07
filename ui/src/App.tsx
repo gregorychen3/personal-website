@@ -1,82 +1,50 @@
-import {
-  Box,
-  Container,
-  CssBaseline,
-  Grid,
-  styled,
-  Toolbar,
-} from "@mui/material";
-import MuiLinearProgress from "@mui/material/LinearProgress";
-import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router";
+import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
+import { Navigate, Route, Routes } from "react-router";
 import { SideNav } from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
-import { selectShowLoading } from "./features/ui/uiSlice";
+import { legacyRedirects } from "./navConfig";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SongbookPage } from "./pages/SongbookPage";
 
-const LinearProgress = styled(MuiLinearProgress, {
-  shouldForwardProp: (prop) => prop !== "show",
-})<{ show: boolean }>(({ theme, show }) => {
-  if (show) {
-    return { zIndex: theme.zIndex.appBar + 1 };
-  }
-
-  return { visibility: "hidden" };
-});
-
-const Main = styled(Box)(() => ({
-  flexGrow: 1,
-  height: "100vh",
-  overflow: "auto",
-}));
-
 export function App() {
-  const showLoading = useSelector(selectShowLoading);
-
   return (
-    <Box
-      sx={{
-        display: "flex",
-      }}
-    >
+    <>
       <CssBaseline />
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         <TopNav />
-      </Box>
-      <Main>
-        <LinearProgress show={showLoading} />
+        {/* Spacer for the fixed app bar; there is no app bar on desktop. */}
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: { xs: 4, md: 0 } }}>
-          <Grid container>
-            <Grid
-              sx={{ display: { xs: "none", md: "flex" } }}
-              size={{
-                md: 3,
-              }}
-            >
-              <Grid size={12}>
-                <SideNav />
-              </Grid>
-            </Grid>
-            <Grid
-              size={{
-                xs: 12,
-                md: 9,
-              }}
-            >
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/music/listen" element={<ListenPage />} />
-                <Route path="/music/schedule" element={<SchedulePage />} />
-                <Route path="/music/songbook" element={<SongbookPage />} />
-              </Routes>
-            </Grid>
+      </Box>
+      <Container maxWidth="lg" sx={{ py: { xs: 3, md: 6 } }}>
+        <Grid container spacing={{ xs: 0, md: 4 }}>
+          <Grid
+            sx={{ display: { xs: "none", md: "block" } }}
+            size={{ md: 3 }}
+          >
+            <SideNav />
           </Grid>
-        </Container>
-      </Main>
-    </Box>
+          <Grid size={{ xs: 12, md: 9 }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/listen" element={<ListenPage />} />
+              <Route path="/schedule" element={<SchedulePage />} />
+              <Route path="/songbook" element={<SongbookPage />} />
+              {legacyRedirects.map(({ from, to }) => (
+                <Route
+                  key={from}
+                  path={from}
+                  element={<Navigate to={to} replace />}
+                />
+              ))}
+              {/* Anything unrecognised lands on the home page rather than a
+                  blank content column. */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 }

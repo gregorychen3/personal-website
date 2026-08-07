@@ -1,95 +1,121 @@
-import { Box, Button, styled } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MuiToolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import React from "react";
-import { useNavigate } from "react-router";
-import { contactHref, NavLink, NavSection, navSections } from "../navConfig";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { contactHref, navLinks } from "../navConfig";
 
-const sxButton = {
+const sxDrawerItem = {
+  display: "block",
+  width: "100%",
+  px: 3,
+  py: 1.5,
   color: "text.secondary",
-  "&:hover": { color: "text.primary", backgroundColor: "action.hover" },
+  textAlign: "left",
+  fontSize: "1.125rem",
 };
 
-const LogoButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  ":hover": {
-    color: theme.palette.primary.main,
-    backgroundColor: "transparent",
-  },
-}));
-
-const LogoText = styled(Typography)(({ theme }) => ({
-  fontFamily: "serif",
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
-}));
-
-const Toolbar = styled(MuiToolbar)(() => ({
-  paddingLeft: "0px!important",
-}));
+const sxActive = { color: "primary.main" };
 
 export function TopNav() {
-  const nav = useNavigate();
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  // Each destination closes the drawer itself, so it never stays open over the
+  // page the visitor just navigated to.
+  const close = () => setOpen(false);
+
   return (
-    <AppBar position="absolute" sx={{ backgroundColor: "background.default" }}>
-      <Toolbar>
-        <LogoButton onClick={() => nav("/")}>
-          <LogoText variant="h6" color="inherit" noWrap>
-            gc
-          </LogoText>
-        </LogoButton>
-        <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: "flex" }}>
-          {navSections.map((section) => (
-            <DropdownMenu key={section.label} section={section} />
-          ))}
-          <Button
-            href={contactHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={sxButton}
+    <AppBar
+      position="fixed"
+      elevation={0}
+      sx={{ backgroundColor: "background.default" }}
+    >
+      <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Typography
+          component={Link}
+          to="/"
+          variant="h6"
+          sx={{ color: "text.primary", textDecoration: "none" }}
+        >
+          gregory chen
+        </Typography>
+        <IconButton
+          onClick={() => setOpen(true)}
+          aria-label="Open navigation menu"
+          sx={{ color: "text.primary" }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
+
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={close}
+        slotProps={{
+          paper: {
+            sx: {
+              width: "min(80vw, 320px)",
+              backgroundColor: "background.default",
+              backgroundImage: "none",
+              borderLeft: "1px solid",
+              borderColor: "divider",
+            },
+          },
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "flex-end" }}>
+          <IconButton
+            onClick={close}
+            aria-label="Close navigation menu"
+            sx={{ color: "text.primary" }}
           >
+            <CloseIcon />
+          </IconButton>
+        </Toolbar>
+
+        <Box component="nav" sx={{ pt: 2 }}>
+          {navLinks.map((link) =>
+            link.external ? (
+              <Button
+                key={link.label}
+                href={link.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={close}
+                sx={sxDrawerItem}
+              >
+                {link.label}
+              </Button>
+            ) : (
+              <Button
+                key={link.label}
+                component={Link}
+                to={link.to}
+                onClick={close}
+                sx={
+                  pathname === link.to
+                    ? { ...sxDrawerItem, ...sxActive }
+                    : sxDrawerItem
+                }
+              >
+                {link.label}
+              </Button>
+            ),
+          )}
+          <Button href={contactHref} onClick={close} sx={sxDrawerItem}>
             contact
           </Button>
         </Box>
-      </Toolbar>
+      </Drawer>
     </AppBar>
-  );
-}
-
-function DropdownMenu({ section }: { section: NavSection }) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
-  const nav = useNavigate();
-  const handleItemClicked = (link: NavLink) => () => {
-    handleClose();
-
-    if (link.external) {
-      window.open(link.to, "_blank", "noreferrer");
-      return;
-    }
-
-    nav(link.to);
-  };
-
-  return (
-    <div>
-      <Button onClick={handleOpen} sx={sxButton}>
-        {section.label}
-      </Button>
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
-        {section.links.map((link) => (
-          <MenuItem key={link.label} onClick={handleItemClicked(link)}>
-            {link.label}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
   );
 }

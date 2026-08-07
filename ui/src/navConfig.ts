@@ -8,24 +8,25 @@ export interface NavLink {
   external?: boolean;
 }
 
-export interface NavSection {
-  label: string;
-  /** Path the section header links to (used by the side nav). */
-  to: string;
-  links: NavLink[];
-}
-
 export const contactHref = "mailto:gregorychen3@gmail.com";
 
-export const navSections: NavSection[] = [
-  {
-    label: "music",
-    to: "/music/listen",
-    links: [
-      { label: "listen", to: "/music/listen" },
-      { label: "schedule", to: "/music/schedule" },
-      { label: "songbook", to: "/music/songbook" },
-      { label: "resume", to: musicResume, external: true },
-    ],
-  },
+export const navLinks: NavLink[] = [
+  { label: "home", to: "/" },
+  { label: "listen", to: "/listen" },
+  { label: "schedule", to: "/schedule" },
+  { label: "songbook", to: "/songbook" },
+  { label: "resume", to: musicResume, external: true },
+];
+
+/**
+ * The site used to be split into music and software sections. Those paths are
+ * still in the wild (search results, old links), so they redirect rather than
+ * dead-end.
+ */
+export const legacyRedirects: { from: string; to: string }[] = [
+  { from: "/music/listen", to: "/listen" },
+  { from: "/music/schedule", to: "/schedule" },
+  { from: "/music/songbook", to: "/songbook" },
+  { from: "/music", to: "/listen" },
+  { from: "/software/projects", to: "/" },
 ];

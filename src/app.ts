@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
+import eventsController from "./controller/eventsController";
 import songsController from "./controller/songsController";
 import testController from "./controller/testController";
 
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/", testController);
 app.use("/api/songs", songsController);
+app.use("/api/events", eventsController);
 
 // the "catchall" handler: for any non-API request that doesn't match one
 // above, send back React's index.html file. Unmatched /api paths fall through
