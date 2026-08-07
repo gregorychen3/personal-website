@@ -1,4 +1,5 @@
-import { Box, Divider, Grid, SvgIcon, Typography } from "@mui/material";
+import { Box, Divider, Grid, Stack, SvgIcon, Typography } from "@mui/material";
+import serenadeInBlueImg from "../assets/serenade-in-blue-album-cover.webp";
 import sessionsVol1Img from "../assets/sessions-vol-1-album-cover.png";
 import { AppleMusicIcon } from "../components/AppleMusicIcon";
 import { SocialLink } from "../components/SocialLink";
@@ -12,6 +13,60 @@ export function ListenPage() {
       <Grid size={12}>
         <Typography variant="h4">Albums</Typography>
         <Divider />
+      </Grid>
+      <Grid size={12}>
+        <Stack
+          direction="row"
+          sx={{ alignItems: "baseline", gap: 1.5, flexWrap: "wrap" }}
+        >
+          <Typography variant="h5">Serenade In Blue</Typography>
+          <Typography variant="body2" sx={{ color: "primary.main" }}>
+            coming soon
+          </Typography>
+        </Stack>
+      </Grid>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
+        <Box
+          component="img"
+          src={serenadeInBlueImg}
+          alt="Serenade In Blue album cover"
+          sx={{ width: "100%", borderRadius: 1 }}
+        />
+      </Grid>
+      <Grid
+        size={{
+          xs: 12,
+          sm: 6,
+        }}
+      >
+        <Typography variant="body2">
+          Aaron Johnson, clarinet and tenor saxophone
+        </Typography>
+        <Typography variant="body2">Gregory Chen, piano</Typography>
+        <Typography variant="body2">Ilya Lushtak, guitar and vocal</Typography>
+        <Typography variant="body2">Daniel Duke, bass</Typography>
+        <Typography variant="body2">Masahiro Sakuma, drums</Typography>
+        <Typography variant="body2">Graham Marsh, cover art</Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            mt: 4,
+          }}
+        >
+          Boptimist Records
+        </Typography>
+        <Typography variant="body2">Recorded 08/31/2025</Typography>
+        <Typography variant="body2">
+          Pinch Recording, Long Island City, Queens
+        </Typography>
+        <Typography variant="body2">
+          Engineered, mixed, and mastered by Grady Bajorek
+        </Typography>
       </Grid>
       <Grid size={12}>
         <Typography variant="h5">Sessions, Vol. 1</Typography>

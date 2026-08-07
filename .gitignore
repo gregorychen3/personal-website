@@ -32,3 +32,8 @@ build/
 
 # Local environment variables (contains secrets)
 .env
+
+# Print-resolution artwork masters. These are tens of MB each and would bloat
+# the repo permanently; the web-sized copies live in ui/src/assets.
+*.tif
+*.tiff
