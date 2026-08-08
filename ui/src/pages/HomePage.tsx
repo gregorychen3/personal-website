@@ -14,7 +14,7 @@ import { useAsync } from "../useAsync";
 /** Enough to show what's next without duplicating the schedule page. */
 const HOME_GIG_COUNT = 3;
 
-const CONTACT_EMAIL = "gregorychen3@gmail.com";
+const CONTACT_EMAIL = "gregorychen3@proton.me";
 
 const sxMoreLink = {
   mt: 2,
