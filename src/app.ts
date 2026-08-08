@@ -1,12 +1,30 @@
 import express, { NextFunction, Request, Response } from "express";
+import fs from "fs";
 import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
+import { Gig, getGigs } from "./calendar";
 import eventsController from "./controller/eventsController";
 import songsController from "./controller/songsController";
 import testController from "./controller/testController";
+import { injectHead } from "./seo";
 
 const app = express();
+
+const indexHtmlPath = path.join(__dirname, "/../ui/dist/index.html");
+
+let template: string | undefined;
+
+/**
+ * The built index.html never changes while the process is running, so it is
+ * read once and kept. Each request only does the string replace.
+ */
+const readTemplate = (): string => {
+  if (template === undefined) {
+    template = fs.readFileSync(indexHtmlPath, "utf8");
+  }
+  return template;
+};
 
 /**
  * Assets retired along with the software career. These are still in Google's
@@ -83,12 +101,21 @@ app.use((req, res, next) => {
 
 // Serve static files from the React app.
 //
-// `redirect: false` matters: by default express.static answers a request for a
+// Two non-default options, both load-bearing:
+//
+// `redirect: false` — by default express.static answers a request for a
 // directory (`/assets`) with a 301 adding a trailing slash, which collides head
 // on with the trailing-slash canonicalisation below and produces an infinite
 // redirect loop. Directories should simply fall through to the 404 handler.
+//
+// `index: false` — by default it serves index.html for `/` directly from disk,
+// which would bypass the catch-all and ship the home page with none of its
+// per-route metadata. The catch-all must own every HTML response.
 app.use(
-  express.static(path.join(__dirname, "/../ui/dist"), { redirect: false }),
+  express.static(path.join(__dirname, "/../ui/dist"), {
+    redirect: false,
+    index: false,
+  }),
 );
 
 app.use(logger("dev"));
@@ -110,7 +137,7 @@ const appRoutes = new Set(["/", "/listen", "/schedule", "/sheetmusic"]);
 // The "catchall" handler: any non-API request that reaches here is answered
 // with React's index.html. Unmatched /api paths fall through to the 404 handler
 // so clients get a real error instead of the SPA shell.
-app.get("/{*splat}", (req, res, next) => {
+app.get("/{*splat}", async (req, res, next) => {
   if (req.path.startsWith("/api/")) {
     return next();
   }
@@ -128,8 +155,23 @@ app.get("/{*splat}", (req, res, next) => {
   // not-found page, but must carry a 404 status. Serving 200 for every URL —
   // as this did previously — is a soft 404: search engines take it as proof the
   // page exists and keep it indexed indefinitely.
-  const file = path.join(__dirname + "/../ui/dist/index.html");
-  return res.status(appRoutes.has(normalised) ? 200 : 404).sendFile(file);
+  const notFound = !appRoutes.has(normalised);
+
+  // Structured data for the schedule needs the gigs. A calendar outage must not
+  // take the page down with it, so a failure just means no Event markup.
+  let gigs: Gig[] = [];
+  if (!notFound && normalised === "/schedule") {
+    try {
+      gigs = await getGigs();
+    } catch (e) {
+      console.error("Skipping Event structured data:", e);
+    }
+  }
+
+  return res
+    .status(notFound ? 404 : 200)
+    .type("html")
+    .send(injectHead(readTemplate(), normalised, { notFound, gigs }));
 });
 
 // catch 404 and forward to error handler

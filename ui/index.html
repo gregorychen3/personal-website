@@ -4,27 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gregory Chen — Jazz Pianist</title>
-    <meta
-      name="description"
-      content="Jazz pianist based in New York City, Boston, and San Francisco. Recordings, upcoming performances, and vintage sheetmusic."
-    />
     <meta name="theme-color" content="#0B0B0B" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Gregory Chen" />
-    <meta property="og:title" content="Gregory Chen — Jazz Pianist" />
-    <meta
-      property="og:description"
-      content="Jazz pianist based in New York City, Boston, and San Francisco. Recordings, upcoming performances, and vintage sheetmusic."
-    />
-    <meta property="og:url" content="https://www.gregory-chen.com/" />
-    <meta
-      property="og:image"
-      content="https://www.gregory-chen.com/og-image.jpg"
-    />
-    <meta property="og:image:alt" content="Serenade In Blue album cover" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!--
+      Everything between these markers is replaced per route by the Express app
+      (see src/seo.ts): title, description, canonical, Open Graph, and JSON-LD.
+      What is here is only the fallback the Vite dev server shows, since it
+      never runs that code. Keep the title tag inside the markers — a second one
+      outside them would shadow the generated one.
+    -->
+    <!--seo-head-->
+    <title>Gregory Chen — Jazz Pianist</title>
+    <!--/seo-head-->
 
     <!-- Google tag (gtag.js) -->
     <script
