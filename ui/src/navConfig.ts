@@ -18,15 +18,12 @@ export const navLinks: NavLink[] = [
   { label: "resume", to: musicResume, external: true },
 ];
 
-/**
- * The site used to be split into music and software sections. Those paths are
- * still in the wild (search results, old links), so they redirect rather than
- * dead-end.
+/*
+ * Redirects for the site's historical URLs live in the Express app (src/app.ts)
+ * so they can be real 301s. Handling them here instead would ship the retired
+ * software paths in the browser bundle and give crawlers a 200 with an empty
+ * shell, which passes no signal.
+ *
+ * Note this means legacy paths only redirect when served by Express — under the
+ * Vite dev server they fall through to the SPA's catch-all and land on home.
  */
-export const legacyRedirects: { from: string; to: string }[] = [
-  { from: "/music/listen", to: "/listen" },
-  { from: "/music/schedule", to: "/schedule" },
-  { from: "/music/sheetmusic", to: "/sheetmusic" },
-  { from: "/music", to: "/listen" },
-  { from: "/software/projects", to: "/" },
-];

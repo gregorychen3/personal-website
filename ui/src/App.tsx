@@ -2,7 +2,6 @@ import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router";
 import { SideNav } from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
-import { legacyRedirects } from "./navConfig";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
 import { SchedulePage } from "./pages/SchedulePage";
@@ -31,15 +30,9 @@ export function App() {
               <Route path="/listen" element={<ListenPage />} />
               <Route path="/schedule" element={<SchedulePage />} />
               <Route path="/sheetmusic" element={<SheetmusicPage />} />
-              {legacyRedirects.map(({ from, to }) => (
-                <Route
-                  key={from}
-                  path={from}
-                  element={<Navigate to={to} replace />}
-                />
-              ))}
-              {/* Anything unrecognised lands on the home page rather than a
-                  blank content column. */}
+              {/* Historical URLs are 301'd by Express before they reach here.
+                  Anything else unrecognised lands on the home page rather than
+                  a blank content column. */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Grid>
