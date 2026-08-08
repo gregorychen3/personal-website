@@ -2,7 +2,7 @@ import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { albums, ServiceLink } from "../albums";
 import { apiClient } from "../apiClient";
-import avatarImg from "../assets/avatar.png";
+import avatarImg from "../assets/avatar.webp";
 import { GigList } from "../components/GigList";
 import { SectionLabel } from "../components/PageHeading";
 import { ServiceLinks } from "../components/ServiceLinks";
@@ -40,7 +40,10 @@ export function HomePage() {
                 component="img"
                 src={record.cover}
                 alt={`${record.title} album cover`}
-                sx={{ width: "100%", display: "block" }}
+                width={record.coverWidth}
+                height={record.coverHeight}
+                loading="lazy"
+                sx={{ width: "100%", height: "auto", display: "block" }}
               />
             </Box>
           </Grid>
@@ -120,7 +123,11 @@ function Hero() {
           component="img"
           src={avatarImg}
           alt="Gregory Chen"
-          sx={{ width: "100%", display: "block" }}
+          width={1200}
+          height={1200}
+          // In the hero and almost certainly the LCP element, so not lazy.
+          loading="eager"
+          sx={{ width: "100%", height: "auto", display: "block" }}
         />
       </Grid>
     </Grid>

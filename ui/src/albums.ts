@@ -1,5 +1,5 @@
 import serenadeInBlueImg from "./assets/serenade-in-blue-album-cover.webp";
-import sessionsVol1Img from "./assets/sessions-vol-1-album-cover.png";
+import sessionsVol1Img from "./assets/sessions-vol-1-album-cover.webp";
 
 export type ServiceKind = "apple" | "youtube" | "spotify" | "amazon";
 
@@ -33,6 +33,13 @@ export interface ServiceLink {
 export interface Album {
   title: string;
   cover: string;
+  /**
+   * Intrinsic pixel dimensions of `cover`. Rendered as width/height attributes
+   * so the browser can reserve the right space before the image arrives —
+   * without them the layout shifts as each cover loads.
+   */
+  coverWidth: number;
+  coverHeight: number;
   /** Released records carry service links; upcoming ones show a marker. */
   upcoming?: boolean;
   personnel: string[];
@@ -46,6 +53,8 @@ export const albums: Album[] = [
   {
     title: "Serenade In Blue",
     cover: serenadeInBlueImg,
+    coverWidth: 1200,
+    coverHeight: 1195,
     upcoming: true,
     personnel: [
       "Aaron Johnson, clarinet and tenor saxophone",
@@ -66,6 +75,8 @@ export const albums: Album[] = [
   {
     title: "Sessions, Vol. 1",
     cover: sessionsVol1Img,
+    coverWidth: 1200,
+    coverHeight: 1200,
     personnel: [
       "Gregory Chen, piano",
       "Kevin Hsieh, bass",

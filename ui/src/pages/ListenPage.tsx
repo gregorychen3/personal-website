@@ -33,8 +33,10 @@ export function ListenPage() {
       <PageHeading title="listen" />
 
       <SectionLabel>albums</SectionLabel>
-      {albums.map((album) => (
-        <AlbumBlock key={album.title} album={album} />
+      {albums.map((album, i) => (
+        // The first cover is the largest thing above the fold — it is the LCP
+        // element, so it must not be lazy-loaded. Everything below it is.
+        <AlbumBlock key={album.title} album={album} eager={i === 0} />
       ))}
 
       <Box sx={{ mt: 8 }}>
@@ -51,7 +53,7 @@ export function ListenPage() {
   );
 }
 
-function AlbumBlock({ album }: { album: Album }) {
+function AlbumBlock({ album, eager }: { album: Album; eager?: boolean }) {
   return (
     <Grid container spacing={4} sx={{ mb: 7 }}>
       <Grid size={{ xs: 12, sm: 6 }}>
@@ -59,7 +61,12 @@ function AlbumBlock({ album }: { album: Album }) {
           component="img"
           src={album.cover}
           alt={`${album.title} album cover`}
-          sx={{ width: "100%", display: "block" }}
+          width={album.coverWidth}
+          height={album.coverHeight}
+          loading={eager ? "eager" : "lazy"}
+          // `height: auto` is what lets the width/height attributes act as an
+          // aspect ratio rather than a fixed size.
+          sx={{ width: "100%", height: "auto", display: "block" }}
         />
       </Grid>
       <Grid size={{ xs: 12, sm: 6 }}>
