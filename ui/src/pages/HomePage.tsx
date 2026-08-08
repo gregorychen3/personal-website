@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { albums, serviceLabel, ServiceKind } from "../albums";
+import { albums, byServiceOrder, serviceLabel, ServiceKind } from "../albums";
 import { apiClient } from "../apiClient";
 import avatarImg from "../assets/avatar.png";
 import { GigList } from "../components/GigList";
@@ -79,23 +79,23 @@ export function HomePage() {
 }
 
 /**
- * Profile links, drawn from the same badge set the album links use and kept in
- * the same order the listen page shows them.
+ * Profile links, drawn from the same badge set the album links use and sorted
+ * through the same shared order.
  */
-const socialLinks: { kind: ServiceKind; to: string }[] = [
+const socialLinks: { kind: ServiceKind; to: string }[] = byServiceOrder([
   {
-    kind: "apple",
-    to: "https://music.apple.com/au/artist/gregory-chen/1778527626",
+    kind: "spotify",
+    to: "https://open.spotify.com/artist/6kfl8Cg6QSQZUetovdNLyj",
   },
   {
     kind: "youtube",
     to: "https://www.youtube.com/channel/UCihTPpCdKn2H7aaJ4bU7QNA",
   },
   {
-    kind: "spotify",
-    to: "https://open.spotify.com/artist/6kfl8Cg6QSQZUetovdNLyj",
+    kind: "apple",
+    to: "https://music.apple.com/au/artist/gregory-chen/1778527626",
   },
-];
+]);
 
 function Hero() {
   return (

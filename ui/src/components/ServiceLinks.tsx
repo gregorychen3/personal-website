@@ -1,12 +1,12 @@
 import { Stack } from "@mui/material";
-import { serviceLabel, ServiceLink } from "../albums";
+import { byServiceOrder, serviceLabel, ServiceLink } from "../albums";
 import { ServiceIcon } from "./ServiceIcon";
 import { SocialLink } from "./SocialLink";
 
 export function ServiceLinks({ links }: { links: ServiceLink[] }) {
   return (
     <Stack sx={{ alignItems: "flex-start", ml: -1 }}>
-      {links.map((link) => (
+      {byServiceOrder(links).map((link) => (
         <SocialLink
           key={link.kind}
           icon={<ServiceIcon kind={link.kind} />}

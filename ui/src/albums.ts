@@ -11,6 +11,19 @@ const serviceLabels: Record<ServiceKind, string> = {
 
 export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
 
+/**
+ * The order services are listed in wherever they appear. Both the home page
+ * profile links and each album's links are sorted through this, so a record
+ * whose links happen to be entered in another order cannot make one page
+ * disagree with another.
+ */
+const serviceOrder: ServiceKind[] = ["spotify", "youtube", "apple"];
+
+export const byServiceOrder = <T extends { kind: ServiceKind }>(links: T[]) =>
+  [...links].sort(
+    (a, b) => serviceOrder.indexOf(a.kind) - serviceOrder.indexOf(b.kind),
+  );
+
 export interface ServiceLink {
   kind: ServiceKind;
   to: string;
@@ -61,13 +74,13 @@ export const albums: Album[] = [
     credits: ["Boptimist Records", "Recorded 08-31-2024"],
     links: [
       {
-        kind: "apple",
-        to: "https://music.apple.com/us/album/sessions-vol-1/1794181040",
+        kind: "spotify",
+        to: "https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ",
       },
       { kind: "youtube", to: "https://youtu.be/iIC2dBC2ZZ8?si=eVFCnaVVO0LAq7Nh" },
       {
-        kind: "spotify",
-        to: "https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT?si=LPsQIqi5Tnmt6g0--XcoAQ",
+        kind: "apple",
+        to: "https://music.apple.com/us/album/sessions-vol-1/1794181040",
       },
     ],
   },
