@@ -1,9 +1,10 @@
 import { Box, Container, CssBaseline, Grid, Toolbar } from "@mui/material";
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import { SideNav } from "./components/SideNav";
 import { TopNav } from "./components/TopNav";
 import { HomePage } from "./pages/HomePage";
 import { ListenPage } from "./pages/ListenPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { SheetmusicPage } from "./pages/SheetmusicPage";
 
@@ -31,9 +32,9 @@ export function App() {
               <Route path="/schedule" element={<SchedulePage />} />
               <Route path="/sheetmusic" element={<SheetmusicPage />} />
               {/* Historical URLs are 301'd by Express before they reach here.
-                  Anything else unrecognised lands on the home page rather than
-                  a blank content column. */}
-              <Route path="*" element={<Navigate to="/" replace />} />
+                  Anything else is genuinely missing: Express serves this route
+                  with a 404 status rather than redirecting it away. */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Grid>
         </Grid>

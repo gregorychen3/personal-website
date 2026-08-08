@@ -81,27 +81,55 @@ app.use((req, res, next) => {
   return next();
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "/../ui/dist")));
+// Serve static files from the React app.
+//
+// `redirect: false` matters: by default express.static answers a request for a
+// directory (`/assets`) with a 301 adding a trailing slash, which collides head
+// on with the trailing-slash canonicalisation below and produces an infinite
+// redirect loop. Directories should simply fall through to the 404 handler.
+app.use(
+  express.static(path.join(__dirname, "/../ui/dist"), { redirect: false }),
+);
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"), { redirect: false }));
 
 app.use("/api/", testController);
 app.use("/api/songs", songsController);
 app.use("/api/events", eventsController);
 
-// the "catchall" handler: for any non-API request that doesn't match one
-// above, send back React's index.html file. Unmatched /api paths fall through
-// to the 404 handler so clients get a real error instead of the SPA shell.
+/**
+ * The SPA's real routes. Kept in sync by hand with the <Route> list in
+ * ui/src/App.tsx — there are only four, and the server has no other way to know
+ * them.
+ */
+const appRoutes = new Set(["/", "/listen", "/schedule", "/sheetmusic"]);
+
+// The "catchall" handler: any non-API request that reaches here is answered
+// with React's index.html. Unmatched /api paths fall through to the 404 handler
+// so clients get a real error instead of the SPA shell.
 app.get("/{*splat}", (req, res, next) => {
   if (req.path.startsWith("/api/")) {
     return next();
   }
+
+  const normalised = req.path.replace(/\/+$/, "") || "/";
+
+  // Canonicalise the trailing slash so /listen/ and /listen are not two URLs
+  // competing for the same content. Preserve any query string.
+  if (normalised !== req.path) {
+    const query = req.url.slice(req.path.length);
+    return res.redirect(301, normalised + query);
+  }
+
+  // Unknown paths still render the app, so the visitor gets the styled
+  // not-found page, but must carry a 404 status. Serving 200 for every URL —
+  // as this did previously — is a soft 404: search engines take it as proof the
+  // page exists and keep it indexed indefinitely.
   const file = path.join(__dirname + "/../ui/dist/index.html");
-  res.sendFile(file);
+  return res.status(appRoutes.has(normalised) ? 200 : 404).sendFile(file);
 });
 
 // catch 404 and forward to error handler
