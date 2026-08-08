@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Only the four real routes. Hashed build assets (the resume PDF, album art)
+  are deliberately excluded: their filenames change on every build, so listing
+  them would guarantee stale entries.
+
+  No <lastmod>, <changefreq> or <priority>. Google ignores the latter two, and
+  lastmod only helps when it is accurate — this file is hand-maintained, so a
+  fixed date here would be a lie within a week.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.gregory-chen.com/</loc>
+  </url>
+  <url>
+    <loc>https://www.gregory-chen.com/listen</loc>
+  </url>
+  <url>
+    <loc>https://www.gregory-chen.com/schedule</loc>
+  </url>
+  <url>
+    <loc>https://www.gregory-chen.com/sheetmusic</loc>
+  </url>
+</urlset>

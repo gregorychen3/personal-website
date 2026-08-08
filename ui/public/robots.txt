@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# The JSON endpoints back the site's own pages; there is nothing to index there.
+Disallow: /api/
+
+Sitemap: https://www.gregory-chen.com/sitemap.xml
