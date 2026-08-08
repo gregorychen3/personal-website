@@ -1,12 +1,11 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { albums, byServiceOrder, serviceLabel, ServiceKind } from "../albums";
+import { albums, ServiceLink } from "../albums";
 import { apiClient } from "../apiClient";
 import avatarImg from "../assets/avatar.png";
 import { GigList } from "../components/GigList";
 import { SectionLabel } from "../components/PageHeading";
-import { ServiceIcon } from "../components/ServiceIcon";
-import { SocialLink } from "../components/SocialLink";
+import { ServiceLinks } from "../components/ServiceLinks";
 import { StatusMessage } from "../components/StatusMessage";
 import { parseGigs } from "../gigs";
 import { useAsync } from "../useAsync";
@@ -79,10 +78,10 @@ export function HomePage() {
 }
 
 /**
- * Profile links, drawn from the same badge set the album links use and sorted
- * through the same shared order.
+ * Profile links. Rendered through the same component as the album links, so
+ * they share its badge set, ordering, and 2x2 layout.
  */
-const socialLinks: { kind: ServiceKind; to: string }[] = byServiceOrder([
+const socialLinks: ServiceLink[] = [
   {
     kind: "spotify",
     to: "https://open.spotify.com/artist/6kfl8Cg6QSQZUetovdNLyj",
@@ -99,7 +98,7 @@ const socialLinks: { kind: ServiceKind; to: string }[] = byServiceOrder([
     kind: "amazon",
     to: "https://music.amazon.com/artists/B0DVW2H16K/gregory-chen",
   },
-]);
+];
 
 function Hero() {
   return (
@@ -112,19 +111,9 @@ function Hero() {
         <Typography variant="body1" sx={{ color: "text.secondary" }}>
           Jazz pianist based in New York City, Boston, and San Francisco.
         </Typography>
-        <Stack
-          direction="row"
-          sx={{ mt: 2, ml: -1, flexWrap: "wrap", alignItems: "center" }}
-        >
-          {socialLinks.map((link) => (
-            <SocialLink
-              key={link.kind}
-              icon={<ServiceIcon kind={link.kind} />}
-              text={serviceLabel(link.kind)}
-              to={link.to}
-            />
-          ))}
-        </Stack>
+        <Box sx={{ mt: 2 }}>
+          <ServiceLinks links={socialLinks} />
+        </Box>
       </Grid>
       <Grid size={{ xs: 12, sm: 5 }}>
         <Box
