@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { contactHref, navLinks } from "../navConfig";
+import { navLinks } from "../navConfig";
 
 const sxDrawerItem = {
   display: "block",
@@ -111,9 +111,6 @@ export function TopNav() {
               </Button>
             ),
           )}
-          <Button href={contactHref} onClick={close} sx={sxDrawerItem}>
-            contact
-          </Button>
         </Box>
       </Drawer>
     </AppBar>

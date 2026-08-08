@@ -1,4 +1,5 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { albums, ServiceLink } from "../albums";
 import { apiClient } from "../apiClient";
@@ -12,6 +13,8 @@ import { useAsync } from "../useAsync";
 
 /** Enough to show what's next without duplicating the schedule page. */
 const HOME_GIG_COUNT = 3;
+
+const CONTACT_EMAIL = "gregorychen3@gmail.com";
 
 const sxMoreLink = {
   mt: 2,
@@ -78,6 +81,88 @@ export function HomePage() {
       </Box>
 
       <NextDates />
+      <Booking />
+    </Box>
+  );
+}
+
+/**
+ * The address is shown as text rather than hidden behind a "contact" link.
+ * A mailto is a dead end for anyone without a working default mail client —
+ * this way the link still works for those who do, and everyone else can read
+ * or copy the address directly.
+ */
+function Booking() {
+  const [copied, setCopied] = useState(false);
+  const emailRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (!copied) {
+      return;
+    }
+    const timer = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(timer);
+  }, [copied]);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopied(true);
+    } catch {
+      // The clipboard API is blocked outside secure contexts and can be
+      // refused by permissions policy. Select the address instead, so the
+      // button always does something rather than failing silently.
+      const node = emailRef.current;
+      if (!node) {
+        return;
+      }
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    }
+  };
+
+  return (
+    <Box sx={{ mt: 8 }}>
+      <SectionLabel>booking</SectionLabel>
+      <Typography variant="body2" sx={{ color: "text.secondary", mb: 1.5 }}>
+        For performances, sessions, and enquiries.
+      </Typography>
+      <Stack
+        direction="row"
+        sx={{ alignItems: "center", gap: 1, flexWrap: "wrap" }}
+      >
+        <Typography
+          component="a"
+          ref={emailRef}
+          href={`mailto:${CONTACT_EMAIL}`}
+          variant="h5"
+          sx={{
+            // The display face lowercases headings, which would quietly
+            // misrepresent an address that happened to contain capitals.
+            textTransform: "none",
+            color: "primary.main",
+            textDecoration: "none",
+            wordBreak: "break-all",
+            "&:hover": { textDecoration: "underline" },
+          }}
+        >
+          {CONTACT_EMAIL}
+        </Typography>
+        <Button
+          onClick={copy}
+          aria-label={copied ? "Email address copied" : "Copy email address"}
+          sx={{
+            minWidth: 0,
+            color: copied ? "primary.main" : "text.secondary",
+            "&:hover": { color: "text.primary", backgroundColor: "action.hover" },
+          }}
+        >
+          {copied ? "copied" : "copy"}
+        </Button>
+      </Stack>
     </Box>
   );
 }

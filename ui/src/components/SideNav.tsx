@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { contactHref, navLinks } from "../navConfig";
+import { navLinks } from "../navConfig";
 
 const sxItem = {
   display: "block",
@@ -69,10 +69,6 @@ export function SideNav() {
           </Button>
         ),
       )}
-
-      <Button href={contactHref} sx={sxItem}>
-        contact
-      </Button>
     </Box>
   );
 }

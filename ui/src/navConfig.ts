@@ -8,8 +8,6 @@ export interface NavLink {
   external?: boolean;
 }
 
-export const contactHref = "mailto:gregorychen3@gmail.com";
-
 export const navLinks: NavLink[] = [
   { label: "home", to: "/" },
   { label: "listen", to: "/listen" },
