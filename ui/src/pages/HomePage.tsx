@@ -95,6 +95,10 @@ const socialLinks: { kind: ServiceKind; to: string }[] = byServiceOrder([
     kind: "apple",
     to: "https://music.apple.com/au/artist/gregory-chen/1778527626",
   },
+  {
+    kind: "amazon",
+    to: "https://music.amazon.com/artists/B0DVW2H16K/gregory-chen",
+  },
 ]);
 
 function Hero() {

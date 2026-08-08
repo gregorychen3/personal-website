@@ -1,5 +1,6 @@
 import { SvgIcon } from "@mui/material";
 import { ServiceKind } from "../albums";
+import { AmazonMusicIcon } from "./AmazonMusicIcon";
 import { AppleMusicIcon } from "./AppleMusicIcon";
 import { SpotifyIcon } from "./SpotifyIcon";
 import { YoutubeMusicIcon } from "./YoutubeMusicIcon";
@@ -17,6 +18,7 @@ const marks: Record<ServiceKind, () => React.ReactElement> = {
   apple: AppleMusicIcon,
   youtube: YoutubeMusicIcon,
   spotify: SpotifyIcon,
+  amazon: AmazonMusicIcon,
 };
 
 export function ServiceIcon({ kind }: { kind: ServiceKind }) {

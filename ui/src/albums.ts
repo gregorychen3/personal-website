@@ -1,12 +1,13 @@
 import serenadeInBlueImg from "./assets/serenade-in-blue-album-cover.webp";
 import sessionsVol1Img from "./assets/sessions-vol-1-album-cover.png";
 
-export type ServiceKind = "apple" | "youtube" | "spotify";
+export type ServiceKind = "apple" | "youtube" | "spotify" | "amazon";
 
 const serviceLabels: Record<ServiceKind, string> = {
   apple: "apple music",
   youtube: "youtube",
   spotify: "spotify",
+  amazon: "amazon music",
 };
 
 export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
@@ -17,7 +18,7 @@ export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
  * whose links happen to be entered in another order cannot make one page
  * disagree with another.
  */
-const serviceOrder: ServiceKind[] = ["spotify", "youtube", "apple"];
+const serviceOrder: ServiceKind[] = ["spotify", "youtube", "apple", "amazon"];
 
 export const byServiceOrder = <T extends { kind: ServiceKind }>(links: T[]) =>
   [...links].sort(
@@ -82,6 +83,7 @@ export const albums: Album[] = [
         kind: "apple",
         to: "https://music.apple.com/us/album/sessions-vol-1/1794181040",
       },
+      { kind: "amazon", to: "https://music.amazon.com/albums/B0DVVVGKCC" },
     ],
   },
 ];
