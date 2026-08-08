@@ -1,9 +1,21 @@
 /**
  * Amazon Music app tile (Charcoal-on-Cyan, rounded) from Amazon's supplied
  * brand pack, with the "amazon" wordmark removed so only "music" and the smile
- * remain — the full lockup is unreadable at icon size. The remaining artwork is
- * Amazon's own, recentred and scaled to the proportion of the tile their full
- * lockup occupied.
+ * remain — the full lockup is unreadable at icon size. Every glyph is still
+ * Amazon's own vector; the group transform only recentres and scales them.
+ *
+ * The transform is derived, not hand-tuned. In the untransformed artwork the
+ * remaining glyphs measure x=241.5 y=454 w=541.1 h=313.6 within the 1024 tile
+ * (taken from `getBBox()`), and the group is scaled so they span `FILL` of the
+ * tile width, then centred:
+ *
+ *   scale = 1024 * FILL / 541.1
+ *   translate = ((1024 - 541.1*scale)/2 - 241.5*scale,
+ *                (1024 - 313.6*scale)/2 - 454*scale)
+ *
+ * FILL is 0.84 — tighter than the ~0.69 Amazon's full lockup used, trading
+ * margin for legibility at icon size. Those numbers are recorded here because
+ * the source brand pack is no longer in the repo.
  *
  * The export's `.cls-1`/`.cls-2` stylesheet was flattened to literal fills;
  * inlining it would leak two very generic class names into the page.
@@ -19,7 +31,7 @@ export function AmazonMusicIcon() {
       <g>
         <rect width="1024" height="1024" rx="227" ry="227" fill="#25D1DA" />
       </g>
-      <g transform="translate(-166.32 -297.13) scale(1.3247)">
+      <g transform="translate(-301.98 -458.96) scale(1.5897)">
         <g>
           <path
             d="M301.64,497.24c14.49,0,25.18,8.09,30.74,21.96h1.17c8.64-14.75,19.17-21.96,32.49-21.96,21.96,0,35.28,18.44,35.28,48.16v72.38c0,2.2-1.61,3.81-3.81,3.81h-23.42c-2.2,0-3.81-1.61-3.81-3.81v-70.04c0-14.2-5.56-22.1-15.95-22.1-11.42,0-17.42,9.22-17.42,26.2v65.94c0,2.2-1.61,3.81-3.81,3.81h-23.42c-2.2,0-3.81-1.61-3.81-3.81v-70.04c0-14.2-5.56-22.1-15.95-22.1-11.42,0-17.42,9.22-17.42,26.2v65.94c0,2.2-1.61,3.81-3.81,3.81h-23.42c-2.2,0-3.81-1.61-3.81-3.81v-114.1c0-2.2,1.61-3.81,3.81-3.81h19.32c2.2,0,3.62,1.46,4.1,3.81l2.93,14.34h1.17c5.27-13.32,15.37-20.78,28.84-20.78Z"
