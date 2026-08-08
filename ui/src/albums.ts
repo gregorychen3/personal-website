@@ -58,7 +58,7 @@ export const albums: Album[] = [
       "Benjamin Zweig, drums",
       "Micah Fong, album art",
     ],
-    credits: ["HighHorse Records", "Recorded 08/31/2024"],
+    credits: ["Boptimist Records", "Recorded 08/31/2024"],
     links: [
       {
         kind: "apple",
