@@ -10,11 +10,11 @@ const videos = [
     src: "https://www.youtube.com/embed/bkfCbIMIqA4?start=88",
   },
   {
-    title: "Alex Hoffman Quintet - Smalls 10/31/2021 Set 1",
+    title: "Alex Hoffman Quintet - Smalls 10-31-2021 Set 1",
     src: "https://www.youtube.com/embed/D9ulpdTD6hY",
   },
   {
-    title: "Alex Hoffman Quintet - Smalls 10/31/2021 Set 2",
+    title: "Alex Hoffman Quintet - Smalls 10-31-2021 Set 2",
     src: "https://www.youtube.com/embed/wkXdCbxZD2w",
   },
   {

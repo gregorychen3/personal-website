@@ -43,7 +43,7 @@ export const albums: Album[] = [
     ],
     credits: [
       "Boptimist Records",
-      "Recorded 08/31/2025",
+      "Recorded 08-31-2025",
       "Pinch Recording, Long Island City, Queens",
       "Engineered, mixed, and mastered by Grady Bajorek",
     ],
@@ -58,7 +58,7 @@ export const albums: Album[] = [
       "Benjamin Zweig, drums",
       "Micah Fong, album art",
     ],
-    credits: ["Boptimist Records", "Recorded 08/31/2024"],
+    credits: ["Boptimist Records", "Recorded 08-31-2024"],
     links: [
       {
         kind: "apple",
