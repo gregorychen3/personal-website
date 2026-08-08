@@ -52,7 +52,9 @@ export function HomePage() {
               direction="row"
               sx={{ alignItems: "baseline", gap: 1.5, flexWrap: "wrap", mb: 2 }}
             >
-              <Typography variant="h4">{record.title}</Typography>
+              <Typography variant="h4" component="h3">
+                {record.title}
+              </Typography>
               {record.upcoming && (
                 <Typography variant="overline" sx={{ color: "primary.main" }}>
                   coming soon

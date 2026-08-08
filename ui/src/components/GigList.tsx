@@ -8,20 +8,37 @@ import {
   ParsedGig,
 } from "../gigs";
 
-export function GigList({ gigs }: { gigs: ParsedGig[] }) {
+/**
+ * `headingLevel` is the level the venue names sit at, which depends on the
+ * caller: the schedule page puts this list straight under its h1, while the
+ * home page nests it beneath a "next dates" section label.
+ */
+export function GigList({
+  gigs,
+  headingLevel = "h3",
+}: {
+  gigs: ParsedGig[];
+  headingLevel?: "h2" | "h3";
+}) {
   return (
     <Box>
       {gigs.map((gig, i) => (
         <Box key={gig.id}>
           {i > 0 && <Divider />}
-          <GigRow gig={gig} />
+          <GigRow gig={gig} headingLevel={headingLevel} />
         </Box>
       ))}
     </Box>
   );
 }
 
-function GigRow({ gig }: { gig: ParsedGig }) {
+function GigRow({
+  gig,
+  headingLevel,
+}: {
+  gig: ParsedGig;
+  headingLevel: "h2" | "h3";
+}) {
   const time = gigTime(gig);
   // Where the calendar gives no venue the billing carries the row instead of
   // leaving an empty headline.
@@ -49,7 +66,9 @@ function GigRow({ gig }: { gig: ParsedGig }) {
         <Typography variant="overline" sx={{ color: "primary.main" }}>
           {gigMonth(gig)}
         </Typography>
-        <Typography variant="h4" sx={{ lineHeight: 1 }}>
+        {/* A bare day number is not a heading. Left as an h4 element it was
+            announced as "heading level 4, sixteen" once per gig. */}
+        <Typography variant="h4" component="div" sx={{ lineHeight: 1 }}>
           {gigDay(gig)}
         </Typography>
         <Typography variant="overline" sx={{ color: "text.disabled", mt: 0.5 }}>
@@ -66,6 +85,7 @@ function GigRow({ gig }: { gig: ParsedGig }) {
               display face lowercases headings, which is wrong for names. */}
           <Typography
             variant="h6"
+            component={headingLevel}
             sx={{ textTransform: "none", wordBreak: "break-word" }}
           >
             {heading}

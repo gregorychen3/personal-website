@@ -74,7 +74,9 @@ function AlbumBlock({ album, eager }: { album: Album; eager?: boolean }) {
           direction="row"
           sx={{ alignItems: "baseline", gap: 1.5, flexWrap: "wrap", mb: 2 }}
         >
-          <Typography variant="h4">{album.title}</Typography>
+          <Typography variant="h4" component="h3">
+            {album.title}
+          </Typography>
           {album.upcoming && (
             <Typography variant="overline" sx={{ color: "primary.main" }}>
               coming soon

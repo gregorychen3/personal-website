@@ -28,7 +28,8 @@ export function SchedulePage() {
         (state.data.length === 0 ? (
           <StatusMessage>No dates on the calendar right now.</StatusMessage>
         ) : (
-          <GigList gigs={parseGigs(state.data)} />
+          // Sits directly under the page h1, with no section label between.
+          <GigList gigs={parseGigs(state.data)} headingLevel="h2" />
         ))}
     </Box>
   );
