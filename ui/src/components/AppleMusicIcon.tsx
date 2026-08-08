@@ -1,14 +1,18 @@
-import { useTheme } from "@mui/material";
+import { useId } from "react";
 
-/** See `ServiceIcon` — badges share one fill treatment across the site. */
-export function AppleMusicIcon({ color }: { color?: string } = {}) {
-  const defaultColor = useTheme().palette.text.primary;
-  const fillColor = color ?? defaultColor;
+/**
+ * Official Apple Music mark, using Apple's own gradient artwork with the note
+ * in white. Render it through `ServiceIcon`.
+ */
+export function AppleMusicIcon() {
+  // The gradient needs a document-unique id: with the exported hardcoded one,
+  // a second instance on the same page would emit a duplicate id and both
+  // would resolve to whichever rendered first.
+  const gradientId = `apple-music-${useId().replace(/:/g, "")}`;
 
   return (
     <svg
       version="1.1"
-      id="Artwork"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
@@ -20,10 +24,9 @@ export function AppleMusicIcon({ color }: { color?: string } = {}) {
       viewBox="0 0 73 73"
       xmlSpace="preserve"
     >
-      <g id="Layer_5"></g>
       <g>
         <linearGradient
-          id="SVGID_1_"
+          id={gradientId}
           gradientUnits="userSpaceOnUse"
           x1="36"
           y1="2.2858"
@@ -49,11 +52,11 @@ export function AppleMusicIcon({ color }: { color?: string } = {}) {
           style={{
             fillRule: "evenodd",
             clipRule: "evenodd",
-            fill: fillColor,
+            fill: `url(#${gradientId})`,
           }}
         />
       </g>
-      <g id="Glyph_2_">
+      <g>
         <g>
           <path
             d="M50.9,11c-0.17,0.02-1.72,0.29-1.91,0.33l-21.4,4.32l-0.01,0c-0.56,0.12-1,0.32-1.33,0.6
@@ -69,7 +72,7 @@ export function AppleMusicIcon({ color }: { color?: string } = {}) {
             style={{
               fillRule: "evenodd",
               clipRule: "evenodd",
-              fill: "black",
+              fill: "white",
             }}
           />
         </g>

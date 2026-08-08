@@ -1,9 +1,11 @@
-import { useTheme } from "@mui/material";
-
-/** See `ServiceIcon` — badges share one fill treatment across the site. */
-export function YoutubeMusicIcon({ color }: { color?: string } = {}) {
-  const defaultColor = useTheme().palette.text.primary;
-
+/**
+ * Official YouTube Music mark: brand red with the ring and play triangle in
+ * white. Render it through `ServiceIcon`.
+ *
+ * The export's clipPath was a full-bounds rect — a no-op that only added a
+ * hardcoded id, so it is dropped here.
+ */
+export function YoutubeMusicIcon() {
   return (
     <svg
       width="23"
@@ -12,22 +14,15 @@ export function YoutubeMusicIcon({ color }: { color?: string } = {}) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#clip0_5547_43)">
-        <path
-          d="M12 24C18.63 24 24 18.63 24 12C24 5.37 18.63 0 12 0C5.37 0 0 5.37 0 12C0 18.63 5.37 24 12 24Z"
-          fill={color ?? defaultColor}
-        />
-        <path
-          d="M12 6C15.31 6 18 8.69 18 12C18 15.31 15.31 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6ZM12 5C8.14 5 5 8.14 5 12C5 15.86 8.14 19 12 19C15.86 19 19 15.86 19 12C19 8.14 15.86 5 12 5Z"
-          fill="black"
-        />
-        <path d="M9.75 15.5L16.25 12L9.75 8.5V15.5Z" fill="black" />
-      </g>
-      <defs>
-        <clipPath id="clip0_5547_43">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
+      <path
+        d="M12 24C18.63 24 24 18.63 24 12C24 5.37 18.63 0 12 0C5.37 0 0 5.37 0 12C0 18.63 5.37 24 12 24Z"
+        fill="#FF0000"
+      />
+      <path
+        d="M12 6C15.31 6 18 8.69 18 12C18 15.31 15.31 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6ZM12 5C8.14 5 5 8.14 5 12C5 15.86 8.14 19 12 19C15.86 19 19 15.86 19 12C19 8.14 15.86 5 12 5Z"
+        fill="white"
+      />
+      <path d="M9.75 15.5L16.25 12L9.75 8.5V15.5Z" fill="white" />
     </svg>
   );
 }
