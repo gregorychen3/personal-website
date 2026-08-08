@@ -35,7 +35,7 @@ export function SheetmusicPage() {
   return (
     <Box>
       <PageHeading
-        title="vintage sheetmusic"
+        title="vintage sheetmusic collection"
       />
 
       <TextField
