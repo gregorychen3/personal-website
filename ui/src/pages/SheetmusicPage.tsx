@@ -88,17 +88,20 @@ export function SheetmusicPage() {
   );
 }
 
+/**
+ * A real anchor rather than a button with an onClick. Visually and behaviourally
+ * identical — ButtonBase resets the native link colour and underline — but the
+ * href is now in the markup, so a crawler has something to follow and the chart
+ * is reachable without running JavaScript.
+ */
 function SongRow({ song }: { song: Song }) {
-  const open = () =>
-    window.open(
-      `https://drive.google.com/open?id=${song.id}`,
-      "_blank",
-      "noreferrer",
-    );
-
   return (
     <ButtonBase
-      onClick={open}
+      component="a"
+      href={`https://drive.google.com/open?id=${song.id}`}
+      target="_blank"
+      // Matches the window.open features this replaced; implies noopener.
+      rel="noreferrer"
       sx={{
         display: "block",
         width: "100%",
