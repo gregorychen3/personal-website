@@ -5,10 +5,18 @@ export interface Song {
   authors: string[];
 }
 
+/** A run of description text. Runs carrying an `href` are rendered as links. */
+export interface GigTextRun {
+  text: string;
+  href?: string;
+}
+
 export interface Gig {
   id: string;
   title: string;
   location?: string;
+  /** Event notes, flattened to text and link runs. */
+  description?: GigTextRun[];
   /** RFC3339 timestamp, or a bare YYYY-MM-DD for all-day entries. */
   start: string;
   /** IANA zone the event was booked in, when the calendar records one. */
@@ -46,6 +54,7 @@ const fetchGigs = async (): Promise<Gig[]> => {
       id: gig.id,
       title: gig.title ?? "",
       location: gig.location,
+      description: Array.isArray(gig.description) ? gig.description : undefined,
       start: gig.start,
       timeZone: gig.timeZone,
       allDay: !!gig.allDay,

@@ -1,15 +1,14 @@
 import { Gig } from "./apiClient";
 
+/**
+ * A gig with its start resolved to a Date. Everything else is shown exactly as
+ * the calendar records it — the title, location, and notes are free text and
+ * are never picked apart.
+ */
 export interface ParsedGig extends Gig {
-  /** Entries prefixed "TBD:" in the calendar are not yet confirmed. */
-  tentative: boolean;
-  /** Who the gig is with, e.g. "w/ Aaron Johnson". */
-  billing: string;
-  venue?: string;
   date: Date;
 }
 
-const TBD_PREFIX = /^TBD:\s*/i;
 const RFC3339_OFFSET = /([+-])(\d{2}):(\d{2})$/;
 
 /**
@@ -26,39 +25,12 @@ const toDate = (gig: Gig): Date => {
   return new Date(year, month - 1, day);
 };
 
-/**
- * Titles follow the convention "[TBD: ]w/ <who>[ @ <venue>]". Where the title
- * carries no venue we fall back to the first segment of the calendar's
- * location, which is the venue name ahead of the street address.
- */
-export const parseGig = (gig: Gig): ParsedGig => {
-  const tentative = TBD_PREFIX.test(gig.title);
-  const title = gig.title.replace(TBD_PREFIX, "").trim();
-
-  const separator = title.indexOf(" @ ");
-  const billing = separator === -1 ? title : title.slice(0, separator).trim();
-  const titleVenue =
-    separator === -1 ? undefined : title.slice(separator + 3).trim();
-
-  const locationVenue = gig.location
-    ?.replace(TBD_PREFIX, "")
-    .split(",")[0]
-    .trim();
-
-  return {
-    ...gig,
-    tentative,
-    billing,
-    venue: titleVenue || locationVenue || undefined,
-    date: toDate(gig),
-  };
-};
+export const parseGig = (gig: Gig): ParsedGig => ({
+  ...gig,
+  date: toDate(gig),
+});
 
 export const parseGigs = (gigs: Gig[]): ParsedGig[] => gigs.map(parseGig);
-
-/** Full location as recorded on the calendar, minus any "TBD:" marker. */
-export const gigLocation = (gig: ParsedGig) =>
-  gig.location?.replace(TBD_PREFIX, "").trim() || undefined;
 
 /**
  * Minutes east of UTC for an RFC3339 offset, used when Google records no IANA

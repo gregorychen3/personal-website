@@ -1,15 +1,9 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
-import {
-  gigDay,
-  gigLocation,
-  gigMonth,
-  gigTime,
-  gigWeekday,
-  ParsedGig,
-} from "../gigs";
+import { Box, Divider, Link, Stack, Typography } from "@mui/material";
+import { Fragment } from "react";
+import { gigDay, gigMonth, gigTime, gigWeekday, ParsedGig } from "../gigs";
 
 /**
- * `headingLevel` is the level the venue names sit at, which depends on the
+ * `headingLevel` is the level the event titles sit at, which depends on the
  * caller: the schedule page puts this list straight under its h1, while the
  * home page nests it beneath a "next dates" section label.
  */
@@ -39,20 +33,6 @@ function GigRow({
   gig: ParsedGig;
   headingLevel: "h2" | "h3";
 }) {
-  const time = gigTime(gig);
-  // Where the calendar gives no venue the billing carries the row instead of
-  // leaving an empty headline.
-  const heading = gig.venue ?? gig.billing;
-  const detail = gig.venue ? gig.billing : undefined;
-
-  // When the venue came from the location itself and carries no street
-  // address, the two lines would read identically.
-  const rawLocation = gigLocation(gig);
-  const location =
-    rawLocation?.toLowerCase() === heading.toLowerCase()
-      ? undefined
-      : rawLocation;
-
   return (
     <Stack direction="row" sx={{ gap: 3, py: 2.5, alignItems: "flex-start" }}>
       <Stack
@@ -76,56 +56,59 @@ function GigRow({
         </Typography>
       </Stack>
 
+      {/* Time, title, location, then notes — each exactly as the calendar
+          records it, on its own line. */}
       <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-        <Stack
-          direction="row"
-          sx={{ gap: 1, alignItems: "baseline", flexWrap: "wrap" }}
-        >
-          {/* Venues keep the capitalisation they were written with — the
-              display face lowercases headings, which is wrong for names. */}
-          <Typography
-            variant="h6"
-            component={headingLevel}
-            sx={{ textTransform: "none", wordBreak: "break-word" }}
-          >
-            {heading}
-          </Typography>
-          {gig.tentative && <TentativeTag />}
-        </Stack>
-
-        {location && (
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {location}
-          </Typography>
-        )}
-
-        {detail && (
-          <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5 }}>
-            {detail}
-          </Typography>
-        )}
-
         <Typography variant="body2" sx={{ color: "text.disabled" }}>
-          {time ?? "time tbd"}
+          {gigTime(gig) ?? "all day"}
         </Typography>
+
+        {/* Titles keep the capitalisation they were written with — the display
+            face lowercases headings, which is wrong for names. */}
+        <Typography
+          variant="h6"
+          component={headingLevel}
+          sx={{ textTransform: "none", wordBreak: "break-word" }}
+        >
+          {gig.title}
+        </Typography>
+
+        {gig.location && (
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {gig.location}
+          </Typography>
+        )}
+
+        {gig.description && (
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary",
+              mt: 0.5,
+              // Notes are free text and may run to several lines; keep the
+              // line breaks the calendar entry was written with.
+              whiteSpace: "pre-line",
+              // Link text is often a bare URL, which has nowhere to wrap.
+              wordBreak: "break-word",
+            }}
+          >
+            {gig.description.map((run, i) =>
+              run.href ? (
+                <Link
+                  key={i}
+                  href={run.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {run.text}
+                </Link>
+              ) : (
+                <Fragment key={i}>{run.text}</Fragment>
+              ),
+            )}
+          </Typography>
+        )}
       </Box>
     </Stack>
-  );
-}
-
-function TentativeTag() {
-  return (
-    <Typography
-      variant="overline"
-      sx={{
-        px: 0.75,
-        py: 0.25,
-        color: "text.disabled",
-        border: "1px solid",
-        borderColor: "divider",
-      }}
-    >
-      tbd
-    </Typography>
   );
 }

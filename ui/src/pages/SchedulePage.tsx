@@ -11,10 +11,7 @@ export function SchedulePage() {
 
   return (
     <Box>
-      <PageHeading
-        title="schedule"
-        subtitle="Upcoming public performances, each shown in its own local time. Dates marked tbd are not yet confirmed."
-      />
+      <PageHeading title="schedule" />
 
       {state.status === "loading" && <StatusMessage>loading…</StatusMessage>}
 
