@@ -1,5 +1,6 @@
 import { Box, ButtonBase, Divider, Stack, TextField, Typography } from "@mui/material";
-import { useMemo, useState } from "react";
+import { ChangeEvent, useMemo } from "react";
+import { useSearchParams } from "react-router";
 import { apiClient, Song } from "../apiClient";
 import { PageHeading } from "../components/PageHeading";
 import { StatusMessage } from "../components/StatusMessage";
@@ -24,13 +25,40 @@ const matches = (song: Song, query: string) => {
 
 export function SheetmusicPage() {
   const state = useAsync(apiClient.fetchSongs);
-  const [query, setQuery] = useState("");
+
+  /**
+   * The URL owns the search text, so a link like /sheetmusic?search=dancing
+   * opens the page already filtered, and any search can be shared by copying
+   * the address bar. Back/forward navigation restores earlier searches for
+   * free, since they are just URL changes.
+   */
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("search") ?? "";
 
   const songs = state.status === "ready" ? state.data : NO_SONGS;
   const visible = useMemo(
     () => songs.filter((song) => matches(song, query)),
     [songs, query],
   );
+
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchParams(
+      (prev) => {
+        // Preserve any unrelated params the URL might carry.
+        const next = new URLSearchParams(prev);
+        if (value) {
+          next.set("search", value);
+        } else {
+          // An empty box gets a clean URL, not ?search=.
+          next.delete("search");
+        }
+        return next;
+      },
+      // One history entry for the whole search session, not one per keystroke.
+      { replace: true },
+    );
+  };
 
   return (
     <Box>
@@ -44,7 +72,7 @@ export function SheetmusicPage() {
         hiddenLabel
         fullWidth
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={onSearchChange}
         disabled={state.status !== "ready"}
         slotProps={{ htmlInput: { "aria-label": "Search songs" } }}
       />
