@@ -34,7 +34,7 @@ const ROUTE_META: Record<string, RouteMeta> = {
   "/": {
     title: "Gregory Chen — Jazz Pianist",
     description:
-      "Jazz pianist based in New York City, Boston, and San Francisco. Recordings, upcoming performances, and a vintage sheet music collection.",
+      "New York and Boston based pianist specializing in early twentieth-century jazz styles. Recordings, upcoming performances, and a vintage sheet music collection.",
   },
   "/listen": {
     title: "Listen — Gregory Chen",

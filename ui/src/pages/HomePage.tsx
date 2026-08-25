@@ -199,7 +199,7 @@ function Hero() {
           sx={{ width: 64, height: 4, backgroundColor: "primary.main", my: 2.5 }}
         />
         <Typography variant="body1" sx={{ color: "text.secondary" }}>
-          Jazz pianist based in New York City, Boston, and San Francisco.
+          New York and Boston based pianist specializing in early twentieth-century jazz styles.
         </Typography>
         <Box sx={{ mt: 2 }}>
           <ServiceLinks links={socialLinks} />
