@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { calendar_v3, google } from "googleapis";
 import { GOOGLE_API_KEY } from "./config";
 
 // The public "Gregory Chen Public Performances" calendar. This is the same
@@ -178,20 +178,72 @@ const descriptionRuns = (html: string): GigTextRun[] => {
   return collapsed.filter((run) => run.text);
 };
 
-const fetchGigs = async (): Promise<Gig[]> => {
-  const items =
-    (
-      await calendar.events.list({
+export interface FetchGigsParams {
+  /**
+   * Exclusive upper bound on event start (RFC3339). Its presence selects
+   * "past" mode: the most recent gigs before this cursor. When omitted, only
+   * upcoming gigs are returned.
+   */
+  timeMax?: string;
+  /** Page size for past mode (default 10). */
+  limit?: number;
+}
+
+// One year, leap-inclusive. Bounds the window searched for a past page.
+const LOOKBACK_MS = 366 * 24 * 60 * 60 * 1000;
+
+// Runaway guard for the nextPageToken loop; 4 pages x 2500 events is far
+// beyond anything this calendar will ever hold in a single year.
+const PAST_WINDOW_MAX_PAGES = 4;
+
+const fetchGigs = async (params?: FetchGigsParams): Promise<Gig[]> => {
+  let items: calendar_v3.Schema$Event[];
+
+  if (!params?.timeMax) {
+    items =
+      (
+        await calendar.events.list({
+          calendarId: gigCalendarId,
+          timeMin: new Date().toISOString(),
+          // Expand recurring entries into their individual instances, otherwise
+          // a standing residency comes back as a single event with one start
+          // date.
+          singleEvents: true,
+          orderBy: "startTime",
+          maxResults: 50,
+        })
+      ).data.items ?? [];
+  } else {
+    // Google only lists ascending from timeMin, so fetch the whole lookback
+    // window and keep the LAST `limit` entries — the most recent gigs before
+    // the cursor. Following nextPageToken matters: with ascending order a
+    // truncated page drops the newest events in the window, exactly the ones
+    // a previous page needs.
+    items = [];
+    let pageToken: string | undefined;
+    let pages = 0;
+    do {
+      const resp = await calendar.events.list({
         calendarId: gigCalendarId,
-        timeMin: new Date().toISOString(),
-        // Expand recurring entries into their individual instances, otherwise
-        // a standing residency comes back as a single event with one start
-        // date.
+        timeMin: new Date(
+          Date.parse(params.timeMax) - LOOKBACK_MS,
+        ).toISOString(),
+        // Exclusive upstream, so the cursor gig itself is not re-returned.
+        timeMax: params.timeMax,
         singleEvents: true,
         orderBy: "startTime",
-        maxResults: 50,
-      })
-    ).data.items ?? [];
+        maxResults: 2500,
+        pageToken,
+      });
+      items.push(...(resp.data.items ?? []));
+      pageToken = resp.data.nextPageToken ?? undefined;
+      pages++;
+    } while (pageToken && pages < PAST_WINDOW_MAX_PAGES);
+    if (pageToken) {
+      console.error("Past-gigs lookback window truncated at page cap");
+    }
+    items = items.slice(-(params.limit ?? 10));
+  }
 
   const gigs: Gig[] = [];
   for (const item of items) {
@@ -222,43 +274,52 @@ const fetchGigs = async (): Promise<Gig[]> => {
 
 const TTL_MS = 5 * 60 * 1000;
 
-let cached: { at: number; gigs: Gig[] } | undefined;
-let inFlight: Promise<Gig[]> | undefined;
+const cache = new Map<string, { at: number; gigs: Gig[] }>();
+const inFlight = new Map<string, Promise<Gig[]>>();
+
+const cacheKey = (params?: FetchGigsParams): string =>
+  params?.timeMax
+    ? `past:${params.timeMax}:${params.limit ?? 10}`
+    : "upcoming";
 
 /**
  * Shared by the /api/events endpoint and the server-rendered Event structured
  * data, so a page view costs at most one upstream call per TTL rather than one
- * per request.
+ * per request. Cached per query: the no-arg upcoming listing and each past
+ * cursor page expire independently.
  *
  * On a refresh failure with a warm cache the stale copy is served: a transient
  * Google outage should not blank the schedule or strip the structured data.
  * Only a cold failure throws, and callers decide what that means — the API
  * returns an error, the SEO layer omits the markup.
  */
-export const getGigs = async (): Promise<Gig[]> => {
-  const fresh = cached && Date.now() - cached.at < TTL_MS;
-  if (fresh) {
-    return cached!.gigs;
+export const getGigs = async (params?: FetchGigsParams): Promise<Gig[]> => {
+  const key = cacheKey(params);
+  const hit = cache.get(key);
+  if (hit && Date.now() - hit.at < TTL_MS) {
+    return hit.gigs;
   }
 
   // Collapse concurrent misses into a single upstream request.
-  if (!inFlight) {
-    inFlight = fetchGigs()
+  let pending = inFlight.get(key);
+  if (!pending) {
+    pending = fetchGigs(params)
       .then((gigs) => {
-        cached = { at: Date.now(), gigs };
+        cache.set(key, { at: Date.now(), gigs });
         return gigs;
       })
       .finally(() => {
-        inFlight = undefined;
+        inFlight.delete(key);
       });
+    inFlight.set(key, pending);
   }
 
   try {
-    return await inFlight;
+    return await pending;
   } catch (e) {
-    if (cached) {
+    if (hit) {
       console.error("Calendar refresh failed; serving stale gigs", e);
-      return cached.gigs;
+      return hit.gigs;
     }
     throw e;
   }

@@ -45,8 +45,26 @@ const fetchSongs = async (): Promise<Song[]> => {
   }));
 };
 
-const fetchGigs = async (): Promise<Gig[]> => {
-  const resp = await getJson<Partial<Gig>[]>("/api/events");
+export interface FetchGigsOptions {
+  /** Exclusive cursor: only gigs starting before this instant. */
+  before?: string;
+  /** Page size for a past-gigs request (server default 10, max 50). */
+  limit?: number;
+}
+
+const fetchGigs = async (options?: FetchGigsOptions): Promise<Gig[]> => {
+  const params = new URLSearchParams();
+  if (options?.before) {
+    params.set("before", options.before);
+  }
+  if (options?.limit !== undefined) {
+    params.set("limit", String(options.limit));
+  }
+  const qs = params.toString();
+
+  const resp = await getJson<Partial<Gig>[]>(
+    `/api/events${qs ? `?${qs}` : ""}`,
+  );
 
   return resp
     .filter((gig): gig is Gig => !!gig.id && !!gig.start)
