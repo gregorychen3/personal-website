@@ -282,6 +282,37 @@ const cacheKey = (params?: FetchGigsParams): string =>
     ? `past:${params.timeMax}:${params.limit ?? 10}`
     : "upcoming";
 
+// Past pages key by cursor, so without a cap the map would grow forever.
+// The map is kept in recency order — cacheGet and cachePut both re-insert —
+// so trimming from the front drops the least recently used. Counting reads as
+// use is what protects the shared "upcoming" entry: it is hit on every
+// schedule view, so a burst of past-page writes can't push it to the front
+// and evict it. Expired entries are deliberately kept until displaced: they
+// are what the stale-on-failure fallback below serves during an upstream
+// outage, when no writes happen.
+const MAX_CACHE_ENTRIES = 100;
+
+const cacheGet = (key: string): { at: number; gigs: Gig[] } | undefined => {
+  const entry = cache.get(key);
+  if (entry) {
+    cache.delete(key);
+    cache.set(key, entry);
+  }
+  return entry;
+};
+
+const cachePut = (key: string, gigs: Gig[]): void => {
+  cache.delete(key);
+  cache.set(key, { at: Date.now(), gigs });
+  while (cache.size > MAX_CACHE_ENTRIES) {
+    const oldest = cache.keys().next().value;
+    if (oldest === undefined) {
+      break;
+    }
+    cache.delete(oldest);
+  }
+};
+
 /**
  * Shared by the /api/events endpoint and the server-rendered Event structured
  * data, so a page view costs at most one upstream call per TTL rather than one
@@ -295,7 +326,7 @@ const cacheKey = (params?: FetchGigsParams): string =>
  */
 export const getGigs = async (params?: FetchGigsParams): Promise<Gig[]> => {
   const key = cacheKey(params);
-  const hit = cache.get(key);
+  const hit = cacheGet(key);
   if (hit && Date.now() - hit.at < TTL_MS) {
     return hit.gigs;
   }
@@ -305,7 +336,7 @@ export const getGigs = async (params?: FetchGigsParams): Promise<Gig[]> => {
   if (!pending) {
     pending = fetchGigs(params)
       .then((gigs) => {
-        cache.set(key, { at: Date.now(), gigs });
+        cachePut(key, gigs);
         return gigs;
       })
       .finally(() => {
@@ -324,3 +355,14 @@ export const getGigs = async (params?: FetchGigsParams): Promise<Gig[]> => {
     throw e;
   }
 };
+
+/**
+ * Write timestamp of the cached upcoming listing, or undefined while cold.
+ * The events controller anchors first past pages to it: every first page then
+ * shares one cache key per upcoming refresh instead of each request minting a
+ * unique millisecond cursor that misses and triggers a full lookback scan —
+ * and the past/upcoming seam matches the listing clients are actually being
+ * served, even when that listing is a minutes-old cache hit.
+ */
+export const upcomingFetchedAt = (): number | undefined =>
+  cache.get("upcoming")?.at;

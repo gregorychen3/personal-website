@@ -1,5 +1,5 @@
 import express from "express";
-import { FetchGigsParams, getGigs } from "../calendar";
+import { FetchGigsParams, getGigs, upcomingFetchedAt } from "../calendar";
 
 const eventsController = express.Router();
 
@@ -33,14 +33,21 @@ eventsController.get("/", async (req, res) => {
       }
     }
 
-    // No cursor means the first past page: anchor to the server clock so
-    // client clock skew can't create a gap or overlap at the past/upcoming
-    // seam. A future cursor is clamped for the same reason — it must never
-    // leak upcoming gigs into a past page.
+    // No cursor means the first past page: anchor to the upcoming cache
+    // entry's write timestamp, falling back to the server clock while that
+    // cache is cold. The anchor is server-side either way, so client clock
+    // skew can't open a gap or overlap at the past/upcoming seam — and
+    // anchoring to the entry (rather than Date.now()) makes the seam match
+    // the listing clients are actually being served, while every first page
+    // shares one cache key per upcoming refresh instead of each request
+    // minting a unique millisecond cursor that always misses. A future cursor
+    // is clamped for the same reason — it must never leak upcoming gigs into
+    // a past page.
+    const now = Date.now();
     const at =
       before === undefined
-        ? Date.now()
-        : Math.min(Date.parse(before as string), Date.now());
+        ? (upcomingFetchedAt() ?? now)
+        : Math.min(Date.parse(before as string), now);
     params = { timeMax: new Date(at).toISOString(), limit: n };
   }
 

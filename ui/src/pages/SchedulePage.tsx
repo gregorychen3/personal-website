@@ -9,6 +9,14 @@ import { useAsync } from "../useAsync";
 
 const PAST_PAGE_SIZE = 10;
 
+/**
+ * Gigs in `gigs` whose id is not in `ids`, order preserved. Used at both
+ * seams where independently fetched lists can overlap: page boundaries in
+ * `loadEarlier`, and the past/upcoming seam at render.
+ */
+const withoutIds = (gigs: Gig[], ids: Set<string>): Gig[] =>
+  gigs.filter((g) => !ids.has(g.id));
+
 export function SchedulePage() {
   const state = useAsync(apiClient.fetchGigs);
 
@@ -38,7 +46,7 @@ export function SchedulePage() {
       // two gigs sharing the cursor instant could straddle a page boundary.
       setPastGigs((prev) => {
         const seen = new Set(prev.map((g) => g.id));
-        return [...gigs.filter((g) => !seen.has(g.id)), ...prev];
+        return [...withoutIds(gigs, seen), ...prev];
       });
       if (gigs.length > 0) {
         setCursor(gigs[0].start);
@@ -70,10 +78,17 @@ export function SchedulePage() {
 
       {state.status === "ready" &&
         (() => {
+          // Dedupe across the seam: the upcoming listing and the first past
+          // page anchor to `now` at different times (and the upcoming listing
+          // may be a minutes-old cache hit), so a gig starting in between
+          // shows up in both. GigList keys rows by gig id, so a duplicate is
+          // not just cosmetic.
+          const pastIds = new Set(pastGigs.map((g) => g.id));
+          const upcoming = withoutIds(state.data, pastIds);
           // Defensive sort: past pages precede the upcoming listing by
           // construction, but an all-day entry near the seam could otherwise
           // interleave by a day.
-          const gigs = parseGigs([...pastGigs, ...state.data]).sort(
+          const gigs = parseGigs([...pastGigs, ...upcoming]).sort(
             (a, b) => a.date.getTime() - b.date.getTime(),
           );
 
