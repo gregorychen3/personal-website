@@ -67,7 +67,6 @@ export const albums: Album[] = [
     credits: [
       "Boptimist Records",
       "Recorded 08-31-2025",
-      "Pinch Recording, Long Island City, Queens",
       "Engineered, mixed, and mastered by Grady Bajorek",
     ],
     links: [],
