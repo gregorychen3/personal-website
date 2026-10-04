@@ -39,7 +39,7 @@ const ROUTE_META: Record<string, RouteMeta> = {
   "/listen": {
     title: "Listen — Gregory Chen",
     description:
-      "Albums and live video from jazz pianist Gregory Chen, including the forthcoming Serenade In Blue and Sessions, Vol. 1.",
+      "Albums and live video from jazz pianist Gregory Chen, including Serenade In Blue and Sessions, Vol. 1.",
   },
   "/schedule": {
     title: "Schedule — Gregory Chen",
@@ -62,7 +62,12 @@ const NOT_FOUND_META: RouteMeta = {
 const ALBUMS = [
   {
     name: "Serenade In Blue",
-    sameAs: [] as string[],
+    sameAs: [
+      "https://open.spotify.com/album/37rt3mydEAafYXaoClYSsg",
+      "https://music.apple.com/us/album/serenade-in-blue/6803169843",
+      "https://music.amazon.com/albums/B0HFT6JRSJ",
+      "https://boptimistrecords.bandcamp.com/album/serenade-in-blue",
+    ],
   },
   {
     name: "Sessions, Vol. 1",
@@ -70,6 +75,7 @@ const ALBUMS = [
       "https://open.spotify.com/album/3w1HU04iwsL5igisYk7QdT",
       "https://music.apple.com/us/album/sessions-vol-1/1794181040",
       "https://music.amazon.com/albums/B0DVVVGKCC",
+      "https://boptimistrecords.bandcamp.com/album/sessions-vol-1",
     ],
   },
 ];

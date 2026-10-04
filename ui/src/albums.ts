@@ -1,13 +1,14 @@
 import serenadeInBlueImg from "./assets/serenade-in-blue-album-cover.webp";
 import sessionsVol1Img from "./assets/sessions-vol-1-album-cover.webp";
 
-export type ServiceKind = "apple" | "youtube" | "spotify" | "amazon";
+export type ServiceKind = "apple" | "youtube" | "spotify" | "amazon" | "bandcamp";
 
 const serviceLabels: Record<ServiceKind, string> = {
   apple: "apple music",
   youtube: "youtube",
   spotify: "spotify",
   amazon: "amazon music",
+  bandcamp: "bandcamp",
 };
 
 export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
@@ -18,7 +19,13 @@ export const serviceLabel = (kind: ServiceKind) => serviceLabels[kind];
  * whose links happen to be entered in another order cannot make one page
  * disagree with another.
  */
-const serviceOrder: ServiceKind[] = ["spotify", "youtube", "apple", "amazon"];
+const serviceOrder: ServiceKind[] = [
+  "spotify",
+  "youtube",
+  "apple",
+  "amazon",
+  "bandcamp",
+];
 
 export const byServiceOrder = <T extends { kind: ServiceKind }>(links: T[]) =>
   [...links].sort(
@@ -55,7 +62,6 @@ export const albums: Album[] = [
     cover: serenadeInBlueImg,
     coverWidth: 1200,
     coverHeight: 1195,
-    upcoming: true,
     personnel: [
       "Aaron Johnson, clarinet and tenor saxophone",
       "Gregory Chen, piano",
@@ -69,7 +75,21 @@ export const albums: Album[] = [
       "Recorded 08-31-2025",
       "Engineered, mixed, and mastered by Grady Bajorek",
     ],
-    links: [],
+    links: [
+      {
+        kind: "spotify",
+        to: "https://open.spotify.com/album/37rt3mydEAafYXaoClYSsg",
+      },
+      {
+        kind: "apple",
+        to: "https://music.apple.com/us/album/serenade-in-blue/6803169843",
+      },
+      { kind: "amazon", to: "https://music.amazon.com/albums/B0HFT6JRSJ" },
+      {
+        kind: "bandcamp",
+        to: "https://boptimistrecords.bandcamp.com/album/serenade-in-blue",
+      },
+    ],
   },
   {
     title: "Sessions, Vol. 1",
@@ -94,6 +114,10 @@ export const albums: Album[] = [
         to: "https://music.apple.com/us/album/sessions-vol-1/1794181040",
       },
       { kind: "amazon", to: "https://music.amazon.com/albums/B0DVVVGKCC" },
+      {
+        kind: "bandcamp",
+        to: "https://boptimistrecords.bandcamp.com/album/sessions-vol-1",
+      },
     ],
   },
 ];

@@ -9,9 +9,9 @@ export function ServiceLinks({ links }: { links: ServiceLink[] }) {
       sx={{
         ml: -1,
         display: "grid",
-        // Fixed two-column grid rather than a wrapping row: with four services
-        // a wrap breaks 3-and-1 at most widths, and the columns line up only
-        // if they are sized to their widest label.
+        // Fixed two-column grid rather than a wrapping row: with a handful of
+        // services a wrap breaks into a ragged last row at most widths, and
+        // the columns line up only if they are sized to their widest label.
         gridTemplateColumns: "repeat(2, max-content)",
         columnGap: 1,
         justifyItems: "start",
